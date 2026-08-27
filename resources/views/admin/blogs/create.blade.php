@@ -1,0 +1,75 @@
+@extends('admin.layouts.app')
+
+@section('title', 'Write New Blog Article')
+@section('header', 'Publish Engineering Article')
+
+@section('content')
+<div class="max-w-4xl space-y-6">
+    <a href="{{ route('admin.blogs.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-white">
+        ← Back to Blog List
+    </a>
+
+    <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+        <form action="{{ route('admin.blogs.store') }}" method="POST" class="space-y-6">
+            @csrf
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Blog Category *</label>
+                    <select name="blog_category_id" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                        @foreach($categories as $cat)
+                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Article Title *</label>
+                    <input type="text" name="title" value="{{ old('title') }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white" placeholder="e.g. Building Enterprise ERPs with Laravel">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Author Name *</label>
+                    <input type="text" name="author_name" value="{{ old('author_name', auth()->user()->name ?? 'ZaroSoft Team') }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Estimated Read Time *</label>
+                    <input type="text" name="read_time" value="{{ old('read_time', '5 min read') }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Cover Image URL</label>
+                <input type="text" name="cover_image" value="{{ old('cover_image') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white" placeholder="https://images.unsplash.com/photo-...">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Excerpt (Summary) *</label>
+                <textarea name="excerpt" rows="2" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ old('excerpt') }}</textarea>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Full Article Content (Markdown or HTML) *</label>
+                <textarea name="content" rows="12" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white font-mono leading-relaxed" placeholder="## Introduction to Modern ERP Architecture..."></textarea>
+            </div>
+
+            <div class="flex items-center gap-6 pt-2">
+                <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
+                    <input type="checkbox" name="is_featured" value="1" class="rounded bg-slate-800 border-slate-700 text-indigo-600">
+                    <span>Feature at Top of Blog</span>
+                </label>
+
+                <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
+                    <input type="checkbox" name="is_published" value="1" checked class="rounded bg-slate-800 border-slate-700 text-indigo-600">
+                    <span>Publish Immediately</span>
+                </label>
+            </div>
+
+            <button type="submit" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-500/20">
+                Publish Article →
+            </button>
+        </form>
+    </div>
+</div>
+@endsection

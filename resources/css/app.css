@@ -1,0 +1,363 @@
+@import 'tailwindcss';
+
+[x-cloak] {
+    display: none !important;
+}
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+
+    --color-brand-primary: #007BFF;
+    --color-brand-secondary: #00D2FF;
+    --color-brand-dark: #111827;
+    --color-brand-light: #F8FAFC;
+    --color-brand-accent: #FFFFFF;
+}
+
+/* =========================================================================
+   ZAROSOFT BRAND DESIGN SYSTEM (Cyan & Bright Blue Palette)
+   ========================================================================= */
+
+:root {
+    --brand-primary: #007BFF;
+    --brand-secondary: #00D2FF;
+    --brand-dark: #111827;
+    --brand-light: #F8FAFC;
+    --brand-accent: #FFFFFF;
+}
+
+/* Glass Panels */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.glass-panel-dark {
+    background: rgba(17, 24, 39, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 35px -10px rgba(0, 123, 255, 0.15);
+    border-color: rgba(0, 210, 255, 0.4);
+}
+
+/* Glow Utilities */
+.glow-primary {
+    box-shadow: 0 0 50px -10px rgba(0, 123, 255, 0.35);
+}
+
+.glow-cyan {
+    box-shadow: 0 0 50px -10px rgba(0, 210, 255, 0.35);
+}
+
+.glow-primary-sm {
+    box-shadow: 0 0 25px -3px rgba(0, 123, 255, 0.25);
+}
+
+/* Gradient Text Utilities */
+.text-gradient {
+    background: linear-gradient(135deg, #007BFF 0%, #00B4FF 50%, #00D2FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-blue {
+    background: linear-gradient(135deg, #0056b3 0%, #007BFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-cyan {
+    background: linear-gradient(135deg, #00D2FF 0%, #007BFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Grid Patterns */
+.bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: 
+        linear-gradient(to right, rgba(0, 123, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 123, 255, 0.05) 1px, transparent 1px);
+}
+
+.dark .bg-grid-pattern {
+    background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Smooth animated gradient border */
+@keyframes gradient-rotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-rotate 6s ease infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #007BFF;
+}
+
+.dark ::-webkit-scrollbar-track {
+    background: #0B0F19;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #1E293B;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #007BFF;
+}
+
+/* ========================================================================= */
+/* KEYFRAME ANIMATIONS & UTILITIES                                           */
+/* ========================================================================= */
+
+@keyframes floatSlow {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-12px) rotate(0.8deg);
+    }
+}
+
+@keyframes floatReverse {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(12px) rotate(-0.8deg);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        opacity: 0.35;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.75;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes marqueeInfinite {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes neonBorderPulse {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(0, 123, 255, 0.2), inset 0 0 15px rgba(0, 210, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(0, 123, 255, 0.45), inset 0 0 20px rgba(0, 210, 255, 0.25);
+    }
+}
+
+/* Helper Animation Classes (Faster & Snappier) */
+.animate-cursor {
+    animation: cursorBlink 0.7s step-start infinite;
+}
+
+.animate-float {
+    animation: floatSlow 5s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+    animation: floatReverse 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulseGlow 3.5s ease-in-out infinite;
+}
+
+.animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marqueeInfinite 28s linear infinite;
+}
+
+.animate-marquee:hover {
+    animation-play-state: paused;
+}
+
+.animate-neon-border {
+    animation: neonBorderPulse 3s ease-in-out infinite;
+}
+
+/* Mouse-follow Spotlight Effect on Cards */
+.spotlight-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.spotlight-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 123, 255, 0.10), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.spotlight-card:hover::before {
+    opacity: 1;
+}
+
+/* Scroll Reveal Classes (Fast, Responsive & Smooth) */
+.reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.97);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================================================
+   DARK THEME GLOBAL OVERRIDES (Triggered when Dark Mode is Active)
+   ========================================================================= */
+html.dark body {
+    background-color: #0b0f19 !important;
+    color: #f1f5f9 !important;
+}
+
+html.dark .bg-\[\#F8FAFC\],
+html.dark .bg-\[\#f8fafc\],
+html.dark .bg-slate-50 {
+    background-color: #0b0f19 !important;
+}
+
+html.dark .bg-white,
+html.dark .bg-\[\#ffffff\] {
+    background-color: #111827 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark .bg-slate-100 {
+    background-color: #1f2937 !important;
+    color: #cbd5e1 !important;
+}
+
+html.dark .text-\[\#111827\],
+html.dark .text-slate-900,
+html.dark .text-slate-800 {
+    color: #f8fafc !important;
+}
+
+html.dark .text-slate-600,
+html.dark .text-slate-500 {
+    color: #94a3b8 !important;
+}
+
+html.dark .border-slate-200,
+html.dark .border-slate-200\/80 {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark header {
+    background-color: rgba(11, 15, 25, 0.92) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark .spotlight-card::before {
+    background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 210, 255, 0.12), transparent 40%) !important;
+}

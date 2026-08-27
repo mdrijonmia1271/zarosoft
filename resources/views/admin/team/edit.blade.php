@@ -1,0 +1,82 @@
+@extends('admin.layouts.app')
+
+@section('title', 'Edit Team Member — ' . $member->name)
+@section('header', 'Edit Team Member: ' . $member->name)
+
+@section('content')
+<div class="max-w-4xl space-y-6">
+    <a href="{{ route('admin.team.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-white">
+        ← Back to Team
+    </a>
+
+    <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
+        <form action="{{ route('admin.team.update', $member->id) }}" method="POST" class="space-y-6">
+            @csrf
+            @method('PUT')
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Full Name *</label>
+                    <input type="text" name="name" value="{{ old('name', $member->name) }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Designation *</label>
+                    <input type="text" name="designation" value="{{ old('designation', $member->designation) }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Role Title / Badge</label>
+                    <input type="text" name="role_title" value="{{ old('role_title', $member->role_title) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Avatar Image URL</label>
+                    <input type="text" name="avatar" value="{{ old('avatar', $member->avatar) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Email</label>
+                    <input type="email" name="email" value="{{ old('email', $member->email) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">LinkedIn Profile URL</label>
+                    <input type="url" name="linkedin_url" value="{{ old('linkedin_url', $member->linkedin_url) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">GitHub Profile URL</label>
+                    <input type="url" name="github_url" value="{{ old('github_url', $member->github_url) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Skills (comma separated)</label>
+                    <input type="text" name="skills" value="{{ is_array($member->skills) ? implode(', ', $member->skills) : '' }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Short Biography *</label>
+                <textarea name="bio" rows="3" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ old('bio', $member->bio) }}</textarea>
+            </div>
+
+            <div class="flex items-center gap-6 pt-2">
+                <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
+                    <input type="checkbox" name="is_founder" value="1" {{ $member->is_founder ? 'checked' : '' }} class="rounded bg-slate-800 border-slate-700 text-indigo-600">
+                    <span>Mark as Co-Founder</span>
+                </label>
+
+                <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
+                    <input type="checkbox" name="is_active" value="1" {{ $member->is_active ? 'checked' : '' }} class="rounded bg-slate-800 border-slate-700 text-indigo-600">
+                    <span>Active / Visible</span>
+                </label>
+            </div>
+
+            <button type="submit" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-500/20">
+                Update Member Details →
+            </button>
+        </form>
+    </div>
+</div>
+@endsection
