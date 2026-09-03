@@ -2,6 +2,7 @@ import './bootstrap';
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
 import { animate } from 'motion';
+import { initHeroWaveBackdrop } from './hero-wave';
 
 // Powers the `x-collapse` accordions on the FAQ page and the homepage.
 Alpine.plugin(collapse);
@@ -14,6 +15,9 @@ Alpine.start();
 // =========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 0. Hero 3D Particle Wave & Interactive Backdrop
+    initHeroWaveBackdrop();
+
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isDesktopPointer = window.matchMedia('(pointer: fine)').matches;
 

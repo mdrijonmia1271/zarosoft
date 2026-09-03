@@ -6,41 +6,30 @@
 @section('content')
 
 <!-- ========================================================================= -->
-<!-- 01. HERO SECTION (Cinematic Full-Width Video Background with Globe Mesh) -->
+<!-- 01. HERO SECTION (Cinematic 3D Particle Wave & Global Network Backdrop) -->
 <!-- ========================================================================= -->
-<section id="hero-section" class="relative overflow-hidden py-20 sm:py-24 lg:py-32 bg-[#060A17] text-white">
+<section id="hero-section" class="relative overflow-hidden py-6 sm:py-8 lg:py-10 bg-[#060A17] text-white">
     
-    <!-- 01. ANIMATED GLOBE BACKDROP (vector — nothing to download) -->
+    <!-- 01. ANIMATED 3D PARTICLE WAVE & WORLD NETWORK BACKDROP -->
     <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none -z-0">
         <x-hero-backdrop />
 
-        {{-- Scrims are deliberately light: they only need to keep the headline
-             legible, not hide the artwork behind it. --}}
-        <div class="absolute inset-0 bg-gradient-to-b from-[#060A17]/55 via-transparent to-[#060A17] pointer-events-none"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_55%_42%_at_50%_45%,_var(--tw-gradient-stops))] from-[#060A17]/90 via-[#060A17]/55 to-transparent pointer-events-none"></div>
-        <div class="absolute inset-0 bg-tech-grid opacity-15 pointer-events-none"></div>
-        
-        <!-- Ambient Glowing Aurora Highlights -->
-        <div class="absolute top-1/4 left-1/4 w-[550px] h-[550px] bg-[#007BFF]/25 rounded-full blur-[150px] pointer-events-none animate-aurora-1"></div>
-        <div class="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-[#00D2FF]/20 rounded-full blur-[130px] pointer-events-none animate-aurora-2"></div>
+        {{-- Subtle vignette scrim to preserve razor-sharp text contrast without hiding the 3D wave & world network --}}
+        <div class="absolute inset-0 bg-gradient-to-b from-[#060A17]/60 via-transparent to-[#060A17] pointer-events-none"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_45%,_var(--tw-gradient-stops))] from-[#060A17]/45 via-transparent to-transparent pointer-events-none"></div>
+        <div class="absolute inset-0 bg-tech-grid opacity-10 pointer-events-none"></div>
     </div>
 
     <!-- 02. HERO FOREGROUND CONTENT -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
-        <div class="max-w-4xl mx-auto space-y-8 reveal">
+        <div class="max-w-4xl mx-auto space-y-3 sm:space-y-4 reveal">
             
-            <!-- Live Tech Pill Badge -->
-            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-xl shadow-lg shadow-blue-500/10">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span class="text-xs font-extrabold uppercase tracking-[0.2em] text-[#38BDF8] font-heading">Enterprise Software Engineering & AI Solutions</span>
-            </div>
-
             <!-- Main Headline with Dynamic Typewriter Effect -->
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08] font-heading drop-shadow-2xl">
-                Engineering Digital <br class="hidden sm:inline" />
-                Products That <br />
+            <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.12] font-heading drop-shadow-2xl">
+                Engineering the Digital Future of Business. <br class="hidden sm:inline" />
+                <!-- Products That <br /> -->
                 <span x-data="{
-                    phrases: ['Scale Without Limits', 'Automate Operations', 'Drive Real Growth', 'Power Enterprises'],
+                    phrases: ['Scale Without Limits', 'Automate Operations', 'Drive Real Growth', 'Empower Enterprises'],
                     phraseIdx: 0,
                     charIdx: 0,
                     displayText: '',
@@ -71,30 +60,30 @@
                           x-text="displayText || '\u00A0'">
                         Scale Without Limits
                     </span>
-                    <span class="inline-block w-[3px] sm:w-[5px] h-[0.9em] bg-[#00D2FF] ml-1.5 animate-cursor rounded-full shadow-[0_0_12px_rgba(0,210,255,0.9)]"></span>
+                    <span class="inline-block w-[3px] sm:w-[4px] h-[0.9em] bg-[#00D2FF] ml-1 animate-cursor rounded-full shadow-[0_0_12px_rgba(0,210,255,0.9)]"></span>
                 </span>
             </h1>
 
             <!-- Subtitle -->
-            <p class="text-base sm:text-xl text-slate-200 max-w-3xl mx-auto leading-relaxed font-normal drop-shadow">
-                ZaroSoft engineers custom ERPs, high-concurrency cloud applications, modern mobile apps, and automated AI pipelines for ambitious businesses and global enterprises.
+            <p class="text-xs sm:text-base text-slate-200 max-w-xl mx-auto leading-relaxed font-normal drop-shadow">
+                ZaroSoft builds scalable digital products, intelligent enterprise systems, and AI-powered automation that help ambitious businesses operate smarter and scale faster.
             </p>
 
             <!-- Dual Action CTAs -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-3">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1.5">
                 <!-- Primary CTA -->
                 <a href="{{ route('contact.index') }}" 
-                   class="w-full sm:w-auto px-9 py-4 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#0052cc] hover:from-[#0062cc] hover:to-[#003d99] text-white font-bold text-sm shadow-xl shadow-[#007BFF]/40 hover:shadow-[#007BFF]/60 hover:scale-[1.02] transition-all btn-premium flex items-center justify-center gap-2 group border border-blue-400/30">
+                   class="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#0052cc] hover:from-[#0062cc] hover:to-[#003d99] text-white font-bold text-xs sm:text-sm shadow-xl shadow-[#007BFF]/40 hover:shadow-[#007BFF]/60 hover:scale-[1.02] transition-all btn-premium flex items-center justify-center gap-2 group border border-blue-400/30">
                     <span>Schedule a Consultation</span>
-                    <svg class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                     </svg>
                 </a>
 
                 <!-- Secondary CTA -->
                 <a href="{{ route('portfolio.index') }}" 
-                   class="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-sm border border-white/20 hover:border-cyan-400/50 shadow-lg backdrop-blur-md hover:scale-[1.02] transition-all flex items-center justify-center gap-2.5">
-                    <svg class="w-4 h-4 text-[#00D2FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   class="w-full sm:w-auto px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-sm border border-white/20 hover:border-cyan-400/50 shadow-lg backdrop-blur-md hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                    <svg class="w-3.5 h-3.5 text-[#00D2FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                     </svg>
@@ -110,15 +99,15 @@
                 [
                     'label' => 'DELIVERY COMMITMENT',
                     'value' => '2-Week Sprints',
-                    'note' => 'Working software you can review every fortnight',
+                    'note' => 'Working software, every two weeks.',
                     'accent' => 'text-[#00D2FF]',
                     'dot' => 'bg-[#00D2FF]',
                     'border' => 'hover:border-[#00D2FF]/60',
                 ],
                 [
-                    'label' => 'RELIABILITY TARGET',
-                    'value' => setting('stat_uptime', '99.9%') . ' Uptime',
-                    'note' => 'High-availability architecture and monitoring',
+    'label' => 'RELIABILITY',
+                    'value' => 'Reliable by Design',
+                    'note' => 'High-availability architecture and continuous monitoring',
                     'accent' => 'text-emerald-400',
                     'dot' => 'bg-emerald-400',
                     'border' => 'hover:border-emerald-400/60',
@@ -126,34 +115,37 @@
                 [
                     'label' => 'PROJECTS DELIVERED',
                     'value' => setting('stat_projects_completed', '45+'),
-                    'note' => 'Across ERP, web, mobile and AI engagements',
+                    'note' => 'Across ERP, web, mobile, and AI solutions',
                     'accent' => 'text-[#38BDF8]',
                     'dot' => 'bg-[#38BDF8]',
                     'border' => 'hover:border-[#007BFF]/60',
                 ],
                 [
-                    'label' => 'SUPPORT WINDOW',
+                    'label' => 'SUPPORT AVAILABILITY 1',
                     'value' => setting('stat_support', '24/7'),
-                    'note' => setting('working_hours', 'Escalation cover for live systems'),
+                    'note' => setting('working_hours', 'Support and escalation for live systems'),
                     'accent' => 'text-purple-400',
                     'dot' => 'bg-purple-400',
                     'border' => 'hover:border-purple-400/60',
                 ],
             ];
         @endphp
-        <div class="pt-14 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 max-w-5xl mx-auto text-left reveal">
+        <div class="pt-5 sm:pt-6 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto text-left reveal">
             @foreach($heroKpis as $kpi)
-            <div class="p-4 sm:p-5 rounded-2xl bg-[#090E20]/80 border border-slate-700/60 backdrop-blur-xl shadow-xl {{ $kpi['border'] }} transition-all duration-300 hover:-translate-y-1">
-                <div class="flex items-center gap-2 {{ $kpi['accent'] }} text-[11px] font-mono font-bold mb-1.5">
-                    <span class="w-2 h-2 rounded-full {{ $kpi['dot'] }}"></span>
+            <div class="p-3 sm:p-3.5 rounded-xl bg-[#090E20]/80 border border-slate-700/60 backdrop-blur-xl shadow-xl {{ $kpi['border'] }} transition-all duration-300 hover:-translate-y-0.5">
+                <div class="flex items-center gap-1.5 {{ $kpi['accent'] }} text-[10px] font-mono font-bold mb-0.5">
+                    <span class="w-1.5 h-1.5 rounded-full {{ $kpi['dot'] }}"></span>
                     <span>{{ $kpi['label'] }}</span>
                 </div>
-                <div class="text-xl sm:text-2xl font-black text-white font-heading">{{ $kpi['value'] }}</div>
-                <div class="text-xs text-slate-400 mt-1">{{ $kpi['note'] }}</div>
+                <div class="text-base sm:text-lg font-black text-white font-heading">{{ $kpi['value'] }}</div>
+                <div class="text-[10px] text-slate-400 mt-0.5 line-clamp-1">{{ $kpi['note'] }}</div>
             </div>
             @endforeach
         </div>
 
+        <!-- Subtle Enterprise Trust Caption -->
+        <div class="pt-2.5 text-center text-[11px] font-mono text-slate-400/80 reveal">
+            <span>Trusted by <strong class="text-[#38BDF8]">100+ Enterprise Clients</strong> Worldwide</span>
         </div>
 
     </div>
