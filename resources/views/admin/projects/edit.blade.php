@@ -10,14 +10,14 @@
     </a>
 
     <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
-        <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" class="space-y-6">
+        <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
             @method('PUT')
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Project Category *</label>
-                    <select name="project_category_id" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <select name="project_category_id" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                         @foreach($categories as $cat)
                         <option value="{{ $cat->id }}" {{ $project->project_category_id == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
                         @endforeach
@@ -26,78 +26,82 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Project Title *</label>
-                    <input type="text" name="title" value="{{ old('title', $project->title) }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <input type="text" name="title" value="{{ old('title', $project->title) }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Client Name</label>
-                    <input type="text" name="client_name" value="{{ old('client_name', $project->client_name) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <input type="text" name="client_name" value="{{ old('client_name', $project->client_name) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Industry</label>
-                    <input type="text" name="industry" value="{{ old('industry', $project->industry) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <input type="text" name="industry" value="{{ old('industry', $project->industry) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Duration / Timeline</label>
-                    <input type="text" name="duration" value="{{ old('duration', $project->duration) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <input type="text" name="duration" value="{{ old('duration', $project->duration) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Live Demo / URL</label>
-                    <input type="url" name="live_url" value="{{ old('live_url', $project->live_url) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <input type="url" name="live_url" value="{{ old('live_url', $project->live_url) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                 </div>
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Tagline</label>
-                <input type="text" name="tagline" value="{{ old('tagline', $project->tagline) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                <input type="text" name="tagline" value="{{ old('tagline', $project->tagline) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Executive Overview *</label>
-                <textarea name="overview" rows="3" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ old('overview', $project->overview) }}</textarea>
+                <textarea name="overview" rows="3" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ old('overview', $project->overview) }}</textarea>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">The Problem / Challenge</label>
-                    <textarea name="problem" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ old('problem', $project->problem) }}</textarea>
+                    <textarea name="problem" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ old('problem', $project->problem) }}</textarea>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">The Solution Implemented</label>
-                    <textarea name="solution" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ old('solution', $project->solution) }}</textarea>
+                    <textarea name="solution" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ old('solution', $project->solution) }}</textarea>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Key Features (1 per line)</label>
-                    <textarea name="key_features" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ is_array($project->key_features) ? implode("\n", $project->key_features) : '' }}</textarea>
+                    <textarea name="key_features" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ is_array($project->key_features) ? implode("\n", $project->key_features) : '' }}</textarea>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Measurable Results / ROI (1 per line)</label>
-                    <textarea name="results" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ is_array($project->results) ? implode("\n", $project->results) : '' }}</textarea>
+                    <textarea name="results" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ is_array($project->results) ? implode("\n", $project->results) : '' }}</textarea>
                 </div>
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Tech Stack (comma separated)</label>
-                <input type="text" name="tech_stack" value="{{ is_array($project->tech_stack) ? implode(', ', $project->tech_stack) : '' }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                <input type="text" name="tech_stack" value="{{ is_array($project->tech_stack) ? implode(', ', $project->tech_stack) : '' }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Thumbnail Image URL</label>
-                    <input type="text" name="thumbnail" value="{{ old('thumbnail', $project->thumbnail) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <input type="text" name="thumbnail" value="{{ old('thumbnail', $project->thumbnail) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
+                    <input type="file" name="thumbnail_file" accept="image/*" class="w-full mt-2 text-[11px] text-slate-600 dark:text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-indigo-50 dark:file:bg-indigo-950/50 file:text-indigo-500 hover:file:bg-indigo-100 cursor-pointer">
+                    <p class="mt-1 text-[10px] text-slate-400">Upload a file, or paste a path / URL above. Uploading replaces the current image.</p>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Hero Image URL</label>
-                    <input type="text" name="hero_image" value="{{ old('hero_image', $project->hero_image) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <input type="text" name="hero_image" value="{{ old('hero_image', $project->hero_image) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
+                    <input type="file" name="hero_image_file" accept="image/*" class="w-full mt-2 text-[11px] text-slate-600 dark:text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-indigo-50 dark:file:bg-indigo-950/50 file:text-indigo-500 hover:file:bg-indigo-100 cursor-pointer">
+                    <p class="mt-1 text-[10px] text-slate-400">Upload a file, or paste a path / URL above. Uploading replaces the current image.</p>
                 </div>
             </div>
 

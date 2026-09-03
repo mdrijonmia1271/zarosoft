@@ -3,9 +3,12 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
+use App\Http\Controllers\Admin\ClientController as AdminClientController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
+use App\Http\Controllers\Admin\IndustryController as AdminIndustryController;
 use App\Http\Controllers\Admin\LeadController as AdminLeadController;
+use App\Http\Controllers\Admin\ProductAdminController as AdminProductController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
@@ -19,6 +22,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SolutionController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +34,10 @@ use Illuminate\Support\Facades\Route;
 // Public Auth Redirect
 Route::get('/login', fn() => redirect()->route('admin.login'))->name('login');
 
+// SEO endpoints (robots.txt is served here so it can reference the live host)
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
@@ -39,6 +47,7 @@ Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('servic
 
 // AI & Innovation
 Route::get('/ai-solutions', [AiSolutionsController::class, 'index'])->name('ai.index');
+Route::get('/ai', fn() => redirect()->route('ai.index'));
 Route::get('/ai-innovation', fn() => redirect()->route('ai.index'));
 
 // Solutions / Industries
@@ -72,7 +81,10 @@ Route::prefix('admin')->group(function () {
     // Admin Guest Routes
     Route::middleware('guest')->group(function () {
         Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
-        Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.post');
+        // Throttled so the panel is not open to credential stuffing.
+        Route::post('/login', [AdminAuthController::class, 'login'])
+            ->middleware('throttle:5,1')
+            ->name('admin.login.post');
     });
 
     // Admin Protected Routes
@@ -95,6 +107,9 @@ Route::prefix('admin')->group(function () {
         Route::resource('team', AdminTeamController::class);
         Route::resource('testimonials', AdminTestimonialController::class);
         Route::resource('faqs', AdminFaqController::class);
+        Route::resource('products', AdminProductController::class)->except('show');
+        Route::resource('industries', AdminIndustryController::class)->except('show');
+        Route::resource('clients', AdminClientController::class)->except('show');
 
         // Site Settings & SEO
         Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');

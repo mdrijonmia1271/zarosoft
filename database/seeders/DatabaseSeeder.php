@@ -4,8 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\Client;
 use App\Models\ContactRequest;
 use App\Models\Faq;
+use App\Models\Industry;
+use App\Models\Product;
 use App\Models\Project;
 use App\Models\ProjectCategory;
 use App\Models\Service;
@@ -45,6 +48,7 @@ class DatabaseSeeder extends Seeder
             ['key' => 'company_phone', 'value' => '+880 1700-000000', 'group' => 'contact', 'label' => 'Company Phone'],
             ['key' => 'company_address', 'value' => 'Level 8, Software Technology Park, Dhaka, Bangladesh', 'group' => 'contact', 'label' => 'Office Address'],
             ['key' => 'working_hours', 'value' => 'Sun - Thu: 9:00 AM - 7:00 PM (GMT+6)', 'group' => 'contact', 'label' => 'Working Hours'],
+            ['key' => 'company_country', 'value' => 'BD', 'group' => 'contact', 'label' => 'Country Code (ISO, e.g. BD)'],
             // Social Links
             ['key' => 'social_linkedin', 'value' => 'https://linkedin.com/company/zarosoft', 'group' => 'social', 'label' => 'LinkedIn Profile'],
             ['key' => 'social_github', 'value' => 'https://github.com/zarosoft', 'group' => 'social', 'label' => 'GitHub Profile'],
@@ -55,20 +59,21 @@ class DatabaseSeeder extends Seeder
             ['key' => 'stat_happy_clients', 'value' => '30+', 'group' => 'general', 'label' => 'Happy Clients'],
             ['key' => 'stat_uptime', 'value' => '99.9%', 'group' => 'general', 'label' => 'System Reliability'],
             ['key' => 'stat_team_experience', 'value' => '7+', 'group' => 'general', 'label' => 'Years Combined Experience'],
+            ['key' => 'stat_support', 'value' => '24/7', 'group' => 'general', 'label' => 'Support Availability'],
         ];
 
         foreach ($settings as $setting) {
             Setting::updateOrCreate(['key' => $setting['key']], $setting);
         }
 
-        // 3. Team Members (4 Founders)
+        // 3. Team Members — 4 co-founders
         $founders = [
             [
                 'name' => 'Mohammad Zaid',
                 'designation' => 'Founder & Chief Executive Officer (CEO)',
                 'role_title' => 'Strategy & Vision',
                 'bio' => 'Visionary technology entrepreneur dedicated to empowering growing businesses through strategic software architecture, scalable web solutions, and automated operations.',
-                'avatar' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+                'avatar' => 'images/team/mohammad-zaid.jpg',
                 'email' => 'zaid@zarosoft.com',
                 'phone' => '+880 1700-111111',
                 'linkedin_url' => 'https://linkedin.com',
@@ -84,7 +89,7 @@ class DatabaseSeeder extends Seeder
                 'designation' => 'Co-Founder & Chief Technology Officer (CTO)',
                 'role_title' => 'Architecture & Cloud Engineering',
                 'bio' => 'High-performance backend architect with deep specialization in cloud-native infrastructure, distributed Laravel ecosystems, Docker orchestration, and microservices.',
-                'avatar' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80',
+                'avatar' => 'images/team/tanvir-ahmed.jpg',
                 'email' => 'tanvir@zarosoft.com',
                 'phone' => '+880 1700-222222',
                 'linkedin_url' => 'https://linkedin.com',
@@ -100,7 +105,7 @@ class DatabaseSeeder extends Seeder
                 'designation' => 'Co-Founder & Lead Solutions Engineer',
                 'role_title' => 'Full-Stack & AI Integration',
                 'bio' => 'Full-stack craftsman specializing in complex custom ERP modules, real-time database optimization in MySQL, AI document OCR pipelines, and robust RESTful APIs.',
-                'avatar' => 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80',
+                'avatar' => 'images/team/rakibul-hasan.jpg',
                 'email' => 'rakibul@zarosoft.com',
                 'phone' => '+880 1700-333333',
                 'linkedin_url' => 'https://linkedin.com',
@@ -116,7 +121,7 @@ class DatabaseSeeder extends Seeder
                 'designation' => 'Co-Founder & Head of Product & Experience',
                 'role_title' => 'UI/UX & Creative Strategy',
                 'bio' => 'Human-centered product designer turning complex business workflows into seamless, pixel-perfect digital experiences, cohesive brand identities, and high-conversion interfaces.',
-                'avatar' => 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80',
+                'avatar' => 'images/team/sabbir-hossain.jpg',
                 'email' => 'sabbir@zarosoft.com',
                 'phone' => '+880 1700-444444',
                 'linkedin_url' => 'https://linkedin.com',
@@ -131,6 +136,78 @@ class DatabaseSeeder extends Seeder
 
         foreach ($founders as $founder) {
             TeamMember::updateOrCreate(['name' => $founder['name']], $founder);
+        }
+
+        // 3b. Core Team (shown after the founders on the About page)
+        $coreTeam = [
+            [
+                'name' => 'Nusrat Jahan',
+                'designation' => 'Senior Backend Engineer',
+                'role_title' => 'Platform & APIs',
+                'bio' => 'Designs the service layer behind our ERP deployments — queue workers, reporting pipelines and the REST APIs that mobile clients depend on.',
+                'avatar' => 'images/team/nusrat-jahan.jpg',
+                'email' => 'nusrat@zarosoft.com',
+                'skills' => ['Laravel', 'Queue Architecture', 'REST & API Design', 'MySQL Tuning'],
+                'order' => 5,
+            ],
+            [
+                'name' => 'Farzana Akter',
+                'designation' => 'Lead Product Designer',
+                'role_title' => 'UI/UX & Design Systems',
+                'bio' => 'Turns dense operational workflows into interfaces people can actually move through quickly, and keeps our component library consistent across products.',
+                'avatar' => 'images/team/farzana-akter.jpg',
+                'email' => 'farzana@zarosoft.com',
+                'skills' => ['Design Systems', 'Figma', 'Prototyping', 'Accessibility'],
+                'order' => 6,
+            ],
+            [
+                'name' => 'Imran Kabir',
+                'designation' => 'DevOps & Cloud Engineer',
+                'role_title' => 'Infrastructure & Reliability',
+                'bio' => 'Owns our deployment pipelines, container orchestration and monitoring — the reason client systems hold their uptime commitments.',
+                'avatar' => 'images/team/imran-kabir.jpg',
+                'email' => 'imran@zarosoft.com',
+                'skills' => ['Docker', 'CI/CD', 'AWS', 'Observability'],
+                'order' => 7,
+            ],
+            [
+                'name' => 'Sadia Islam',
+                'designation' => 'AI & Machine Learning Engineer',
+                'role_title' => 'OCR & Automation',
+                'bio' => 'Builds the document extraction and classification models behind our OCR pipelines, and the evaluation harnesses that keep their accuracy honest.',
+                'avatar' => 'images/team/sadia-islam.jpg',
+                'email' => 'sadia@zarosoft.com',
+                'skills' => ['Python', 'Computer Vision', 'OCR Pipelines', 'Model Evaluation'],
+                'order' => 8,
+            ],
+            [
+                'name' => 'Tasnim Rahman',
+                'designation' => 'QA & Test Automation Lead',
+                'role_title' => 'Quality Engineering',
+                'bio' => 'Runs our regression suites and release gates, so what reaches a client environment has already survived the cases that break software.',
+                'avatar' => 'images/team/tasnim-rahman.jpg',
+                'email' => 'tasnim@zarosoft.com',
+                'skills' => ['Test Automation', 'PHPUnit', 'Playwright', 'Release QA'],
+                'order' => 9,
+            ],
+            [
+                'name' => 'Arif Hossain',
+                'designation' => 'Mobile Application Developer',
+                'role_title' => 'iOS & Android',
+                'bio' => 'Ships the cross-platform apps that put our ERP and POS systems in the hands of field staff, including the offline sync that keeps them usable.',
+                'avatar' => 'images/team/arif-hossain.jpg',
+                'email' => 'arif@zarosoft.com',
+                'skills' => ['Flutter', 'Dart', 'Offline Sync', 'App Store Delivery'],
+                'order' => 10,
+            ],
+        ];
+
+        foreach ($coreTeam as $member) {
+            TeamMember::updateOrCreate(['name' => $member['name']], $member + [
+                'is_founder' => false,
+                'is_active' => true,
+                'linkedin_url' => 'https://linkedin.com',
+            ]);
         }
 
         // 4. Service Categories
@@ -632,12 +709,12 @@ class DatabaseSeeder extends Seeder
                     '99.8% on-time customer order delivery rate',
                     'Financial closing cycle reduced from 14 days to 4 hours',
                 ],
-                'thumbnail' => 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop&q=80',
-                'hero_image' => 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&auto=format&fit=crop&q=80',
+                'thumbnail' => 'images/projects/zaro-erp-manufacturing-system.jpg',
+                'hero_image' => 'images/projects/zaro-erp-manufacturing-system.jpg',
                 'gallery' => [
-                    'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop&q=80',
-                    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&auto=format&fit=crop&q=80',
-                    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80',
+                    'images/projects/gallery/erp-factory-floor.jpg',
+                    'images/projects/gallery/erp-dashboard.jpg',
+                    'images/projects/gallery/erp-analytics.jpg',
                 ],
                 'live_url' => 'https://demo.zarosoft.com/erp',
                 'is_featured' => true,
@@ -666,11 +743,11 @@ class DatabaseSeeder extends Seeder
                     '82% of customer support queries resolved autonomously',
                     'Zero manual transcription errors reported since launch',
                 ],
-                'thumbnail' => 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80',
-                'hero_image' => 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1600&auto=format&fit=crop&q=80',
+                'thumbnail' => 'images/projects/neuralbot-ai-document-ocr.jpg',
+                'hero_image' => 'images/projects/neuralbot-ai-document-ocr.jpg',
                 'gallery' => [
-                    'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=80',
-                    'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=80',
+                    'images/projects/gallery/ai-pipeline-code.jpg',
+                    'images/projects/gallery/ai-insights.jpg',
                 ],
                 'live_url' => 'https://demo.zarosoft.com/ai-bot',
                 'is_featured' => true,
@@ -699,11 +776,11 @@ class DatabaseSeeder extends Seeder
                     'Handled 25,000 concurrent shoppers during Black Friday with 0 downtime',
                     'Sub-200ms average server response time',
                 ],
-                'thumbnail' => 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&auto=format&fit=crop&q=80',
-                'hero_image' => 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=1600&auto=format&fit=crop&q=80',
+                'thumbnail' => 'images/projects/omnistore-b2b-ecommerce-platform.jpg',
+                'hero_image' => 'images/projects/omnistore-b2b-ecommerce-platform.jpg',
                 'gallery' => [
-                    'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&auto=format&fit=crop&q=80',
-                    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80',
+                    'images/projects/gallery/commerce-warehouse.jpg',
+                    'images/projects/gallery/commerce-app-ui.jpg',
                 ],
                 'live_url' => 'https://omnistore.demo.zarosoft.com',
                 'is_featured' => true,
@@ -732,10 +809,10 @@ class DatabaseSeeder extends Seeder
                     'Over $15M in secure transaction volume processed in the first 6 months',
                     '0 security incidents or unauthorized access breaches',
                 ],
-                'thumbnail' => 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop&q=80',
-                'hero_image' => 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=1600&auto=format&fit=crop&q=80',
+                'thumbnail' => 'images/projects/paypulse-mobile-fintech-wallet.jpg',
+                'hero_image' => 'images/projects/paypulse-mobile-fintech-wallet.jpg',
                 'gallery' => [
-                    'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop&q=80',
+                    'images/projects/gallery/fintech-checkout.jpg',
                 ],
                 'live_url' => 'https://paypulse.demo.zarosoft.com',
                 'is_featured' => true,
@@ -764,10 +841,10 @@ class DatabaseSeeder extends Seeder
                     '12,000+ monthly digital appointments handled without double-booking',
                     '99% doctor satisfaction rating on digital prescription UX',
                 ],
-                'thumbnail' => 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&auto=format&fit=crop&q=80',
-                'hero_image' => 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1600&auto=format&fit=crop&q=80',
+                'thumbnail' => 'images/projects/medcare-plus-healthcare-system.jpg',
+                'hero_image' => 'images/projects/medcare-plus-healthcare-system.jpg',
                 'gallery' => [
-                    'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&auto=format&fit=crop&q=80',
+                    'images/projects/gallery/healthcare-facility.jpg',
                 ],
                 'live_url' => 'https://medcare.demo.zarosoft.com',
                 'is_featured' => false,
@@ -796,10 +873,10 @@ class DatabaseSeeder extends Seeder
                     'Winner of regional Brand Identity of the Year honors',
                     '100% brand consistency maintained across 6 regional marketing teams',
                 ],
-                'thumbnail' => 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&auto=format&fit=crop&q=80',
-                'hero_image' => 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1600&auto=format&fit=crop&q=80',
+                'thumbnail' => 'images/projects/apex-studio-brand-identity-design.jpg',
+                'hero_image' => 'images/projects/apex-studio-brand-identity-design.jpg',
                 'gallery' => [
-                    'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&auto=format&fit=crop&q=80',
+                    'images/projects/gallery/brand-studio.jpg',
                 ],
                 'live_url' => 'https://apexstudio.demo.zarosoft.com',
                 'is_featured' => false,
@@ -854,9 +931,9 @@ DB::transaction(function () use ($order) {
 ### Why Laravel 12 is the Premier ERP Backend
 
 Laravel provides unmatched developer velocity combined with enterprise-grade tooling: robust queue workers, scheduled tasks, database migrations with zero downtime, and a powerful Eloquent ORM that seamlessly interfaces with MySQL.',
-                'cover_image' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop&q=80',
+                'cover_image' => 'images/blog/building-scalable-erp-with-laravel-mysql.jpg',
                 'author_name' => 'Tanvir Ahmed',
-                'author_avatar' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80',
+                'author_avatar' => 'images/team/tanvir-ahmed.jpg',
                 'read_time' => '7 min read',
                 'is_featured' => true,
                 'is_published' => true,
@@ -869,9 +946,9 @@ Laravel provides unmatched developer velocity combined with enterprise-grade too
                 'slug' => 'practical-ai-ocr-business-automation-2026',
                 'excerpt' => 'Cut through the AI hype. Here is how modern businesses are saving hundreds of work-hours each week using tailored document OCR and intelligent RAG chatbots.',
                 'content' => "## Moving Beyond Hype to Measurable ROI\n\nWhile general conversational chatbots dominate the headlines, the real commercial value of AI lies in automating tedious, repetitive operational workflows.\n\n### 1. Automated Invoice & Receipt OCR Extraction\n\nInstead of data entry operators manually keying in vendor invoices, modern computer vision models extract key-value pairs (Invoice #, Date, Line Items, Tax, Total) directly into your ERP in seconds.\n\n### 2. Context-Aware Support Chatbots\n\nBy grounding Large Language Models with Retrieval-Augmented Generation (RAG) on your internal product documentation and FAQ database, support bots can resolve up to 80% of customer inquiries accurately without human intervention.\n\n### The ZaroSoft Approach\n\nWe integrate AI directly where your data lives — seamlessly connected to your Laravel backend and MySQL database, ensuring total data privacy and zero data leakage.",
-                'cover_image' => 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80',
+                'cover_image' => 'images/blog/practical-ai-ocr-business-automation-2026.jpg',
                 'author_name' => 'Rakibul Hasan',
-                'author_avatar' => 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80',
+                'author_avatar' => 'images/team/rakibul-hasan.jpg',
                 'read_time' => '5 min read',
                 'is_featured' => true,
                 'is_published' => true,
@@ -884,9 +961,9 @@ Laravel provides unmatched developer velocity combined with enterprise-grade too
                 'slug' => 'the-zaro-philosophy-brand-story',
                 'excerpt' => 'ZaroSoft was founded on four unwavering pillars. Here is what Zenith, Automation, Reliability, and Optimization mean for every line of code we write.',
                 'content' => "## Beyond Writing Code: Engineering Solutions\n\nWhen we founded ZaroSoft, we recognized that businesses do not just want software; they want outcomes. They want fewer manual errors, faster execution, predictable systems, and scalable growth.\n\n### The Four ZARO Pillars:\n\n- **Z — Zenith (Aiming for Highest Quality)**: We never settle for mediocre implementations. From pixel-perfect layouts to pristine backend architectures, we aim for the apex of craftsmanship.\n- **A — Automation**: If a task is performed more than twice, it should be automated. We eliminate human bottlenecks through intelligent workflows.\n- **R — Reliability (Reliable Technology)**: Business systems cannot fail. We engineer resilient, fault-tolerant applications with automated backups, rigorous testing, and 99.9% uptime.\n- **O — Optimization**: We optimize for speed, user clarity, server efficiency, and highest return on investment.\n\n> *\"ZaroSoft isn't just about writing code. We build technology that solves real business problems.\"*",
-                'cover_image' => 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&auto=format&fit=crop&q=80',
+                'cover_image' => 'images/blog/the-zaro-philosophy-brand-story.jpg',
                 'author_name' => 'Mohammad Zaid',
-                'author_avatar' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80',
+                'author_avatar' => 'images/team/mohammad-zaid.jpg',
                 'read_time' => '4 min read',
                 'is_featured' => true,
                 'is_published' => true,
@@ -899,9 +976,9 @@ Laravel provides unmatched developer velocity combined with enterprise-grade too
                 'slug' => 'designing-enterprise-dashboards-users-love',
                 'excerpt' => 'Complex business software does not have to be ugly and confusing. Learn how to design high-density data dashboards with clarity, speed, and modern aesthetics.',
                 'content' => "## The Problem with Traditional Enterprise Software\n\nTraditional enterprise software is notoriously cluttered, slow, and unintuitive. Workers spend hours hunting for buttons hidden under sub-menus.\n\n### Key Principles for Modern Enterprise UI/UX:\n\n1. **Progressive Disclosure**: Show users the primary information first, and provide contextual drill-downs on demand.\n2. **Visual Hierarchy & Information Density**: Use clean typography hierarchies and whitespace to make dense data tables scannable.\n3. **Dark / Light Mode Flexibility**: Provide eye-friendly dark modes for power users who spend 8+ hours inside the system daily.\n4. **Keyboard-First Shortcuts**: Allow operators to navigate, search, and submit forms without touching the mouse.",
-                'cover_image' => 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1200&auto=format&fit=crop&q=80',
+                'cover_image' => 'images/blog/designing-enterprise-dashboards-users-love.jpg',
                 'author_name' => 'Sabbir Hossain',
-                'author_avatar' => 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=200&auto=format&fit=crop&q=80',
+                'author_avatar' => 'images/team/sabbir-hossain.jpg',
                 'read_time' => '6 min read',
                 'is_featured' => false,
                 'is_published' => true,
@@ -922,7 +999,7 @@ Laravel provides unmatched developer velocity combined with enterprise-grade too
                 'client_position' => 'Managing Director',
                 'company' => 'Apex Industrial Mills Ltd.',
                 'location' => 'Dhaka, Bangladesh',
-                'avatar' => 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80',
+                'avatar' => 'images/testimonials/rafiqul-islam.jpg',
                 'rating' => 5,
                 'quote' => 'ZaroSoft transformed our factory operations completely. Their custom ERP replaced 15 disjointed spreadsheets and gave us real-time visibility across all 3 production facilities. Outstanding technical team with true business understanding.',
                 'project_title' => 'Custom Manufacturing ERP Suite',
@@ -934,7 +1011,7 @@ Laravel provides unmatched developer velocity combined with enterprise-grade too
                 'client_position' => 'Chief Operations Officer',
                 'company' => 'MedCare Hospital Network',
                 'location' => 'Chittagong, Bangladesh',
-                'avatar' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80',
+                'avatar' => 'images/testimonials/farhana-yasmin.jpg',
                 'rating' => 5,
                 'quote' => 'The patient management and digital pharmacy system engineered by ZaroSoft cut our patient wait times by more than half. Their ongoing support and responsiveness are simply world-class.',
                 'project_title' => 'Clinical Healthcare Platform',
@@ -946,7 +1023,7 @@ Laravel provides unmatched developer velocity combined with enterprise-grade too
                 'client_position' => 'Head of Digital Commerce',
                 'company' => 'Nordic Fashion Group',
                 'location' => 'Stockholm, Sweden',
-                'avatar' => 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80',
+                'avatar' => 'images/testimonials/david-lindqvist.jpg',
                 'rating' => 5,
                 'quote' => 'Our previous website collapsed during flash sales. ZaroSoft re-architected our e-commerce platform with Laravel and Redis; it handled over 25,000 concurrent shoppers without breaking a sweat. Highest recommendation!',
                 'project_title' => 'High-Concurrency E-Commerce Store',
@@ -958,7 +1035,7 @@ Laravel provides unmatched developer velocity combined with enterprise-grade too
                 'client_position' => 'Chief Technology Officer',
                 'company' => 'FinGlobal Logistics',
                 'location' => 'Dubai, UAE',
-                'avatar' => 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&auto=format&fit=crop&q=80',
+                'avatar' => 'images/testimonials/shahidul-alam.jpg',
                 'rating' => 5,
                 'quote' => 'Their AI OCR integration automated 95% of our manual invoice entry. The return on investment was achieved within the first 60 days of deployment. ZaroSoft is our go-to engineering partner.',
                 'project_title' => 'AI Document OCR & Bot Integration',
@@ -1073,6 +1150,57 @@ Laravel provides unmatched developer velocity combined with enterprise-grade too
 
         foreach ($sampleLeads as $lead) {
             ContactRequest::updateOrCreate(['ticket_number' => $lead['ticket_number']], $lead);
+        }
+
+        // 13. Products (Product Suite page)
+        $products = [
+            ['name' => 'ZaroERP', 'slug' => 'zaroerp', 'tagline' => 'Complete Intelligent Enterprise Resource Planning Suite', 'status' => 'Enterprise Ready', 'description' => 'A modular ERP system connecting manufacturing, inventory, procurement, accounts, and human resources with zero per-user license fees.', 'highlights' => ['Shop-Floor BOM Scheduling', 'Multi-Branch Inventory & Barcodes', 'Double-Entry Automated Accounts', 'Real-Time Executive Analytics'], 'icon' => 'layers', 'order' => 1],
+            ['name' => 'ZaroCRM', 'slug' => 'zarocrm', 'tagline' => 'High-Velocity Sales Pipeline & Omnichannel Lead CRM', 'status' => 'Enterprise Ready', 'description' => 'Visual Kanban deal tracking, automated follow-up sequences, WhatsApp/Email integration, and deal closing analytics.', 'highlights' => ['Kanban Sales Stages', 'One-Click Quotation PDF', 'Email & WhatsApp Sync', 'Sales Team Commission Metrics'], 'icon' => 'users', 'order' => 2],
+            ['name' => 'ZaroPOS', 'slug' => 'zaropos', 'tagline' => 'Lightning-Fast Cloud Point-of-Sale with Offline Support', 'status' => 'Enterprise Ready', 'description' => 'Designed for busy retail outlets and restaurants. Features 1-second barcode billing, cash drawer sync, and customer loyalty rewards.', 'highlights' => ['Offline Billing Cache', 'Thermal Receipt Printing', 'Barcode Scanner Support', 'Multi-Outlet Stock Sync'], 'icon' => 'shopping-cart', 'order' => 3],
+            ['name' => 'ZaroHR', 'slug' => 'zarohr', 'tagline' => 'Automated Payroll, Biometric Attendance & Employee Portal', 'status' => 'Enterprise Ready', 'description' => 'Simplify employee life-cycles. Automated salary disbursement calculations, tax deductions, leave approvals, and biometric machine sync.', 'highlights' => ['Biometric Machine Integration', 'One-Click Bank Payroll Sheet', 'Employee Self-Service App', 'Automated Tax & PF Calculations'], 'icon' => 'briefcase', 'order' => 4],
+            ['name' => 'ZaroInventory', 'slug' => 'zaroinventory', 'tagline' => 'Smart Warehouse Automation & Low-Stock Forecaster', 'status' => 'Coming Soon', 'description' => 'Intelligent stock replenishment algorithms that predict demand spikes and prevent overstocking or stockouts across regional hubs.', 'highlights' => ['Automated Re-order Alerts', 'Batch & Expiry Management', 'Warehouse Bin Allocation', 'Inter-Branch Stock Transfer'], 'icon' => 'package', 'order' => 5],
+            ['name' => 'ZaroAI', 'slug' => 'zaroai', 'tagline' => 'Autonomous Document OCR & Enterprise Knowledge Chatbot', 'status' => 'Coming Soon', 'description' => 'Self-hosted AI engine that extracts data from vendor documents, analyzes financial health, and answers staff inquiries instantly.', 'highlights' => ['Scanned Invoice OCR Extraction', 'Internal Knowledge RAG Chat', 'Anomaly & Fraud Detection', 'Custom API Connectors'], 'icon' => 'cpu', 'order' => 6],
+        ];
+
+        foreach ($products as $product) {
+            Product::updateOrCreate(['slug' => $product['slug']], $product + ['is_active' => true]);
+        }
+
+        // 14. Industry Solutions
+        $industries = [
+            ['slug' => 'manufacturing', 'name' => 'Manufacturing & Heavy Industries', 'icon' => 'factory', 'headline' => 'Complete Shop-Floor to Balance Sheet Automation', 'summary' => 'Connect raw material sourcing, automated Bill of Materials (BOM), production batch tracking, inventory, and automated general ledger.', 'features' => ['BOM Management', 'Batch Production Scheduling', 'Machine Downtime Logs', 'Multi-Warehouse Inventory', 'Automated Cost Accounting'], 'accent' => 'blue', 'order' => 1],
+            ['slug' => 'retail-ecommerce', 'name' => 'Retail & E-Commerce', 'icon' => 'shopping-bag', 'headline' => 'Omnichannel POS, Inventory & Flash Sale Systems', 'summary' => 'Sync physical retail outlets with online storefronts. Handle rapid checkout, automated courier dispatch, and multi-tier loyalty points.', 'features' => ['Cloud POS & Barcode Billing', 'Real-Time Stock Synchronization', 'Courier API Automation', 'Multi-Gateway Checkout', 'Customer Loyalty Engine'], 'accent' => 'purple', 'order' => 2],
+            ['slug' => 'healthcare', 'name' => 'Healthcare & Clinical Centers', 'icon' => 'activity', 'headline' => 'Digital EHR, Telemedicine & Diagnostic Lab Automation', 'summary' => 'Streamline doctor appointment schedules, electronic health records (EHR), pharmacy batch expiration alerts, and pathology reporting.', 'features' => ['Electronic Health Records (EHR)', 'SMS Appointment Triage', 'Pathology Lab Reporting', 'Pharmacy Expiry POS', 'Doctor Digital Prescriptions'], 'accent' => 'emerald', 'order' => 3],
+            ['slug' => 'education', 'name' => 'Education & Universities', 'icon' => 'book-open', 'headline' => 'Student Portals, Fee Automation & LMS Platforms', 'summary' => 'Modern institutional management for schools, universities, and coaching academies with online fees, gradebooks, and digital classes.', 'features' => ['Online Admission & Fee Gateway', 'Digital Attendance & SMS Alerts', 'Gradebook & Report Cards', 'Student / Parent Portal', 'Library & Asset Tracking'], 'accent' => 'amber', 'order' => 4],
+            ['slug' => 'finance-banking', 'name' => 'FinTech, Microfinance & Corporate Banking', 'icon' => 'credit-card', 'headline' => 'Secure Microfinance Ledgers, Loan Disbursal & Wallets', 'summary' => 'High-security financial software featuring automated loan interest calculations, biometric KYC authentication, and audit-ready reporting.', 'features' => ['Double-Entry Microfinance Ledger', 'Automated EMI & Loan Calculator', 'Biometric & KYC Verification', 'Digital Wallet Architecture', 'Regulatory Compliance Audits'], 'accent' => 'cyan', 'order' => 5],
+            ['slug' => 'logistics', 'name' => 'Logistics, Fleet & Supply Chain', 'icon' => 'truck', 'headline' => 'Real-Time Fleet Dispatch, GPS Tracking & Waybills', 'summary' => 'Automate consignment booking, route optimization, driver trip manifests, fuel accounting, and automated customer tracking links.', 'features' => ['Consignment & Waybill Generator', 'Driver Trip & Fuel Logs', 'Real-Time GPS Tracking API', 'Automated Delivery SMS', 'B2B Client Freight Portal'], 'accent' => 'rose', 'order' => 6],
+        ];
+
+        foreach ($industries as $industry) {
+            Industry::updateOrCreate(['slug' => $industry['slug']], $industry + ['is_active' => true]);
+        }
+
+        // 15. Client Logos (the "trusted by" strip on the homepage)
+        $clients = [
+            ['name' => 'Cmed Health', 'slug' => 'cmed-health', 'order' => 1],
+            ['name' => 'CHRF', 'slug' => 'chrf', 'order' => 2],
+            ['name' => 'National University, Bangladesh', 'slug' => 'national-university', 'order' => 3],
+            ['name' => 'Neptune Enterprise', 'slug' => 'neptune-enterprise', 'order' => 4],
+            ['name' => 'Neptune Printing & Accessories Ltd', 'slug' => 'neptune-printing', 'order' => 5],
+            ['name' => 'TK Accessories & Packaging', 'slug' => 'tk-accessories-packaging', 'order' => 6],
+            ['name' => 'Best Dry', 'slug' => 'best-dry', 'order' => 7],
+            ['name' => 'UHCD', 'slug' => 'uhcd', 'order' => 8],
+            ['name' => 'Harvard School & College', 'slug' => 'harvard-school-college', 'order' => 9],
+            ['name' => 'Chatmohar Govt. College, Pabna', 'slug' => 'chatmohar-govt-college', 'order' => 10],
+            ['name' => 'Shyampur Mohabidyalay, Rangpur', 'slug' => 'shyampur-mohabidyalay', 'order' => 11],
+            ['name' => 'Pubail Adarsha College, Gazipur', 'slug' => 'pubail-adarsha-college', 'order' => 12],
+        ];
+
+        foreach ($clients as $client) {
+            Client::updateOrCreate(['slug' => $client['slug']], $client + [
+                'logo' => 'images/clients/' . $client['slug'] . '.png',
+                'is_active' => true,
+            ]);
         }
     }
 }

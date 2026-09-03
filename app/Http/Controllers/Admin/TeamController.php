@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\HandlesImageUploads;
 use App\Http\Controllers\Controller;
 use App\Models\TeamMember;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
+    use HandlesImageUploads;
+
     public function index()
     {
         $members = TeamMember::orderBy('order')->paginate(15);
@@ -26,7 +29,8 @@ class TeamController extends Controller
             'designation' => 'required|string|max:150',
             'role_title' => 'nullable|string|max:100',
             'bio' => 'required|string',
-            'avatar' => 'nullable|string',
+            'avatar' => 'nullable|string|max:2048',
+            'avatar_file' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
             'email' => 'nullable|email',
             'phone' => 'nullable|string',
             'linkedin_url' => 'nullable|string',
@@ -45,7 +49,7 @@ class TeamController extends Controller
             'designation' => $validated['designation'],
             'role_title' => $validated['role_title'] ?? null,
             'bio' => $validated['bio'],
-            'avatar' => $validated['avatar'] ?? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+            'avatar' => $this->resolveImageField($request, 'avatar', 'team'),
             'email' => $validated['email'] ?? null,
             'phone' => $validated['phone'] ?? null,
             'linkedin_url' => $validated['linkedin_url'] ?? null,
@@ -72,7 +76,8 @@ class TeamController extends Controller
             'designation' => 'required|string|max:150',
             'role_title' => 'nullable|string|max:100',
             'bio' => 'required|string',
-            'avatar' => 'nullable|string',
+            'avatar' => 'nullable|string|max:2048',
+            'avatar_file' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
             'email' => 'nullable|email',
             'phone' => 'nullable|string',
             'linkedin_url' => 'nullable|string',
@@ -91,7 +96,7 @@ class TeamController extends Controller
             'designation' => $validated['designation'],
             'role_title' => $validated['role_title'] ?? null,
             'bio' => $validated['bio'],
-            'avatar' => $validated['avatar'] ?? $team->avatar,
+            'avatar' => $this->resolveImageField($request, 'avatar', 'team', $team->avatar),
             'email' => $validated['email'] ?? null,
             'phone' => $validated['phone'] ?? null,
             'linkedin_url' => $validated['linkedin_url'] ?? null,

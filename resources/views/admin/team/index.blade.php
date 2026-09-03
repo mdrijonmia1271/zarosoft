@@ -29,7 +29,11 @@
                     @forelse($members as $m)
                     <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
                         <td class="py-4 px-6 flex items-center gap-3">
-                            <img src="{{ $m->avatar }}" alt="{{ $m->name }}" class="w-10 h-10 rounded-full object-cover border border-slate-700">
+                            @if($m->avatar_url)
+                            <img src="{{ $m->avatar_url }}" alt="{{ $m->name }}" class="w-10 h-10 rounded-full object-cover border border-slate-700">
+                            @else
+                            <span class="w-10 h-10 rounded-full border border-slate-700 bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-[11px] font-bold text-slate-500 dark:text-slate-400">{{ $m->initials }}</span>
+                            @endif
                             <div>
                                 <p class="font-bold text-slate-900 dark:text-white">{{ $m->name }}</p>
                                 <p class="text-[11px] text-slate-400">{{ $m->email }}</p>

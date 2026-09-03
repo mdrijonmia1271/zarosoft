@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\ResolvesMediaPath;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -10,6 +11,7 @@ use Illuminate\Support\Str;
 class Project extends Model
 {
     use HasFactory;
+    use ResolvesMediaPath;
 
     protected $fillable = [
         'project_category_id',
@@ -58,5 +60,19 @@ class Project extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(ProjectCategory::class, 'project_category_id');
+    }
+
+    public function getThumbnailUrlAttribute(): ?string
+    {
+        return $this->resolveMediaPath($this->thumbnail);
+    }
+
+    /**
+     * Falls back to the thumbnail so a project without a dedicated hero shot
+     * still renders a banner.
+     */
+    public function getHeroUrlAttribute(): ?string
+    {
+        return $this->resolveMediaPath($this->hero_image) ?? $this->thumbnail_url;
     }
 }

@@ -10,13 +10,13 @@
     </a>
 
     <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
-        <form action="{{ route('admin.projects.store') }}" method="POST" class="space-y-6">
+        <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Project Category *</label>
-                    <select name="project_category_id" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <select name="project_category_id" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                         @foreach($categories as $cat)
                         <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                         @endforeach
@@ -25,78 +25,82 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Project Title *</label>
-                    <input type="text" name="title" value="{{ old('title') }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white" placeholder="e.g. ZaroERP — Smart Manufacturing Suite">
+                    <input type="text" name="title" value="{{ old('title') }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white" placeholder="e.g. ZaroERP — Smart Manufacturing Suite">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Client Name</label>
-                    <input type="text" name="client_name" value="{{ old('client_name') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white" placeholder="e.g. Apex Industrial Mills Ltd.">
+                    <input type="text" name="client_name" value="{{ old('client_name') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white" placeholder="e.g. Apex Industrial Mills Ltd.">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Industry</label>
-                    <input type="text" name="industry" value="{{ old('industry') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white" placeholder="e.g. Manufacturing, FinTech, Healthcare">
+                    <input type="text" name="industry" value="{{ old('industry') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white" placeholder="e.g. Manufacturing, FinTech, Healthcare">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Duration / Timeline</label>
-                    <input type="text" name="duration" value="{{ old('duration') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white" placeholder="e.g. 4 Months">
+                    <input type="text" name="duration" value="{{ old('duration') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white" placeholder="e.g. 4 Months">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Live Demo / URL</label>
-                    <input type="url" name="live_url" value="{{ old('live_url') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white" placeholder="https://demo.zarosoft.com/erp">
+                    <input type="url" name="live_url" value="{{ old('live_url') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white" placeholder="https://demo.zarosoft.com/erp">
                 </div>
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Tagline (Punchy Headline)</label>
-                <input type="text" name="tagline" value="{{ old('tagline') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white" placeholder="Automating shop-floor production lines and multi-warehouse inventory.">
+                <input type="text" name="tagline" value="{{ old('tagline') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white" placeholder="Automating shop-floor production lines and multi-warehouse inventory.">
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Executive Overview *</label>
-                <textarea name="overview" rows="3" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ old('overview') }}</textarea>
+                <textarea name="overview" rows="3" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ old('overview') }}</textarea>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">The Problem / Challenge</label>
-                    <textarea name="problem" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ old('problem') }}</textarea>
+                    <textarea name="problem" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ old('problem') }}</textarea>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">The Solution Implemented</label>
-                    <textarea name="solution" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ old('solution') }}</textarea>
+                    <textarea name="solution" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ old('solution') }}</textarea>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Key Features (1 per line)</label>
-                    <textarea name="key_features" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed" placeholder="Automated Bill of Materials (BOM)&#10;Barcode inventory scanning&#10;Double-entry accounting"></textarea>
+                    <textarea name="key_features" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed" placeholder="Automated Bill of Materials (BOM)&#10;Barcode inventory scanning&#10;Double-entry accounting"></textarea>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Measurable Results / ROI (1 per line)</label>
-                    <textarea name="results" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed" placeholder="45% reduction in factory downtime&#10;$280,000 saved annually&#10;99.8% on-time delivery"></textarea>
+                    <textarea name="results" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed" placeholder="45% reduction in factory downtime&#10;$280,000 saved annually&#10;99.8% on-time delivery"></textarea>
                 </div>
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Tech Stack (comma separated)</label>
-                <input type="text" name="tech_stack" value="{{ old('tech_stack') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white" placeholder="Laravel 12, MySQL, Redis, Tailwind CSS, Docker">
+                <input type="text" name="tech_stack" value="{{ old('tech_stack') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white" placeholder="Laravel 12, MySQL, Redis, Tailwind CSS, Docker">
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Thumbnail Image URL</label>
-                    <input type="text" name="thumbnail" value="{{ old('thumbnail') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white" placeholder="https://images.unsplash.com/photo-...">
+                    <input type="text" name="thumbnail" value="{{ old('thumbnail') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white" placeholder="images/projects/my-project.jpg or https://...">
+                    <input type="file" name="thumbnail_file" accept="image/*" class="w-full mt-2 text-[11px] text-slate-600 dark:text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-indigo-50 dark:file:bg-indigo-950/50 file:text-indigo-500 hover:file:bg-indigo-100 cursor-pointer">
+                    <p class="mt-1 text-[10px] text-slate-400">Upload a file, or paste a path / URL above. Uploading replaces the current image.</p>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Hero Image URL</label>
-                    <input type="text" name="hero_image" value="{{ old('hero_image') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white" placeholder="https://images.unsplash.com/photo-...">
+                    <input type="text" name="hero_image" value="{{ old('hero_image') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white" placeholder="images/projects/my-project.jpg or https://...">
+                    <input type="file" name="hero_image_file" accept="image/*" class="w-full mt-2 text-[11px] text-slate-600 dark:text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-indigo-50 dark:file:bg-indigo-950/50 file:text-indigo-500 hover:file:bg-indigo-100 cursor-pointer">
+                    <p class="mt-1 text-[10px] text-slate-400">Upload a file, or paste a path / URL above. Uploading replaces the current image.</p>
                 </div>
             </div>
 

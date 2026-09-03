@@ -17,23 +17,23 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Category *</label>
-                    <input type="text" name="category" value="{{ old('category', $faq->category) }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <input type="text" name="category" value="{{ old('category', $faq->category) }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Display Order</label>
-                    <input type="number" name="order" value="{{ old('order', $faq->order) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <input type="number" name="order" value="{{ old('order', $faq->order) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                 </div>
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Question *</label>
-                <input type="text" name="question" value="{{ old('question', $faq->question) }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                <input type="text" name="question" value="{{ old('question', $faq->question) }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Answer *</label>
-                <textarea name="answer" rows="5" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ old('answer', $faq->answer) }}</textarea>
+                <textarea name="answer" rows="5" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ old('answer', $faq->answer) }}</textarea>
             </div>
 
             <div class="flex items-center gap-6 pt-2">

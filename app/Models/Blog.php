@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\ResolvesMediaPath;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +12,7 @@ use Illuminate\Support\Str;
 class Blog extends Model
 {
     use HasFactory;
+    use ResolvesMediaPath;
 
     protected $fillable = [
         'blog_category_id',
@@ -56,5 +58,28 @@ class Blog extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function getCoverImageUrlAttribute(): ?string
+    {
+        return $this->resolveMediaPath($this->cover_image);
+    }
+
+    public function getAuthorAvatarUrlAttribute(): ?string
+    {
+        return $this->resolveMediaPath($this->author_avatar);
+    }
+
+    /**
+     * Up to two initials for the author, used when no avatar is available.
+     */
+    public function getAuthorInitialsAttribute(): string
+    {
+        $parts = preg_split('/\s+/', trim((string) $this->author_name), -1, PREG_SPLIT_NO_EMPTY) ?: [];
+
+        return Str::upper(implode('', array_map(
+            fn ($part) => Str::substr($part, 0, 1),
+            array_slice($parts, 0, 2)
+        )));
     }
 }

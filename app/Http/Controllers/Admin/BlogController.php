@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\HandlesImageUploads;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
@@ -11,6 +12,8 @@ use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
+    use HandlesImageUploads;
+
     public function index()
     {
         $blogs = Blog::with('category')->orderBy('published_at', 'desc')->paginate(15);
@@ -32,7 +35,8 @@ class BlogController extends Controller
             'slug' => 'nullable|string|max:250|unique:blogs,slug',
             'excerpt' => 'required|string|max:500',
             'content' => 'required|string',
-            'cover_image' => 'nullable|string',
+            'cover_image' => 'nullable|string|max:2048',
+            'cover_image_file' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
             'author_name' => 'required|string|max:100',
             'read_time' => 'required|string|max:50',
             'tags' => 'nullable|array',
@@ -48,7 +52,7 @@ class BlogController extends Controller
             'slug' => $slug,
             'excerpt' => $validated['excerpt'],
             'content' => $validated['content'],
-            'cover_image' => $validated['cover_image'] ?? 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&auto=format&fit=crop&q=80',
+            'cover_image' => $this->resolveImageField($request, 'cover_image', 'blog'),
             'author_name' => $validated['author_name'],
             'read_time' => $validated['read_time'],
             'is_featured' => $request->boolean('is_featured'),
@@ -78,7 +82,8 @@ class BlogController extends Controller
             'slug' => 'nullable|string|max:250|unique:blogs,slug,' . $blog->id,
             'excerpt' => 'required|string|max:500',
             'content' => 'required|string',
-            'cover_image' => 'nullable|string',
+            'cover_image' => 'nullable|string|max:2048',
+            'cover_image_file' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
             'author_name' => 'required|string|max:100',
             'read_time' => 'required|string|max:50',
             'tags' => 'nullable|array',
@@ -94,7 +99,7 @@ class BlogController extends Controller
             'slug' => $slug,
             'excerpt' => $validated['excerpt'],
             'content' => $validated['content'],
-            'cover_image' => $validated['cover_image'] ?? $blog->cover_image,
+            'cover_image' => $this->resolveImageField($request, 'cover_image', 'blog', $blog->cover_image),
             'author_name' => $validated['author_name'],
             'read_time' => $validated['read_time'],
             'is_featured' => $request->boolean('is_featured'),

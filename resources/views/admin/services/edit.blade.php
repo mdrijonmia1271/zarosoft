@@ -17,7 +17,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Service Category *</label>
-                    <select name="service_category_id" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <select name="service_category_id" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                         @foreach($categories as $cat)
                         <option value="{{ $cat->id }}" {{ $service->service_category_id == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
                         @endforeach
@@ -26,39 +26,39 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Service Title *</label>
-                    <input type="text" name="title" value="{{ old('title', $service->title) }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <input type="text" name="title" value="{{ old('title', $service->title) }}" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Slug (URL identifier)</label>
-                    <input type="text" name="slug" value="{{ old('slug', $service->slug) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <input type="text" name="slug" value="{{ old('slug', $service->slug) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Icon Key / Emoji</label>
-                    <input type="text" name="icon" value="{{ old('icon', $service->icon) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white">
+                    <input type="text" name="icon" value="{{ old('icon', $service->icon) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
                 </div>
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Short Description *</label>
-                <textarea name="short_description" rows="2" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ old('short_description', $service->short_description) }}</textarea>
+                <textarea name="short_description" rows="2" required class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ old('short_description', $service->short_description) }}</textarea>
             </div>
 
             <div>
                 <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Detailed Description</label>
-                <textarea name="description" rows="5" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ old('description', $service->description) }}</textarea>
+                <textarea name="description" rows="5" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ old('description', $service->description) }}</textarea>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Key Features (1 per line)</label>
-                    <textarea name="features" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ is_array($service->features) ? implode("\n", $service->features) : '' }}</textarea>
+                    <textarea name="features" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ is_array($service->features) ? implode("\n", $service->features) : '' }}</textarea>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Tech Stack (comma separated)</label>
-                    <textarea name="tech_stack" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-white leading-relaxed">{{ is_array($service->tech_stack) ? implode(", ", $service->tech_stack) : '' }}</textarea>
+                    <textarea name="tech_stack" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed">{{ is_array($service->tech_stack) ? implode(", ", $service->tech_stack) : '' }}</textarea>
                 </div>
             </div>
 

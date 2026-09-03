@@ -49,12 +49,9 @@
                         <span class="text-base">💼</span>
                         <span>Leads (Mini CRM)</span>
                     </div>
-                    @php
-                    $newLeads = \App\Models\ContactRequest::where('status', 'new')->count();
-                    @endphp
-                    @if($newLeads > 0)
+                    @if($newLeadsCount > 0)
                     <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500 text-white">
-                        {{ $newLeads }}
+                        {{ $newLeadsCount }}
                     </span>
                     @endif
                 </a>
@@ -65,7 +62,22 @@
 
                 <a href="{{ route('admin.services.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.services.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <span class="text-base">🛠️</span>
-                    <span>Services (17)</span>
+                    <span>Services ({{ $activeServiceCount }})</span>
+                </a>
+
+                <a href="{{ route('admin.products.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.products.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                    <span class="text-base">📦</span>
+                    <span>Product Suite</span>
+                </a>
+
+                <a href="{{ route('admin.industries.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.industries.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                    <span class="text-base">🏭</span>
+                    <span>Industry Solutions</span>
+                </a>
+
+                <a href="{{ route('admin.clients.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.clients.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                    <span class="text-base">🤝</span>
+                    <span>Client Logos</span>
                 </a>
 
                 <a href="{{ route('admin.projects.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.projects.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">

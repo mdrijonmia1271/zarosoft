@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\HandlesImageUploads;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\ProjectCategory;
@@ -10,6 +11,8 @@ use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
+    use HandlesImageUploads;
+
     public function index()
     {
         $projects = Project::with('category')->orderBy('order')->paginate(15);
@@ -38,8 +41,10 @@ class ProjectController extends Controller
             'key_features' => 'nullable|string',
             'tech_stack' => 'nullable|string',
             'results' => 'nullable|string',
-            'thumbnail' => 'nullable|string',
-            'hero_image' => 'nullable|string',
+            'thumbnail' => 'nullable|string|max:2048',
+            'thumbnail_file' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
+            'hero_image' => 'nullable|string|max:2048',
+            'hero_image_file' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
             'live_url' => 'nullable|string',
             'is_featured' => 'boolean',
             'is_active' => 'boolean',
@@ -65,8 +70,8 @@ class ProjectController extends Controller
             'key_features' => array_values($key_features),
             'tech_stack' => array_values($tech_stack),
             'results' => array_values($results),
-            'thumbnail' => $validated['thumbnail'] ?? 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80',
-            'hero_image' => $validated['hero_image'] ?? 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&auto=format&fit=crop&q=80',
+            'thumbnail' => $this->resolveImageField($request, 'thumbnail', 'projects'),
+            'hero_image' => $this->resolveImageField($request, 'hero_image', 'projects'),
             'live_url' => $validated['live_url'] ?? null,
             'is_featured' => $request->boolean('is_featured'),
             'is_active' => $request->boolean('is_active', true),
@@ -98,8 +103,10 @@ class ProjectController extends Controller
             'key_features' => 'nullable|string',
             'tech_stack' => 'nullable|string',
             'results' => 'nullable|string',
-            'thumbnail' => 'nullable|string',
-            'hero_image' => 'nullable|string',
+            'thumbnail' => 'nullable|string|max:2048',
+            'thumbnail_file' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
+            'hero_image' => 'nullable|string|max:2048',
+            'hero_image_file' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:4096',
             'live_url' => 'nullable|string',
             'is_featured' => 'boolean',
             'is_active' => 'boolean',
@@ -125,8 +132,8 @@ class ProjectController extends Controller
             'key_features' => array_values($key_features),
             'tech_stack' => array_values($tech_stack),
             'results' => array_values($results),
-            'thumbnail' => $validated['thumbnail'] ?? $project->thumbnail,
-            'hero_image' => $validated['hero_image'] ?? $project->hero_image,
+            'thumbnail' => $this->resolveImageField($request, 'thumbnail', 'projects', $project->thumbnail),
+            'hero_image' => $this->resolveImageField($request, 'hero_image', 'projects', $project->hero_image),
             'live_url' => $validated['live_url'] ?? null,
             'is_featured' => $request->boolean('is_featured'),
             'is_active' => $request->boolean('is_active', true),

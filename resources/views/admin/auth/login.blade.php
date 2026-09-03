@@ -12,7 +12,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-[#07090e] text-slate-100 min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-    
+
     <!-- Background Glows -->
     <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#007BFF]/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow"></div>
     <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#00D2FF]/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" style="animation-delay: 2s;"></div>
@@ -44,12 +44,12 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">Email Address</label>
-                    <input type="email" name="email" value="{{ old('email', 'admin@zarosoft.com') }}" required autofocus class="w-full px-4 py-3 rounded-xl bg-[#07090e] border border-white/10 text-sm text-white focus:outline-none focus:border-[#007BFF] placeholder-slate-600">
+                    <input type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="you@zarosoft.com" class="w-full px-4 py-3 rounded-xl bg-[#07090e] border border-white/10 text-sm text-white focus:outline-none focus:border-[#007BFF] placeholder-slate-600">
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">Password</label>
-                    <input type="password" name="password" value="password123" required class="w-full px-4 py-3 rounded-xl bg-[#07090e] border border-white/10 text-sm text-white focus:outline-none focus:border-[#007BFF] placeholder-slate-600">
+                    <input type="password" name="password" required autocomplete="current-password" placeholder="••••••••" class="w-full px-4 py-3 rounded-xl bg-[#07090e] border border-white/10 text-sm text-white focus:outline-none focus:border-[#007BFF] placeholder-slate-600">
                 </div>
 
                 <div class="flex items-center justify-between text-xs">
@@ -57,7 +57,7 @@
                         <input type="checkbox" name="remember" class="rounded bg-[#07090e] border-white/10 text-[#007BFF] focus:ring-0">
                         <span>Remember session</span>
                     </label>
-                    <span class="text-slate-500">Default: password123</span>
+                    <span class="text-slate-500">Authorised personnel only</span>
                 </div>
 
                 <button type="submit" class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#007BFF] via-[#0099FF] to-[#00D2FF] hover:from-[#0069d9] hover:to-[#00B4FF] text-white font-extrabold text-sm shadow-xl shadow-[#007BFF]/25 transition-all">
@@ -70,6 +70,5 @@
             <a href="{{ route('home') }}" class="hover:text-slate-300">← Back to public website</a>
         </div>
     </div>
-
 </body>
 </html>
