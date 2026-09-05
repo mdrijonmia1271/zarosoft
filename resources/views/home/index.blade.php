@@ -6,148 +6,319 @@
 @section('content')
 
 <!-- ========================================================================= -->
-<!-- 01. HERO SECTION (Cinematic 3D Particle Wave & Global Network Backdrop) -->
+<!-- 01. UNIFIED HERO SECTION (Left Content + Right Media Card Showcase) -->
 <!-- ========================================================================= -->
-<section id="hero-section" class="relative overflow-hidden py-6 sm:py-8 lg:py-10 bg-[#060A17] text-white">
-    
-    <!-- 01. ANIMATED 3D PARTICLE WAVE & WORLD NETWORK BACKDROP -->
-    <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none -z-0">
-        <x-hero-backdrop />
-
-        {{-- Subtle vignette scrim to preserve razor-sharp text contrast without hiding the 3D wave & world network --}}
-        <div class="absolute inset-0 bg-gradient-to-b from-[#060A17]/60 via-transparent to-[#060A17] pointer-events-none"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_45%,_var(--tw-gradient-stops))] from-[#060A17]/45 via-transparent to-transparent pointer-events-none"></div>
-        <div class="absolute inset-0 bg-tech-grid opacity-10 pointer-events-none"></div>
+<section id="hero-section" class="relative overflow-hidden py-10 sm:py-14 lg:py-18 bg-[#060A17] text-white border-b border-slate-800/60">
+    {{-- High-tech 3D wave particle canvas --}}
+    <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <canvas id="hero-particle-wave-canvas" class="w-full h-full opacity-35"></canvas>
     </div>
 
-    <!-- 02. HERO FOREGROUND CONTENT -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
-        <div class="max-w-4xl mx-auto space-y-3 sm:space-y-4 reveal">
+    {{-- Ambient dynamic glow behind content --}}
+    <div class="absolute top-1/4 left-1/4 -translate-x-1/2 w-[550px] h-[350px] bg-[#007BFF]/15 blur-[160px] pointer-events-none rounded-full"></div>
+    <div class="absolute top-1/3 right-10 w-[500px] h-[350px] bg-[#00D2FF]/10 blur-[150px] pointer-events-none rounded-full"></div>
+    <div class="absolute inset-0 bg-tech-grid opacity-15 pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 xl:gap-12 items-center">
             
-            <!-- Main Headline with Dynamic Typewriter Effect -->
-            <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.12] font-heading drop-shadow-2xl">
-                Engineering the Digital Future of Business. <br class="hidden sm:inline" />
-                <!-- Products That <br /> -->
-                <span x-data="{
-                    phrases: ['Scale Without Limits', 'Automate Operations', 'Drive Real Growth', 'Empower Enterprises'],
-                    phraseIdx: 0,
-                    charIdx: 0,
-                    displayText: '',
-                    isDeleting: false,
-                    init() { this.typeLoop(); },
-                    typeLoop() {
-                        const currentPhrase = this.phrases[this.phraseIdx];
-                        if (this.isDeleting) {
-                            this.displayText = currentPhrase.substring(0, this.charIdx - 1);
-                            this.charIdx--;
-                        } else {
-                            this.displayText = currentPhrase.substring(0, this.charIdx + 1);
-                            this.charIdx++;
+            <!-- ============================================================= -->
+            <!-- LEFT COLUMN: Value Proposition, Headlines, CTAs, & Trust KPIs -->
+            <!-- ============================================================= -->
+            <div class="lg:col-span-6 xl:col-span-7 space-y-6 sm:space-y-7 text-left reveal">
+                
+                <!-- Main Headline with Dynamic Typewriter Effect -->
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight text-white leading-[1.14] font-heading drop-shadow-2xl">
+                    Engineering the Digital Future of Business. <br class="hidden sm:inline" />
+                    <span x-data="{
+                        phrases: ['Scale Without Limits', 'Automate Operations', 'Drive Real Growth', 'Empower Enterprises'],
+                        phraseIdx: 0,
+                        charIdx: 0,
+                        displayText: '',
+                        isDeleting: false,
+                        init() { this.typeLoop(); },
+                        typeLoop() {
+                            const currentPhrase = this.phrases[this.phraseIdx];
+                            if (this.isDeleting) {
+                                this.displayText = currentPhrase.substring(0, this.charIdx - 1);
+                                this.charIdx--;
+                            } else {
+                                this.displayText = currentPhrase.substring(0, this.charIdx + 1);
+                                this.charIdx++;
+                            }
+                            let speed = this.isDeleting ? 35 : 75;
+                            if (!this.isDeleting && this.charIdx === currentPhrase.length) {
+                                speed = 2200;
+                                this.isDeleting = true;
+                            } else if (this.isDeleting && this.charIdx === 0) {
+                                this.isDeleting = false;
+                                this.phraseIdx = (this.phraseIdx + 1) % this.phrases.length;
+                                speed = 400;
+                            }
+                            setTimeout(() => this.typeLoop(), speed);
                         }
-                        let speed = this.isDeleting ? 35 : 75;
-                        if (!this.isDeleting && this.charIdx === currentPhrase.length) {
-                            speed = 2000;
-                            this.isDeleting = true;
-                        } else if (this.isDeleting && this.charIdx === 0) {
-                            this.isDeleting = false;
-                            this.phraseIdx = (this.phraseIdx + 1) % this.phrases.length;
-                            speed = 400;
-                        }
-                        setTimeout(() => this.typeLoop(), speed);
-                    }
-                }" class="inline-flex items-center justify-center flex-wrap">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00D2FF] via-[#38BDF8] to-[#007BFF] drop-shadow-[0_0_35px_rgba(0,210,255,0.6)]" 
-                          x-text="displayText || '\u00A0'">
-                        Scale Without Limits
+                    }" class="inline-flex items-center flex-wrap">
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00D2FF] via-[#38BDF8] to-[#007BFF] drop-shadow-[0_0_35px_rgba(0,210,255,0.6)]" 
+                              x-text="displayText || '\u00A0'">
+                            Scale Without Limits
+                        </span>
+                        <span class="inline-block w-[3px] sm:w-[4px] h-[0.9em] bg-[#00D2FF] ml-1 animate-cursor rounded-full shadow-[0_0_12px_rgba(0,210,255,0.9)]"></span>
                     </span>
-                    <span class="inline-block w-[3px] sm:w-[4px] h-[0.9em] bg-[#00D2FF] ml-1 animate-cursor rounded-full shadow-[0_0_12px_rgba(0,210,255,0.9)]"></span>
-                </span>
-            </h1>
+                </h1>
 
-            <!-- Subtitle -->
-            <p class="text-xs sm:text-base text-slate-200 max-w-xl mx-auto leading-relaxed font-normal drop-shadow">
-                ZaroSoft builds scalable digital products, intelligent enterprise systems, and AI-powered automation that help ambitious businesses operate smarter and scale faster.
-            </p>
+                <!-- Subtitle -->
+                <p class="text-sm sm:text-base lg:text-lg text-slate-300 max-w-xl leading-relaxed font-normal">
+                    ZaroSoft builds scalable digital products, intelligent enterprise systems, and AI-powered automation that help ambitious businesses operate smarter and scale faster.
+                </p>
 
-            <!-- Dual Action CTAs -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1.5">
-                <!-- Primary CTA -->
-                <a href="{{ route('contact.index') }}" 
-                   class="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#0052cc] hover:from-[#0062cc] hover:to-[#003d99] text-white font-bold text-xs sm:text-sm shadow-xl shadow-[#007BFF]/40 hover:shadow-[#007BFF]/60 hover:scale-[1.02] transition-all btn-premium flex items-center justify-center gap-2 group border border-blue-400/30">
-                    <span>Schedule a Consultation</span>
-                    <svg class="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                    </svg>
-                </a>
+                <!-- Dual Action CTAs -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1">
+                    <!-- Primary CTA -->
+                    <a href="{{ route('contact.index') }}" 
+                       class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#0052cc] hover:from-[#0062cc] hover:to-[#003d99] text-white font-bold text-sm shadow-xl shadow-[#007BFF]/40 hover:shadow-[#007BFF]/60 hover:scale-[1.02] transition-all btn-premium flex items-center justify-center gap-2 group border border-blue-400/30">
+                        <span>Schedule a Consultation</span>
+                        <svg class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </a>
 
-                <!-- Secondary CTA -->
-                <a href="{{ route('portfolio.index') }}" 
-                   class="w-full sm:w-auto px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs sm:text-sm border border-white/20 hover:border-cyan-400/50 shadow-lg backdrop-blur-md hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
-                    <svg class="w-3.5 h-3.5 text-[#00D2FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                    </svg>
-                    <span>Explore Case Studies</span>
-                </a>
-            </div>
-
-        </div>
-
-        <!-- 03. TRUST KPI STRIP (figures come from Admin → Settings) -->
-        @php
-            $heroKpis = [
-                [
-                    'label' => 'DELIVERY COMMITMENT',
-                    'value' => '2-Week Sprints',
-                    'note' => 'Working software, every two weeks.',
-                    'accent' => 'text-[#00D2FF]',
-                    'dot' => 'bg-[#00D2FF]',
-                    'border' => 'hover:border-[#00D2FF]/60',
-                ],
-                [
-    'label' => 'RELIABILITY',
-                    'value' => 'Reliable by Design',
-                    'note' => 'High-availability architecture and continuous monitoring',
-                    'accent' => 'text-emerald-400',
-                    'dot' => 'bg-emerald-400',
-                    'border' => 'hover:border-emerald-400/60',
-                ],
-                [
-                    'label' => 'PROJECTS DELIVERED',
-                    'value' => setting('stat_projects_completed', '45+'),
-                    'note' => 'Across ERP, web, mobile, and AI solutions',
-                    'accent' => 'text-[#38BDF8]',
-                    'dot' => 'bg-[#38BDF8]',
-                    'border' => 'hover:border-[#007BFF]/60',
-                ],
-                [
-                    'label' => 'SUPPORT AVAILABILITY 1',
-                    'value' => setting('stat_support', '24/7'),
-                    'note' => setting('working_hours', 'Support and escalation for live systems'),
-                    'accent' => 'text-purple-400',
-                    'dot' => 'bg-purple-400',
-                    'border' => 'hover:border-purple-400/60',
-                ],
-            ];
-        @endphp
-        <div class="pt-5 sm:pt-6 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto text-left reveal">
-            @foreach($heroKpis as $kpi)
-            <div class="p-3 sm:p-3.5 rounded-xl bg-[#090E20]/80 border border-slate-700/60 backdrop-blur-xl shadow-xl {{ $kpi['border'] }} transition-all duration-300 hover:-translate-y-0.5">
-                <div class="flex items-center gap-1.5 {{ $kpi['accent'] }} text-[10px] font-mono font-bold mb-0.5">
-                    <span class="w-1.5 h-1.5 rounded-full {{ $kpi['dot'] }}"></span>
-                    <span>{{ $kpi['label'] }}</span>
+                    <!-- Secondary CTA -->
+                    <a href="{{ route('portfolio.index') }}" 
+                       class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-sm border border-white/20 hover:border-cyan-400/50 shadow-lg backdrop-blur-md hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4 text-[#00D2FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                        <span>Explore Case Studies</span>
+                    </a>
                 </div>
-                <div class="text-base sm:text-lg font-black text-white font-heading">{{ $kpi['value'] }}</div>
-                <div class="text-[10px] text-slate-400 mt-0.5 line-clamp-1">{{ $kpi['note'] }}</div>
+
+                <!-- TRUST KPI STRIP (figures come from Admin → Settings) -->
+                @php
+                    $heroKpis = [
+                        [
+                            'label' => 'DELIVERY COMMITMENT',
+                            'value' => '2-Week Sprints',
+                            'note' => 'Working software, bi-weekly',
+                            'accent' => 'text-[#00D2FF]',
+                            'dot' => 'bg-[#00D2FF]',
+                            'border' => 'hover:border-[#00D2FF]/60',
+                        ],
+                        [
+                            'label' => 'ARCHITECTURE SLA',
+                            'value' => '99.9% Uptime',
+                            'note' => 'High availability by design',
+                            'accent' => 'text-emerald-400',
+                            'dot' => 'bg-emerald-400',
+                            'border' => 'hover:border-emerald-400/60',
+                        ],
+                        [
+                            'label' => 'TRACK RECORD',
+                            'value' => setting('stat_projects_completed', '45+'),
+                            'note' => 'ERP, web & AI platforms',
+                            'accent' => 'text-[#38BDF8]',
+                            'dot' => 'bg-[#38BDF8]',
+                            'border' => 'hover:border-[#007BFF]/60',
+                        ],
+                        [
+                            'label' => 'SLA SUPPORT',
+                            'value' => setting('stat_support', '24/7'),
+                            'note' => 'Continuous live monitoring',
+                            'accent' => 'text-purple-400',
+                            'dot' => 'bg-purple-400',
+                            'border' => 'hover:border-purple-400/60',
+                        ],
+                    ];
+                @endphp
+                <div class="pt-3 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 text-left">
+                    @foreach($heroKpis as $kpi)
+                    <div class="p-3 sm:p-3.5 rounded-xl bg-[#090E20]/80 border border-slate-700/60 backdrop-blur-xl shadow-lg {{ $kpi['border'] }} transition-all duration-300 hover:-translate-y-0.5">
+                        <div class="flex items-center gap-1.5 {{ $kpi['accent'] }} text-[9px] font-mono font-bold mb-1">
+                            <span class="w-1.5 h-1.5 rounded-full {{ $kpi['dot'] }}"></span>
+                            <span>{{ $kpi['label'] }}</span>
+                        </div>
+                        <div class="text-sm sm:text-base font-black text-white font-heading">{{ $kpi['value'] }}</div>
+                        <div class="text-[10px] text-slate-400 mt-0.5 line-clamp-1">{{ $kpi['note'] }}</div>
+                    </div>
+                    @endforeach
+                </div>
+
+                <!-- Subtle Enterprise Trust Caption -->
+                <div class="pt-1 flex items-center gap-2 text-xs font-mono text-slate-400/90">
+                    <span class="text-amber-400 font-bold tracking-widest">★★★★★</span>
+                    <span>Trusted by <strong class="text-[#38BDF8]">100+ Enterprise Clients</strong> Worldwide</span>
+                </div>
+
             </div>
-            @endforeach
-        </div>
 
-        <!-- Subtle Enterprise Trust Caption -->
-        <div class="pt-2.5 text-center text-[11px] font-mono text-slate-400/80 reveal">
-            <span>Trusted by <strong class="text-[#38BDF8]">100+ Enterprise Clients</strong> Worldwide</span>
-        </div>
+            <!-- ============================================================= -->
+            <!-- RIGHT COLUMN: Media Showcase Card (Clean Video + Photos) -->
+            <!-- ============================================================= -->
+            <div class="lg:col-span-6 xl:col-span-5 relative lg:-translate-y-10 xl:-translate-y-14 lg:-mt-2 reveal">
+                
+                {{-- Clean Media Card Showcase Frame --}}
+                <div x-data="{
+                    activeSlide: 0,
+                    autoplay: true,
+                    videoDuration: 20000,
+                    imageDuration: 5500,
+                    timer: null,
+                    slides: [
+                        {
+                            type: 'video',
+                            src: '{{ asset('videos/video-5.mp4') }}'
+                        },
+                        {
+                            type: 'image',
+                            src: '{{ asset('images/hero-workstation.webp') }}'
+                        },
+                        {
+                            type: 'image',
+                            src: '{{ asset('images/projects/zaro-erp-manufacturing-system.webp') }}'
+                        },
+                        {
+                            type: 'image',
+                            src: '{{ asset('images/projects/omnistore-b2b-ecommerce-platform.webp') }}'
+                        },
+                        {
+                            type: 'image',
+                            src: '{{ asset('images/projects/neuralbot-ai-document-ocr.webp') }}'
+                        },
+                        {
+                            type: 'image',
+                            src: '{{ asset('images/projects/paypulse-mobile-fintech-wallet.webp') }}'
+                        },
+                        {
+                            type: 'image',
+                            src: '{{ asset('images/team-collaboration.webp') }}'
+                        }
+                    ],
+                    init() {
+                        this.startTimer();
+                    },
+                    startTimer() {
+                        this.clearTimer();
+                        if (!this.autoplay) return;
+                        const duration = this.activeSlide === 0 ? this.videoDuration : this.imageDuration;
+                        this.timer = setTimeout(() => {
+                            this.nextSlide();
+                        }, duration);
+                    },
+                    clearTimer() {
+                        if (this.timer) {
+                            clearTimeout(this.timer);
+                            this.timer = null;
+                        }
+                    },
+                    handleSlideChange() {
+                        this.startTimer();
+                        if (this.activeSlide === 0) {
+                            this.$nextTick(() => {
+                                const v = document.getElementById('hero-card-video');
+                                if (v) {
+                                    v.currentTime = 0;
+                                    v.play().catch(() => {});
+                                    if (v.duration && !isNaN(v.duration) && v.duration > 0) {
+                                        this.clearTimer();
+                                        const dur = Math.max(v.duration * 1000, this.videoDuration);
+                                        this.timer = setTimeout(() => {
+                                            this.nextSlide();
+                                        }, dur);
+                                    }
+                                }
+                            });
+                        }
+                    },
+                    nextSlide() {
+                        this.activeSlide = (this.activeSlide + 1) % this.slides.length;
+                        this.handleSlideChange();
+                    },
+                    prevSlide() {
+                        this.activeSlide = (this.activeSlide - 1 + this.slides.length) % this.slides.length;
+                        this.handleSlideChange();
+                    },
+                    goToSlide(index) {
+                        this.activeSlide = index;
+                        this.handleSlideChange();
+                    }
+                }" 
+                @mouseenter="clearTimer()"
+                @mouseleave="if(autoplay) startTimer()"
+                class="relative rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-b from-[#00D2FF]/40 via-[#007BFF]/20 to-transparent shadow-2xl shadow-[#007BFF]/25 group"
+                >
+                    <div class="rounded-[1.35rem] sm:rounded-[1.65rem] bg-[#090E20]/95 border border-slate-700/80 backdrop-blur-2xl overflow-hidden relative">
+                        
+                        <!-- Media Display Screen -->
+                        <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#060A17]">
+                            
+                            {{-- Slide 0: Video Reel --}}
+                            <div x-show="activeSlide === 0" 
+                                 x-transition:enter="transition ease-out duration-500"
+                                 x-transition:enter-start="opacity-0 scale-95"
+                                 x-transition:enter-end="opacity-100 scale-100"
+                                 class="absolute inset-0 w-full h-full">
+                                <video 
+                                    id="hero-card-video"
+                                    autoplay 
+                                    muted 
+                                    playsinline 
+                                    preload="auto"
+                                    @ended="if(activeSlide === 0 && autoplay) nextSlide()"
+                                    src="{{ asset('videos/video-5.mp4') }}"
+                                    class="w-full h-full object-cover object-center"
+                                >
+                                    <source src="{{ asset('videos/video-5.mp4') }}" type="video/mp4">
+                                    <source src="{{ asset('videos/video-4.mp4') }}" type="video/mp4">
+                                    <source src="{{ asset('videos/hero-bg.mp4') }}" type="video/mp4">
+                                </video>
+                            </div>
 
+                            {{-- Slides 1..6: Picture Showcases --}}
+                            <template x-for="(slide, index) in slides.slice(1)" :key="index + 1">
+                                <div x-show="activeSlide === (index + 1)" 
+                                     x-transition:enter="transition ease-out duration-500"
+                                     x-transition:enter-start="opacity-0 scale-95"
+                                     x-transition:enter-end="opacity-100 scale-100"
+                                     class="absolute inset-0 w-full h-full">
+                                    <img :src="slide.src" 
+                                         alt="ZaroSoft Showcase" 
+                                         loading="lazy"
+                                         class="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700">
+                                </div>
+                            </template>
+
+                            <!-- Navigation Arrows (appear on hover) -->
+                            <button type="button" @click="prevSlide()" aria-label="Previous slide" 
+                                    class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 hover:bg-[#007BFF] text-white/80 hover:text-white backdrop-blur-md flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 shadow-lg z-20">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <button type="button" @click="nextSlide()" aria-label="Next slide" 
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 hover:bg-[#007BFF] text-white/80 hover:text-white backdrop-blur-md flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 shadow-lg z-20">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+
+                            <!-- Minimal Sleek Dots Indicator -->
+                            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-md z-20">
+                                <template x-for="(slide, index) in slides" :key="index">
+                                    <button type="button" @click="goToSlide(index)" :aria-label="'Go to slide ' + (index + 1)"
+                                            class="h-1.5 rounded-full transition-all duration-300 cursor-pointer"
+                                            :class="activeSlide === index ? 'w-5 bg-[#00D2FF] shadow-[0_0_8px_rgba(0,210,255,0.8)]' : 'w-1.5 bg-white/40 hover:bg-white/70'">
+                                    </button>
+                                </template>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
 </section>
 
