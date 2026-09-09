@@ -16,230 +16,16 @@
 
         <!-- ==================== 10 DECORATIVE SOFTWARE TECH SHAPES (HERO AREA) ==================== -->
 
-        <!-- Shape 1: Top-Left Outer 3D Isometric Wireframe Cube -->
-        <div
-            class="absolute top-4 sm:top-8 left-3 sm:left-8 lg:left-14 pointer-events-none -z-0 opacity-30 sm:opacity-40 animate-float hidden sm:block">
-            <svg class="w-16 h-16 sm:w-22 sm:h-22" viewBox="0 0 100 100" fill="none">
-                <path d="M50 12 L85 32 L85 68 L50 88 L15 68 L15 32 Z" stroke="url(#hero-cube-grad)" stroke-width="1.5"
-                    stroke-linejoin="round" />
-                <path d="M50 12 L50 50 L85 68" stroke="url(#hero-cube-grad)" stroke-width="1.5" stroke-linejoin="round" />
-                <path d="M50 50 L15 68" stroke="url(#hero-cube-grad)" stroke-width="1.5" stroke-linejoin="round" />
-                <path d="M50 12 L85 68 M50 12 L15 68" stroke="#007BFF" stroke-width="0.75" stroke-dasharray="3 3"
-                    opacity="0.35" />
-                <circle cx="50" cy="50" r="3" fill="#00D2FF" />
-                <circle cx="50" cy="12" r="2" fill="#007BFF" />
-                <circle cx="85" cy="32" r="2" fill="#00D2FF" />
-                <circle cx="15" cy="32" r="2" fill="#007BFF" />
-                <circle cx="50" cy="88" r="2" fill="#007BFF" />
-                <defs>
-                    <linearGradient id="hero-cube-grad" x1="15" y1="12" x2="85" y2="88" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 2: Top-Right Outer 4-Point Astroid Star with Glowing Core -->
-        <div
-            class="absolute top-5 sm:top-10 right-4 sm:right-10 lg:right-16 pointer-events-none -z-0 opacity-25 sm:opacity-35 animate-float-delayed">
-            <svg class="w-14 h-14 sm:w-20 sm:h-20" viewBox="0 0 100 100" fill="none">
-                <path d="M50 8 C50 32, 68 50, 92 50 C68 50, 50 68, 50 92 C50 68, 32 50, 8 50 C32 50, 50 32, 50 8 Z"
-                    fill="url(#hero-star-grad)" stroke="url(#hero-star-stroke)" stroke-width="1.5" />
-                <circle cx="50" cy="50" r="7" fill="#00D2FF" fill-opacity="0.6" />
-                <circle cx="50" cy="50" r="3" fill="white" />
-                <defs>
-                    <linearGradient id="hero-star-grad" x1="8" y1="8" x2="92" y2="92" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" stop-opacity="0.25" />
-                        <stop offset="1" stop-color="#007BFF" stop-opacity="0.05" />
-                    </linearGradient>
-                    <linearGradient id="hero-star-stroke" x1="8" y1="8" x2="92" y2="92" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" />
-                        <stop offset="1" stop-color="#007BFF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 3: Top-Left Badge Flank (3D Hexagonal Matrix Lattice) -->
-        <div
-            class="absolute top-6 sm:top-10 left-1/4 -translate-x-12 sm:-translate-x-20 pointer-events-none -z-0 opacity-20 sm:opacity-30 animate-float hidden lg:block">
-            <svg class="w-14 h-14 sm:w-18 sm:h-18" viewBox="0 0 100 100" fill="none">
-                <polygon points="50,15 80,32 80,68 50,85 20,68 20,32" stroke="url(#hero-hex-top-grad)" stroke-width="1.5"
-                    fill="none" />
-                <polygon points="50,28 70,40 70,60 50,72 30,60 30,40" stroke="url(#hero-hex-top-grad)" stroke-width="1"
-                    stroke-dasharray="2 3" opacity="0.6" />
-                <circle cx="50" cy="50" r="3.5" fill="#007BFF" />
-                <defs>
-                    <linearGradient id="hero-hex-top-grad" x1="20" y1="15" x2="80" y2="85" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 4: Top-Right Badge Flank (Concentric Radar Orbit Circles) -->
-        <div
-            class="absolute top-6 sm:top-10 right-1/4 translate-x-12 sm:translate-x-20 pointer-events-none -z-0 opacity-20 sm:opacity-30 animate-float-delayed hidden lg:block">
-            <svg class="w-14 h-14 sm:w-18 sm:h-18" viewBox="0 0 100 100" fill="none">
-                <circle cx="50" cy="50" r="38" stroke="url(#hero-radar-top-grad)" stroke-width="1.25"
-                    stroke-dasharray="3 3" />
-                <circle cx="50" cy="50" r="22" stroke="url(#hero-radar-top-grad)" stroke-width="1.5" />
-                <circle cx="50" cy="50" r="10" stroke="url(#hero-radar-top-grad)" stroke-width="1" fill="#007BFF"
-                    fill-opacity="0.1" />
-                <circle cx="72" cy="50" r="3" fill="#00D2FF" />
-                <defs>
-                    <linearGradient id="hero-radar-top-grad" x1="12" y1="12" x2="88" y2="88" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" />
-                        <stop offset="1" stop-color="#007BFF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 5: Mid-Left Headline Flank (3D Faceted Diamond / Octahedron Prism) -->
-        <div
-            class="absolute top-1/2 -translate-y-20 left-2 sm:left-6 lg:left-12 pointer-events-none -z-0 opacity-25 sm:opacity-35 animate-float hidden md:block">
-            <svg class="w-16 h-16 sm:w-22 sm:h-22" viewBox="0 0 100 100" fill="none">
-                <polygon points="50,10 85,45 50,90 15,45" stroke="url(#hero-octa-mid-grad)" stroke-width="1.5"
-                    fill="url(#hero-octa-mid-fill)" />
-                <line x1="15" y1="45" x2="85" y2="45" stroke="url(#hero-octa-mid-grad)" stroke-width="1.5" />
-                <polygon points="50,10 65,45 50,90 35,45" stroke="url(#hero-octa-mid-grad)" stroke-width="1" fill="none"
-                    opacity="0.6" />
-                <circle cx="50" cy="45" r="3" fill="#00D2FF" />
-                <defs>
-                    <linearGradient id="hero-octa-mid-grad" x1="15" y1="10" x2="85" y2="90" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                    <linearGradient id="hero-octa-mid-fill" x1="50" y1="10" x2="50" y2="90" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" stop-opacity="0.12" />
-                        <stop offset="1" stop-color="#00D2FF" stop-opacity="0.02" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 6: Mid-Right Headline Flank (3D Geodesic Wireframe Sphere / Icosahedron) -->
-        <div
-            class="absolute top-1/2 -translate-y-20 right-2 sm:right-6 lg:right-12 pointer-events-none -z-0 opacity-25 sm:opacity-35 animate-float-delayed hidden md:block">
-            <svg class="w-16 h-16 sm:w-22 sm:h-22" viewBox="0 0 100 100" fill="none">
-                <circle cx="50" cy="50" r="38" stroke="url(#hero-sphere-mid-grad)" stroke-width="1.5" />
-                <ellipse cx="50" cy="50" rx="38" ry="15" stroke="url(#hero-sphere-mid-grad)" stroke-width="1"
-                    stroke-dasharray="3 3" />
-                <ellipse cx="50" cy="50" rx="15" ry="38" stroke="url(#hero-sphere-mid-grad)" stroke-width="1"
-                    stroke-dasharray="3 3" />
-                <polygon points="50,12 80,31 80,69 50,88 20,69 20,31" stroke="url(#hero-sphere-mid-grad)" stroke-width="1"
-                    opacity="0.6" />
-                <circle cx="50" cy="50" r="3.5" fill="#007BFF" />
-                <defs>
-                    <linearGradient id="hero-sphere-mid-grad" x1="12" y1="12" x2="88" y2="88"
-                        gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" />
-                        <stop offset="1" stop-color="#007BFF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 7: Lower-Left Subtitle Flank (3D Torus Orbital Ring with Orbiting Node) -->
-        <div
-            class="absolute bottom-16 sm:bottom-24 left-4 sm:left-14 lg:left-22 pointer-events-none -z-0 opacity-25 sm:opacity-35 animate-float hidden md:block">
-            <svg class="w-18 h-18 sm:w-24 sm:h-24" viewBox="0 0 120 120" fill="none">
-                <ellipse cx="60" cy="60" rx="46" ry="22" transform="rotate(-25 60 60)" stroke="url(#hero-torus-grad)"
-                    stroke-width="1.5" />
-                <ellipse cx="60" cy="60" rx="46" ry="22" transform="rotate(35 60 60)" stroke="url(#hero-torus-grad)"
-                    stroke-width="1.25" stroke-dasharray="4 4" opacity="0.6" />
-                <circle cx="60" cy="60" r="14" stroke="url(#hero-torus-grad)" stroke-width="1.5" fill="#007BFF"
-                    fill-opacity="0.08" />
-                <circle cx="95" cy="45" r="3.5" fill="#00D2FF" fill-opacity="0.9" />
-                <defs>
-                    <linearGradient id="hero-torus-grad" x1="14" y1="38" x2="106" y2="82" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 8: Lower-Right Subtitle Flank (3D Isometric Cylinder / Column) -->
-        <div
-            class="absolute bottom-16 sm:bottom-24 right-4 sm:right-14 lg:right-22 pointer-events-none -z-0 opacity-20 sm:opacity-30 animate-float-delayed hidden md:block">
-            <svg class="w-16 h-20 sm:w-22 sm:h-26" viewBox="0 0 100 120" fill="none">
-                <ellipse cx="50" cy="25" rx="35" ry="15" stroke="url(#hero-cyl-mid-grad)" stroke-width="1.5"
-                    fill="url(#hero-cyl-mid-fill)" />
-                <ellipse cx="50" cy="95" rx="35" ry="15" stroke="url(#hero-cyl-mid-grad)" stroke-width="1.5" />
-                <line x1="15" y1="25" x2="15" y2="95" stroke="url(#hero-cyl-mid-grad)" stroke-width="1.5" />
-                <line x1="85" y1="25" x2="85" y2="95" stroke="url(#hero-cyl-mid-grad)" stroke-width="1.5" />
-                <ellipse cx="50" cy="60" rx="35" ry="15" stroke="url(#hero-cyl-mid-grad)" stroke-width="1"
-                    stroke-dasharray="3 3" opacity="0.45" />
-                <circle cx="50" cy="25" r="3" fill="#00D2FF" />
-                <defs>
-                    <linearGradient id="hero-cyl-mid-grad" x1="15" y1="10" x2="85" y2="110" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                    <linearGradient id="hero-cyl-mid-fill" x1="50" y1="10" x2="50" y2="40" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" stop-opacity="0.12" />
-                        <stop offset="1" stop-color="#00D2FF" stop-opacity="0.03" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 9: Bottom-Left Corner Beside CTAs (8-Point Rounded Astroid Star) -->
-        <div
-            class="absolute bottom-4 sm:bottom-8 left-3 sm:left-8 pointer-events-none -z-0 opacity-20 sm:opacity-30 animate-float hidden sm:block">
-            <svg class="w-14 h-14 sm:w-18 sm:h-18" viewBox="0 0 80 80" fill="none">
-                <path d="M40 6 Q40 40 74 40 Q40 40 40 74 Q40 40 6 40 Q40 40 40 6 Z" fill="url(#hero-astroid-bot-grad)"
-                    stroke="url(#hero-astroid-bot-stroke)" stroke-width="1.5" />
-                <circle cx="40" cy="40" r="5" fill="#007BFF" fill-opacity="0.6" />
-                <defs>
-                    <linearGradient id="hero-astroid-bot-grad" x1="6" y1="6" x2="74" y2="74" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" stop-opacity="0.18" />
-                        <stop offset="1" stop-color="#00D2FF" stop-opacity="0.05" />
-                    </linearGradient>
-                    <linearGradient id="hero-astroid-bot-stroke" x1="6" y1="6" x2="74" y2="74"
-                        gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 10: Bottom-Right Corner Beside CTAs (3D Tetrahedron / Pyramid Wireframe) -->
-        <div
-            class="absolute bottom-4 sm:bottom-8 right-3 sm:right-8 pointer-events-none -z-0 opacity-20 sm:opacity-30 animate-float-delayed hidden sm:block">
-            <svg class="w-14 h-14 sm:w-18 sm:h-18" viewBox="0 0 100 100" fill="none">
-                <polygon points="50,15 85,75 15,75" stroke="url(#hero-tetra-bot-grad)" stroke-width="1.5" fill="none" />
-                <line x1="50" y1="15" x2="50" y2="58" stroke="url(#hero-tetra-bot-grad)" stroke-width="1.5" />
-                <line x1="15" y1="75" x2="50" y2="58" stroke="url(#hero-tetra-bot-grad)" stroke-width="1.5" />
-                <line x1="85" y1="75" x2="50" y2="58" stroke="url(#hero-tetra-bot-grad)" stroke-width="1.5" />
-                <circle cx="50" cy="58" r="3" fill="#00D2FF" />
-                <defs>
-                    <linearGradient id="hero-tetra-bot-grad" x1="15" y1="15" x2="85" y2="75" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Center Coordinate Marker Glyphs (Left & Right Plus Grids) -->
-        <div
-            class="absolute top-1/2 -translate-y-1/2 left-2 sm:left-6 pointer-events-none -z-0 opacity-20 sm:opacity-30 text-slate-400 font-mono text-xs hidden xl:flex flex-col gap-3 select-none">
-            <span class="text-[#007BFF]/70 font-bold">+</span>
-            <span class="text-[#00D2FF]/70 font-bold">+</span>
-            <span class="text-slate-400/50 font-bold">+</span>
-        </div>
-        <div
-            class="absolute top-1/2 -translate-y-1/2 right-2 sm:right-6 pointer-events-none -z-0 opacity-20 sm:opacity-30 text-slate-400 font-mono text-xs hidden xl:flex flex-col gap-3 select-none">
-            <span class="text-[#00D2FF]/70 font-bold">+</span>
-            <span class="text-[#007BFF]/70 font-bold">+</span>
-            <span class="text-slate-400/50 font-bold">+</span>
-        </div>
 
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6 reveal">
             <div
@@ -273,89 +59,9 @@
 
     <!-- Mission & Vision Cards -->
     <section class="py-24 bg-white border-b border-slate-200/80 relative overflow-hidden">
-        <!-- ==================== DECORATIVE SHAPES ==================== -->
-        <!-- Shape 1: Top-Left Outer Corner Faceted Octahedron / Diamond Prism -->
-        <div
-            class="absolute -top-6 -left-6 sm:top-6 sm:left-6 pointer-events-none -z-0 opacity-20 sm:opacity-30 animate-float hidden sm:block">
-            <svg class="w-20 h-20 sm:w-28 sm:h-28" viewBox="0 0 100 100" fill="none">
-                <polygon points="50,10 85,45 50,90 15,45" stroke="url(#mv-octa-grad)" stroke-width="1.5"
-                    fill="url(#mv-octa-fill)" />
-                <line x1="15" y1="45" x2="85" y2="45" stroke="url(#mv-octa-grad)" stroke-width="1.5" />
-                <polygon points="50,10 65,45 50,90 35,45" stroke="url(#mv-octa-grad)" stroke-width="1" fill="none"
-                    opacity="0.5" />
-                <circle cx="50" cy="45" r="3" fill="#007BFF" />
-                <defs>
-                    <linearGradient id="mv-octa-grad" x1="15" y1="10" x2="85" y2="90" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                    <linearGradient id="mv-octa-fill" x1="50" y1="10" x2="50" y2="90" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" stop-opacity="0.12" />
-                        <stop offset="1" stop-color="#00D2FF" stop-opacity="0.02" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 2: Top-Right Geodesic Sphere / Icosahedron Tech Wireframe -->
-        <div
-            class="absolute top-6 right-6 sm:right-12 pointer-events-none -z-0 opacity-20 sm:opacity-30 animate-float-delayed hidden md:block">
-            <svg class="w-20 h-20 sm:w-28 sm:h-28" viewBox="0 0 100 100" fill="none">
-                <circle cx="50" cy="50" r="40" stroke="url(#mv-sphere-grad)" stroke-width="1.5" />
-                <ellipse cx="50" cy="50" rx="40" ry="16" stroke="url(#mv-sphere-grad)" stroke-width="1"
-                    stroke-dasharray="3 3" />
-                <ellipse cx="50" cy="50" rx="16" ry="40" stroke="url(#mv-sphere-grad)" stroke-width="1"
-                    stroke-dasharray="3 3" />
-                <polygon points="50,10 82,30 82,70 50,90 18,70 18,30" stroke="url(#mv-sphere-grad)" stroke-width="1"
-                    opacity="0.6" />
-                <circle cx="50" cy="50" r="4" fill="#00D2FF" fill-opacity="0.8" />
-                <defs>
-                    <linearGradient id="mv-sphere-grad" x1="10" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" />
-                        <stop offset="1" stop-color="#007BFF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 3: Bottom-Right Outer Corner Layered Torus Ring -->
-        <div
-            class="absolute -bottom-8 -right-8 sm:bottom-6 sm:right-10 pointer-events-none -z-0 opacity-20 sm:opacity-30 animate-float-delayed hidden sm:block">
-            <svg class="w-24 h-24 sm:w-32 sm:h-32" viewBox="0 0 120 120" fill="none">
-                <ellipse cx="60" cy="60" rx="48" ry="24" transform="rotate(40 60 60)" stroke="url(#mv-torus-grad)"
-                    stroke-width="1.5" />
-                <ellipse cx="60" cy="60" rx="48" ry="24" transform="rotate(-20 60 60)" stroke="url(#mv-torus-grad)"
-                    stroke-width="1" stroke-dasharray="3 3" opacity="0.6" />
-                <circle cx="60" cy="60" r="16" stroke="url(#mv-torus-grad)" stroke-width="1.5" fill="#00D2FF"
-                    fill-opacity="0.08" />
-                <circle cx="35" cy="80" r="3" fill="#007BFF" />
-                <defs>
-                    <linearGradient id="mv-torus-grad" x1="12" y1="36" x2="108" y2="84" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" />
-                        <stop offset="1" stop-color="#007BFF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 4: Bottom-Left 4-Point Astroid Star -->
-        <div
-            class="absolute bottom-4 left-6 sm:left-14 pointer-events-none -z-0 opacity-15 sm:opacity-25 animate-float hidden lg:block">
-            <svg class="w-14 h-14 sm:w-18 sm:h-18" viewBox="0 0 80 80" fill="none">
-                <path d="M40 6 Q40 40 74 40 Q40 40 40 74 Q40 40 6 40 Q40 40 40 6 Z" fill="url(#mv-star-grad)"
-                    stroke="url(#mv-star-stroke)" stroke-width="1.5" />
-                <defs>
-                    <linearGradient id="mv-star-grad" x1="6" y1="6" x2="74" y2="74" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" stop-opacity="0.2" />
-                        <stop offset="1" stop-color="#00D2FF" stop-opacity="0.05" />
-                    </linearGradient>
-                    <linearGradient id="mv-star-stroke" x1="6" y1="6" x2="74" y2="74" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -400,84 +106,10 @@
 
     <!-- The ZARO Philosophy -->
     <section class="py-24 bg-[#F8FAFC] border-b border-slate-200/80 relative overflow-hidden">
-        <!-- ==================== DECORATIVE SHAPES ==================== -->
-        <!-- Shape 1: Left Background 3D Cylinder / Prism Wireframe -->
-        <div
-            class="absolute top-20 -left-6 sm:left-8 pointer-events-none -z-0 opacity-20 sm:opacity-30 animate-float hidden lg:block">
-            <svg class="w-20 h-24 sm:w-28 sm:h-32" viewBox="0 0 100 120" fill="none">
-                <ellipse cx="50" cy="25" rx="35" ry="15" stroke="url(#zaro-cyl-grad)" stroke-width="1.5"
-                    fill="url(#zaro-cyl-fill)" />
-                <ellipse cx="50" cy="95" rx="35" ry="15" stroke="url(#zaro-cyl-grad)" stroke-width="1.5" />
-                <line x1="15" y1="25" x2="15" y2="95" stroke="url(#zaro-cyl-grad)" stroke-width="1.5" />
-                <line x1="85" y1="25" x2="85" y2="95" stroke="url(#zaro-cyl-grad)" stroke-width="1.5" />
-                <ellipse cx="50" cy="60" rx="35" ry="15" stroke="url(#zaro-cyl-grad)" stroke-width="1"
-                    stroke-dasharray="3 3" opacity="0.45" />
-                <circle cx="50" cy="25" r="3" fill="#007BFF" />
-                <defs>
-                    <linearGradient id="zaro-cyl-grad" x1="15" y1="10" x2="85" y2="110" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                    <linearGradient id="zaro-cyl-fill" x1="50" y1="10" x2="50" y2="40" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" stop-opacity="0.12" />
-                        <stop offset="1" stop-color="#00D2FF" stop-opacity="0.03" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 2: Right Background 8-Point Rounded Astroid Star -->
-        <div
-            class="absolute top-16 -right-6 sm:right-10 pointer-events-none -z-0 opacity-20 sm:opacity-30 animate-float-delayed hidden lg:block">
-            <svg class="w-18 h-18 sm:w-24 sm:h-24" viewBox="0 0 80 80" fill="none">
-                <path d="M40 6 Q40 40 74 40 Q40 40 40 74 Q40 40 6 40 Q40 40 40 6 Z" fill="url(#zaro-astroid-grad)"
-                    stroke="url(#zaro-astroid-stroke)" stroke-width="1.5" />
-                <circle cx="40" cy="40" r="6" fill="#007BFF" fill-opacity="0.6" />
-                <circle cx="40" cy="40" r="2.5" fill="white" />
-                <defs>
-                    <linearGradient id="zaro-astroid-grad" x1="6" y1="6" x2="74" y2="74" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" stop-opacity="0.18" />
-                        <stop offset="1" stop-color="#00D2FF" stop-opacity="0.05" />
-                    </linearGradient>
-                    <linearGradient id="zaro-astroid-stroke" x1="6" y1="6" x2="74" y2="74" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 3: Center Bottom 3D Pyramid / Tetrahedron Wireframe -->
-        <div
-            class="absolute -bottom-8 left-1/2 -translate-x-1/2 pointer-events-none -z-0 opacity-15 sm:opacity-25 animate-float hidden md:block">
-            <svg class="w-20 h-20 sm:w-28 sm:h-28" viewBox="0 0 100 100" fill="none">
-                <polygon points="50,15 85,75 15,75" stroke="url(#zaro-tetra-grad)" stroke-width="1.5" fill="none" />
-                <line x1="50" y1="15" x2="50" y2="60" stroke="url(#zaro-tetra-grad)" stroke-width="1.5" />
-                <line x1="15" y1="75" x2="50" y2="60" stroke="url(#zaro-tetra-grad)" stroke-width="1.5" />
-                <line x1="85" y1="75" x2="50" y2="60" stroke="url(#zaro-tetra-grad)" stroke-width="1.5" />
-                <circle cx="50" cy="60" r="3" fill="#00D2FF" />
-                <defs>
-                    <linearGradient id="zaro-tetra-grad" x1="15" y1="15" x2="85" y2="75" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 4: Left Side Micro-plus Grid -->
-        <div
-            class="absolute bottom-16 left-6 pointer-events-none -z-0 opacity-20 text-[#007BFF] font-mono text-sm hidden xl:block select-none">
-            <div>+ &nbsp; +</div>
-            <div>+ &nbsp; +</div>
-        </div>
 
-        <!-- Shape 5: Right Side Micro-plus Grid -->
-        <div
-            class="absolute bottom-16 right-6 pointer-events-none -z-0 opacity-20 text-[#00D2FF] font-mono text-sm hidden xl:block select-none">
-            <div>+ &nbsp; +</div>
-            <div>+ &nbsp; +</div>
-        </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-16 reveal">
@@ -555,50 +187,7 @@
             class="absolute -bottom-32 -right-24 w-[26rem] h-[26rem] rounded-full bg-[#00D2FF]/10 blur-[120px] pointer-events-none">
         </div>
 
-        <!-- ==================== DECORATIVE SHAPES ==================== -->
-        <!-- Shape 1: Top-Right Outer Corner Faceted Diamond / Octahedron -->
-        <div
-            class="absolute top-10 right-8 sm:right-16 pointer-events-none z-0 opacity-30 sm:opacity-40 animate-float hidden sm:block">
-            <svg class="w-18 h-18 sm:w-24 sm:h-24" viewBox="0 0 100 100" fill="none">
-                <polygon points="50,12 85,45 50,88 15,45" stroke="url(#team-octa-grad)" stroke-width="1.5"
-                    fill="url(#team-octa-fill)" />
-                <line x1="15" y1="45" x2="85" y2="45" stroke="url(#team-octa-grad)" stroke-width="1.5" />
-                <line x1="50" y1="12" x2="50" y2="88" stroke="url(#team-octa-grad)" stroke-width="1"
-                    stroke-dasharray="2 3" />
-                <circle cx="50" cy="45" r="3" fill="#00D2FF" />
-                <defs>
-                    <linearGradient id="team-octa-grad" x1="15" y1="12" x2="85" y2="88" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" />
-                        <stop offset="1" stop-color="#00D2FF" />
-                    </linearGradient>
-                    <linearGradient id="team-octa-fill" x1="50" y1="12" x2="50" y2="88" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#007BFF" stop-opacity="0.18" />
-                        <stop offset="1" stop-color="#00D2FF" stop-opacity="0.03" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 2: Bottom-Left Outer Corner 4-Point Astroid Star -->
-        <div
-            class="absolute bottom-10 left-6 sm:left-14 pointer-events-none z-0 opacity-30 sm:opacity-40 animate-float-delayed hidden sm:block">
-            <svg class="w-16 h-16 sm:w-20 sm:h-20" viewBox="0 0 100 100" fill="none">
-                <path d="M50 10 C50 32, 68 50, 90 50 C68 50, 50 68, 50 90 C50 68, 32 50, 10 50 C32 50, 50 32, 50 10 Z"
-                    fill="url(#team-star-grad)" stroke="url(#team-star-stroke)" stroke-width="1.5" />
-                <circle cx="50" cy="50" r="6" fill="#00D2FF" fill-opacity="0.6" />
-                <circle cx="50" cy="50" r="2.5" fill="white" />
-                <defs>
-                    <linearGradient id="team-star-grad" x1="10" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" stop-opacity="0.25" />
-                        <stop offset="1" stop-color="#007BFF" stop-opacity="0.05" />
-                    </linearGradient>
-                    <linearGradient id="team-star-stroke" x1="10" y1="10" x2="90" y2="90" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" />
-                        <stop offset="1" stop-color="#007BFF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20 sm:space-y-24">
             @php
@@ -952,82 +541,9 @@
     <!-- CTA -->
     <section class="py-20 bg-[#0B132B] text-white text-center border-t border-slate-800 relative overflow-hidden">
         <!-- ==================== DECORATIVE DARK TECH SHAPES ==================== -->
-        <!-- Shape 1: Top-Left Dark Holographic Torus Ring with Radial Glowing Core -->
-        <div
-            class="absolute -top-10 -left-10 sm:top-4 sm:left-12 pointer-events-none -z-0 opacity-25 sm:opacity-35 animate-float hidden sm:block">
-            <svg class="w-28 h-28 sm:w-36 sm:h-36" viewBox="0 0 140 140" fill="none">
-                <ellipse cx="70" cy="70" rx="55" ry="25" transform="rotate(-30 70 70)" stroke="url(#cta-torus-1)"
-                    stroke-width="1.75" />
-                <ellipse cx="70" cy="70" rx="55" ry="25" transform="rotate(45 70 70)" stroke="url(#cta-torus-2)"
-                    stroke-width="1.25" stroke-dasharray="4 4" />
-                <circle cx="70" cy="70" r="18" stroke="url(#cta-torus-1)" stroke-width="1.5" fill="url(#cta-torus-fill)" />
-                <circle cx="70" cy="70" r="4" fill="#00D2FF" />
-                <defs>
-                    <linearGradient id="cta-torus-1" x1="15" y1="45" x2="125" y2="95" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" />
-                        <stop offset="1" stop-color="#007BFF" />
-                    </linearGradient>
-                    <linearGradient id="cta-torus-2" x1="15" y1="45" x2="125" y2="95" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#38BDF8" />
-                        <stop offset="1" stop-color="#818CF8" />
-                    </linearGradient>
-                    <radialGradient id="cta-torus-fill" cx="70" cy="70" r="18" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" stop-opacity="0.3" />
-                        <stop offset="1" stop-color="#007BFF" stop-opacity="0" />
-                    </radialGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 2: Bottom-Right Dark Holographic Wireframe Cube with Vertex Nodes -->
-        <div
-            class="absolute -bottom-10 -right-10 sm:bottom-4 sm:right-14 pointer-events-none -z-0 opacity-25 sm:opacity-35 animate-float-delayed hidden sm:block">
-            <svg class="w-24 h-24 sm:w-32 sm:h-32" viewBox="0 0 100 100" fill="none">
-                <path d="M50 12 L85 32 L85 68 L50 88 L15 68 L15 32 Z" stroke="url(#cta-cube-grad)" stroke-width="1.5"
-                    stroke-linejoin="round" />
-                <path d="M50 12 L50 50 L85 68" stroke="url(#cta-cube-grad)" stroke-width="1.5" stroke-linejoin="round" />
-                <path d="M50 50 L15 68" stroke="url(#cta-cube-grad)" stroke-width="1.5" stroke-linejoin="round" />
-                <circle cx="50" cy="50" r="3" fill="#00D2FF" />
-                <circle cx="50" cy="12" r="2.5" fill="#38BDF8" />
-                <circle cx="85" cy="32" r="2.5" fill="#00D2FF" />
-                <circle cx="15" cy="32" r="2.5" fill="#007BFF" />
-                <circle cx="50" cy="88" r="2.5" fill="#007BFF" />
-                <defs>
-                    <linearGradient id="cta-cube-grad" x1="15" y1="12" x2="85" y2="88" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" />
-                        <stop offset="1" stop-color="#007BFF" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 3: Center-Right Glowing Cyan 8-Point Astroid Star -->
-        <div
-            class="absolute top-1/2 -translate-y-1/2 right-4 sm:right-24 pointer-events-none -z-0 opacity-20 sm:opacity-30 animate-float hidden lg:block">
-            <svg class="w-16 h-16 sm:w-20 sm:h-20" viewBox="0 0 80 80" fill="none">
-                <path d="M40 6 Q40 40 74 40 Q40 40 40 74 Q40 40 6 40 Q40 40 40 6 Z" fill="url(#cta-star-grad)"
-                    stroke="url(#cta-star-stroke)" stroke-width="1.5" />
-                <circle cx="40" cy="40" r="4" fill="#38BDF8" />
-                <defs>
-                    <linearGradient id="cta-star-grad" x1="6" y1="6" x2="74" y2="74" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" stop-opacity="0.3" />
-                        <stop offset="1" stop-color="#007BFF" stop-opacity="0.05" />
-                    </linearGradient>
-                    <linearGradient id="cta-star-stroke" x1="6" y1="6" x2="74" y2="74" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#00D2FF" />
-                        <stop offset="1" stop-color="#38BDF8" />
-                    </linearGradient>
-                </defs>
-            </svg>
-        </div>
 
-        <!-- Shape 4: Left Side Code Matrix Bracket Glyphs -->
-        <div
-            class="absolute top-1/2 -translate-y-1/2 left-6 pointer-events-none -z-0 opacity-20 text-cyan-400 font-mono text-lg hidden xl:block select-none">
-            &lt; / &gt;
-        </div>
-
-        <div class="absolute inset-0 bg-tech-grid opacity-20 pointer-events-none"></div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 relative z-10 reveal">
             <h2 class="text-3xl sm:text-4xl font-black font-heading">Ready to Collaborate with Our Engineering Team?</h2>
             <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">Tell us about your project challenges. We will

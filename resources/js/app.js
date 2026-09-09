@@ -1,7 +1,6 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
-import { animate } from 'motion';
 import { initHeroWaveBackdrop } from './hero-wave';
 
 // Powers the `x-collapse` accordions on the FAQ page and the homepage.
@@ -11,8 +10,59 @@ window.Alpine = Alpine;
 Alpine.start();
 
 // =========================================================================
-// PREMIUM MOTION & INTERACTION ENGINE (Physics Springs + Safe Reveals)
+// PREMIUM MOTION & INTERACTION ENGINE
 // =========================================================================
+
+const REVEAL_SELECTOR = '.reveal, .reveal-left, .reveal-right, .reveal-scale';
+
+/**
+ * Writes a counter's finished value straight to the element, with whatever
+ * prefix and suffix it carries.
+ */
+function paintCounter(el, value) {
+    const prefix = el.getAttribute('data-prefix') || '';
+    const suffix = el.getAttribute('data-suffix') || '';
+
+    el.innerText = prefix + value + suffix;
+}
+
+/**
+ * Rolls a `[data-counter]` element up from zero. Re-entrant: if the element is
+ * scrolled away from and back mid-count, the in-flight animation is abandoned
+ * rather than racing the new one.
+ */
+function runCounter(el) {
+    const target = parseFloat(el.getAttribute('data-counter'));
+    if (Number.isNaN(target)) return;
+
+    const duration = parseInt(el.getAttribute('data-duration'), 10) || 1400;
+    const isDecimal = target % 1 !== 0;
+    const run = (parseInt(el.dataset.counterRun, 10) || 0) + 1;
+    el.dataset.counterRun = String(run);
+
+    let startTime = null;
+
+    const step = (timestamp) => {
+        // A newer run claimed this element while we were mid-flight.
+        if (el.dataset.counterRun !== String(run)) return;
+
+        if (startTime === null) startTime = timestamp;
+
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = target * eased;
+
+        paintCounter(el, isDecimal ? current.toFixed(1) : Math.floor(current));
+
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        } else {
+            paintCounter(el, target);
+        }
+    };
+
+    requestAnimationFrame(step);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     // 0. Hero 3D Particle Wave & Interactive Backdrop
@@ -21,168 +71,103 @@ document.addEventListener('DOMContentLoaded', () => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isDesktopPointer = window.matchMedia('(pointer: fine)').matches;
 
-    // 1. Safe Scroll-Reveal Engine
-    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-    
-    if (prefersReduced) {
-        revealElements.forEach(el => {
-            el.classList.add('revealed');
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-        });
-    } else {
-        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const revealElements = Array.from(document.querySelectorAll(REVEAL_SELECTOR));
+    const counterElements = Array.from(document.querySelectorAll('[data-counter]'));
 
-        revealElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            // If element is already in the viewport on load (Hero section, top badges), animate in immediately
-            if (rect.top < windowHeight * 0.95 && rect.bottom > 0) {
-                const delay = (parseInt(el.getAttribute('data-delay')) || 0) / 1000;
-                
-                let transformProp = { opacity: [0, 1], y: [16, 0] };
-                if (el.classList.contains('reveal-left')) {
-                    transformProp = { opacity: [0, 1], x: [-20, 0] };
-                } else if (el.classList.contains('reveal-right')) {
-                    transformProp = { opacity: [0, 1], x: [20, 0] };
-                } else if (el.classList.contains('reveal-scale')) {
-                    transformProp = { opacity: [0, 1], scale: [0.96, 1] };
+    // ---------------------------------------------------------------------
+    // 1. Bidirectional scroll reveal
+    // ---------------------------------------------------------------------
+    if (prefersReduced) {
+        // Leave every element in its default visible state and land the
+        // counters on their final values without animating.
+        counterElements.forEach((el) => paintCounter(el, el.getAttribute('data-counter')));
+    } else {
+        // Opting the document in is what arms the hidden start state in CSS,
+        // so it happens only once we know we can animate back out of it.
+        document.documentElement.setAttribute('data-reveal-ready', '');
+
+        revealElements.forEach((el) => {
+            const delay = parseInt(el.getAttribute('data-delay'), 10);
+            if (delay) el.style.setProperty('--reveal-delay', `${delay}ms`);
+        });
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                const el = entry.target;
+
+                if (entry.isIntersecting) {
+                    el.classList.remove('is-above');
+                    el.classList.add('is-visible');
+                    return;
                 }
 
-                animate(el, transformProp, { duration: 0.55, delay, easing: [0.16, 1, 0.3, 1] });
-                el.classList.add('revealed');
-            } else {
-                // For elements below viewport, mark with motion-init and observe
-                el.classList.add('motion-init');
-            }
+                // Remember which edge it left through so it retreats that way
+                // instead of always dropping back down through the fold.
+                el.classList.toggle('is-above', entry.boundingClientRect.top < 0);
+                el.classList.remove('is-visible');
+            });
+        }, {
+            // Reveal once an element is a little way into view, and let it go
+            // again shortly before it clears the top edge, so both halves of
+            // the journey happen on screen where they can be seen.
+            rootMargin: '-10% 0px -10% 0px',
+            threshold: 0,
         });
 
-        // Observe elements that are below the fold
-        const pendingElements = document.querySelectorAll('.motion-init');
-        if (pendingElements.length > 0) {
-            const observer = new IntersectionObserver((entries, obs) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const target = entry.target;
-                        const delay = (parseInt(target.getAttribute('data-delay')) || 0) / 1000;
-                        
-                        let transformProp = { opacity: [0, 1], y: [18, 0] };
-                        if (target.classList.contains('reveal-left')) {
-                            transformProp = { opacity: [0, 1], x: [-20, 0] };
-                        } else if (target.classList.contains('reveal-right')) {
-                            transformProp = { opacity: [0, 1], x: [20, 0] };
-                        } else if (target.classList.contains('reveal-scale')) {
-                            transformProp = { opacity: [0, 1], scale: [0.96, 1] };
-                        }
+        revealElements.forEach((el) => revealObserver.observe(el));
 
-                        animate(target, transformProp, { duration: 0.55, delay, easing: [0.16, 1, 0.3, 1] });
-                        target.classList.add('revealed');
-                        target.classList.remove('motion-init');
-                        obs.unobserve(target);
+        // -----------------------------------------------------------------
+        // 2. Numerical roll-up counters, replayed on every re-entry
+        // -----------------------------------------------------------------
+        if (counterElements.length > 0) {
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        runCounter(entry.target);
+                    } else {
+                        // Reset to zero so the next pass rolls up again rather
+                        // than snapping from the finished value.
+                        entry.target.dataset.counterRun = String(
+                            (parseInt(entry.target.dataset.counterRun, 10) || 0) + 1
+                        );
+                        paintCounter(entry.target, 0);
                     }
                 });
-            }, {
-                rootMargin: '0px 0px 80px 0px', // Trigger smoothly before entering screen
-                threshold: 0.05
-            });
+            }, { threshold: 0.2 });
 
-            pendingElements.forEach(el => observer.observe(el));
+            counterElements.forEach((el) => counterObserver.observe(el));
         }
-
-        // Safety fallback: after 2.5s, reveal any un-animated elements just in case
-        setTimeout(() => {
-            document.querySelectorAll('.motion-init').forEach(el => {
-                el.classList.remove('motion-init');
-                el.classList.add('revealed');
-                el.style.opacity = '1';
-                el.style.transform = 'none';
-            });
-        }, 2500);
     }
 
-    // 2. Numerical Roll-Up Counters
-    const counterElements = document.querySelectorAll('[data-counter]');
-    if (prefersReduced) {
-        counterElements.forEach((target) => {
-            const endVal = target.getAttribute('data-counter');
-            target.innerText = (target.getAttribute('data-prefix') || '') + endVal + (target.getAttribute('data-suffix') || '');
-        });
-    } else if (counterElements.length > 0) {
-        const counterObserver = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = entry.target;
-                    obs.unobserve(target);
-                    
-                    const endVal = parseFloat(target.getAttribute('data-counter'));
-                    const suffix = target.getAttribute('data-suffix') || '';
-                    const prefix = target.getAttribute('data-prefix') || '';
-                    const duration = parseInt(target.getAttribute('data-duration')) || 1200;
-                    const isDecimal = endVal % 1 !== 0;
-
-                    let startTime = null;
-                    const animateCounter = (timestamp) => {
-                        if (!startTime) startTime = timestamp;
-                        const progress = Math.min((timestamp - startTime) / duration, 1);
-                        const easeProgress = 1 - Math.pow(1 - progress, 3);
-                        const currentVal = endVal * easeProgress;
-
-                        target.innerText = prefix + (isDecimal ? currentVal.toFixed(1) : Math.floor(currentVal)) + suffix;
-
-                        if (progress < 1) {
-                            requestAnimationFrame(animateCounter);
-                        } else {
-                            target.innerText = prefix + endVal + suffix;
-                        }
-                    };
-                    requestAnimationFrame(animateCounter);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        counterElements.forEach(el => counterObserver.observe(el));
-    }
-
+    // ---------------------------------------------------------------------
     // 3. Spotlight Card Radial Hover Tracking
+    // ---------------------------------------------------------------------
     if (!prefersReduced && isDesktopPointer) {
-        const spotlightCards = document.querySelectorAll('.spotlight-card');
-        spotlightCards.forEach(card => {
+        document.querySelectorAll('.spotlight-card').forEach((card) => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
+                card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
             });
         });
 
         // 4. Subtle 3D Tilt Effect on Desktop Showcase ([data-tilt])
-        const tiltElements = document.querySelectorAll('[data-tilt]');
-        tiltElements.forEach(item => {
+        document.querySelectorAll('[data-tilt]').forEach((item) => {
             item.addEventListener('mousemove', (e) => {
                 const rect = item.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                // Max tilt 3.5 degrees for premium subtle feel
-                const rotateX = ((y - centerY) / centerY) * -3.5;
-                const rotateY = ((x - centerX) / centerX) * 3.5;
+                const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -3.5;
+                const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 3.5;
                 item.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.01, 1.01, 1.01)`;
-            });
-
-            item.addEventListener('mouseleave', () => {
-                item.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                item.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
             });
 
             item.addEventListener('mouseenter', () => {
                 item.style.transition = 'transform 0.1s ease-out';
             });
+
+            item.addEventListener('mouseleave', () => {
+                item.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+                item.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
         });
     }
 });
-
-
-
-
-

@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
     protected function shareLayoutData(): void
     {
         View::composer(
-            ['layouts.navigation', 'layouts.footer', 'home.index', 'admin.layouts.app'],
+            ['layouts.navigation', 'layouts.footer', 'admin.layouts.app'],
             fn ($view) => $view->with('activeServiceCount', $this->activeServiceCount())
         );
 

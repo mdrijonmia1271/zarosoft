@@ -783,40 +783,73 @@ body {
     }
 }
 
-/* Scroll Reveal Classes (Safe Defaults: 100% visible by default) */
+/* =========================================================================
+   SCROLL REVEAL ENGINE (bidirectional)
+   Content travels in from outside the viewport as it enters and travels back
+   out as it leaves, so scrolling up replays the entrance rather than showing
+   a page of already-settled elements.
+
+   Everything is visible by default. The hidden start state only applies once
+   JS stamps `data-reveal-ready` on <html>, which it does only when motion is
+   welcome — so a no-JS or reduced-motion visitor never meets a blank page.
+   ========================================================================= */
+
 .reveal,
 .reveal-left,
 .reveal-right,
 .reveal-scale {
     opacity: 1;
     transform: none;
-    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* When initialized by JS scroll observer */
-.motion-init.reveal {
+[data-reveal-ready] .reveal,
+[data-reveal-ready] .reveal-left,
+[data-reveal-ready] .reveal-right,
+[data-reveal-ready] .reveal-scale {
     opacity: 0;
-    transform: translateY(16px);
-}
-.motion-init.reveal-left {
-    opacity: 0;
-    transform: translateX(-20px);
-}
-.motion-init.reveal-right {
-    opacity: 0;
-    transform: translateX(20px);
-}
-.motion-init.reveal-scale {
-    opacity: 0;
-    transform: scale(0.96);
+    transform:
+        translate3d(var(--reveal-x, 0px), var(--reveal-y, 2.25rem), 0)
+        scale(var(--reveal-scale, 1));
+    transition:
+        opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.motion-init.reveal.revealed,
-.motion-init.reveal-left.revealed,
-.motion-init.reveal-right.revealed,
-.motion-init.reveal-scale.revealed {
+/* Direction variants. Declared after the base rule so they win the tie. */
+[data-reveal-ready] .reveal-left {
+    --reveal-x: -2.75rem;
+    --reveal-y: 0px;
+}
+
+[data-reveal-ready] .reveal-right {
+    --reveal-x: 2.75rem;
+    --reveal-y: 0px;
+}
+
+[data-reveal-ready] .reveal-scale {
+    --reveal-y: 1.25rem;
+    --reveal-scale: 0.94;
+}
+
+/* Left through the top edge, so it should retreat the way it came rather
+   than dropping back down through the fold. */
+[data-reveal-ready] .reveal.is-above {
+    --reveal-y: -2.25rem;
+}
+
+[data-reveal-ready] .reveal-scale.is-above {
+    --reveal-y: -1.25rem;
+}
+
+/* The delay lives here rather than on the base rule so a stagger applies on
+   the way in but never on the way out — staggered exits read as lag. */
+[data-reveal-ready] .reveal.is-visible,
+[data-reveal-ready] .reveal-left.is-visible,
+[data-reveal-ready] .reveal-right.is-visible,
+[data-reveal-ready] .reveal-scale.is-visible {
     opacity: 1;
     transform: none;
+    transition-delay: var(--reveal-delay, 0s);
 }
 
 /* =========================================================================
@@ -965,6 +998,602 @@ body {
     }
     .hero-globe__star {
         opacity: 0.5;
+    }
+}
+
+/* Shared by the case-study cards; the mono chip is the one piece of the
+   retired capability grid still in use. */
+.tech-chip {
+    border-radius: 0.375rem;
+    background: var(--surface-sunken);
+    padding: 0.125rem 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--ink-body);
+    transition: background 0.35s ease, color 0.35s ease;
+}
+/* =========================================================================
+   CASE STUDY CARDS (Home -> "Real Engineering Impact")
+   ========================================================================= */
+
+.filter-pill {
+    border-radius: 0.75rem;
+    border: 1px solid var(--line-subtle);
+    background: #ffffff;
+    padding: 0.55rem 1rem;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink-body);
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-pill:hover {
+    border-color: rgba(0, 123, 255, 0.4);
+    color: var(--brand-primary);
+}
+
+.filter-pill--active {
+    border-color: transparent;
+    background: var(--brand-primary);
+    color: #ffffff;
+    box-shadow: var(--shadow-glow-blue);
+}
+
+.case-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 22px;
+    border: 1px solid var(--line-subtle);
+    background: #ffffff;
+    box-shadow: var(--shadow-soft);
+    transition:
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.4s ease,
+        box-shadow 0.5s ease;
+}
+
+.case-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(0, 123, 255, 0.4);
+    box-shadow: 0 34px 60px -28px rgba(0, 123, 255, 0.45);
+}
+
+.case-card__media {
+    position: relative;
+    height: 15rem;
+    overflow: hidden;
+    background: var(--surface-dark);
+}
+
+@media (min-width: 640px) {
+    .case-card__media { height: 17rem; }
+}
+
+/* Deepens on hover so the client name and title keep their contrast even as
+   the cover image brightens and zooms underneath them. */
+.case-card__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(11, 19, 43, 0.96) 0%, rgba(11, 19, 43, 0.55) 38%, rgba(11, 19, 43, 0.05) 72%);
+    transition: opacity 0.5s ease;
+}
+
+.case-card:hover .case-card__scrim {
+    opacity: 0.88;
+}
+
+.case-card:hover .tech-chip {
+    background: rgba(0, 123, 255, 0.1);
+    color: #0369a1;
+}
+
+.case-card__result {
+    margin-top: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 0.85rem;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    background: rgba(16, 185, 129, 0.07);
+    padding: 0.7rem 0.9rem;
+}
+
+.case-card__result-icon {
+    display: flex;
+    height: 1.75rem;
+    width: 1.75rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.55rem;
+    background: rgba(16, 185, 129, 0.15);
+    color: #047857;
+}
+
+.case-card__go {
+    display: flex;
+    height: 1.75rem;
+    width: 1.75rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: rgba(0, 123, 255, 0.1);
+    color: var(--brand-primary);
+    transition: background 0.35s ease, color 0.35s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.case-card:hover .case-card__go {
+    background: var(--brand-primary);
+    color: #ffffff;
+    transform: translateX(3px);
+}
+
+/* =========================================================================
+   TESTIMONIAL CARDS (Home -> dark "Trusted by Founders" band)
+   ========================================================================= */
+
+.quote-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 55%, transparent 100%);
+    padding: 1.75rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition:
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.4s ease,
+        box-shadow 0.5s ease;
+}
+
+.quote-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0, 123, 255, 0.45);
+    box-shadow: 0 30px 55px -25px rgba(0, 123, 255, 0.55);
+}
+
+/* Oversized opening quote, bled off the top corner as texture rather than
+   punctuation — the blockquote itself is left unquoted so screen readers do
+   not announce a stray glyph. */
+.quote-card__mark {
+    position: absolute;
+    top: -1.25rem;
+    right: 1rem;
+    /* A serif face on purpose: the heading font draws its quote marks as two
+       plain circles, which read as stray dots rather than punctuation. */
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 7rem;
+    font-weight: 900;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+    user-select: none;
+    transition: color 0.5s ease;
+}
+
+.quote-card:hover .quote-card__mark {
+    color: rgba(0, 123, 255, 0.16);
+}
+
+.quote-card__avatar {
+    display: block;
+    height: 2.75rem;
+    width: 2.75rem;
+    flex: none;
+    border-radius: 9999px;
+    background: linear-gradient(to top right, var(--brand-primary), var(--brand-secondary));
+    padding: 2px;
+}
+
+/* =========================================================================
+   INSIGHT ROWS & FAQ (Home -> "Notes from the build floor")
+   ========================================================================= */
+
+.post-row {
+    position: relative;
+    display: flex;
+    gap: 1.25rem;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid var(--line-subtle);
+    background: #ffffff;
+    padding: 0.85rem;
+    box-shadow: var(--shadow-subtle);
+    transition: border-color 0.35s ease, box-shadow 0.4s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.post-row:hover {
+    transform: translateX(4px);
+    border-color: rgba(0, 123, 255, 0.35);
+    box-shadow: 0 18px 35px -20px rgba(0, 123, 255, 0.4);
+}
+
+/* Accent rail that wipes down the left edge on hover. */
+.post-row::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--brand-primary), var(--brand-secondary));
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.post-row:hover::before {
+    transform: scaleY(1);
+}
+
+.post-row__media {
+    display: block;
+    height: 6rem;
+    width: 7rem;
+    flex: none;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--surface-dark);
+}
+
+@media (min-width: 640px) {
+    .post-row__media {
+        height: 6.5rem;
+        width: 9rem;
+    }
+}
+
+.faq-item {
+    border-radius: 16px;
+    border: 1px solid var(--line-subtle);
+    background: #ffffff;
+    padding: 1.1rem 1.25rem;
+    transition: border-color 0.35s ease, box-shadow 0.4s ease, background 0.35s ease;
+}
+
+.faq-item:hover {
+    border-color: rgba(0, 123, 255, 0.3);
+}
+
+.faq-item--open {
+    border-color: rgba(0, 123, 255, 0.4);
+    box-shadow: 0 16px 32px -20px rgba(0, 123, 255, 0.45);
+}
+
+.faq-item__toggle {
+    display: flex;
+    height: 1.5rem;
+    width: 1.5rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: var(--surface-sunken);
+    color: var(--ink-muted);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.faq-item--open .faq-item__toggle,
+.faq-item:hover .faq-item__toggle {
+    background: rgba(0, 123, 255, 0.12);
+    color: var(--brand-primary);
+}
+
+/* =========================================================================
+   CLOSING CTA PANEL (Home -> "Let's Build Something Extraordinary")
+   ========================================================================= */
+
+.cta-panel {
+    height: 100%;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1.5rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.cta-step {
+    position: relative;
+    display: flex;
+    gap: 0.9rem;
+}
+
+.cta-step__marker {
+    display: flex;
+    height: 1.75rem;
+    width: 1.75rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: 1px solid rgba(0, 123, 255, 0.4);
+    background: rgba(0, 123, 255, 0.15);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: #38bdf8;
+}
+
+/* Connector line between the numbered steps, skipped on the last one. */
+.cta-step:not(:last-child) .cta-step__marker::after {
+    content: '';
+    position: absolute;
+    top: 1.9rem;
+    left: 0.875rem;
+    width: 1px;
+    height: calc(100% - 1.1rem);
+    background: linear-gradient(to bottom, rgba(0, 123, 255, 0.35), transparent);
+}
+
+/* =========================================================================
+   ZARO FRAMEWORK PILLAR CARDS
+   Home -> "Why Leading Companies Trust Our Engineering". Each card is three
+   nested layers on purpose: the outer article owns the scroll reveal, the
+   frame owns the 3D tilt (so the two transforms never fight), and the body
+   owns the white surface. Accent colour is passed in per card as
+   --zaro-accent, so one rule set paints all four pillars.
+   ========================================================================= */
+
+@property --zaro-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.zaro-pillar {
+    --zaro-accent: var(--brand-primary);
+    --zaro-accent-ink: #0369a1;
+    display: flex;
+    height: 100%;
+    /* The tilt lives on the frame one level down, so the vanishing point has
+       to be declared on its parent for the rotation to read as depth. */
+    perspective: 1400px;
+}
+
+/* --- Hairline frame + travelling accent ring ---------------------------- */
+.zaro-pillar__frame {
+    position: relative;
+    flex: 1;
+    border-radius: 26px;
+    padding: 1.5px;
+    background: linear-gradient(180deg, rgba(203, 213, 225, 0.95), rgba(226, 232, 240, 0.4));
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zaro-pillar__frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: conic-gradient(
+        from var(--zaro-angle),
+        transparent 0deg,
+        var(--zaro-accent) 55deg,
+        #ffffff 95deg,
+        var(--zaro-accent) 135deg,
+        transparent 215deg
+    );
+    opacity: 0;
+    transition: opacity 0.45s ease;
+}
+
+.zaro-pillar:hover .zaro-pillar__frame::before,
+.zaro-pillar:focus-within .zaro-pillar__frame::before {
+    opacity: 1;
+    animation: zaroRingSpin 4s linear infinite;
+}
+
+@keyframes zaroRingSpin {
+    to { --zaro-angle: 360deg; }
+}
+
+/* --- Card surface ------------------------------------------------------- */
+.zaro-pillar__body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 24.5px;
+    background: linear-gradient(180deg, #ffffff 0%, #fdfefe 55%, #f8fafc 100%);
+    padding: 1.6rem 1.5rem 1.25rem;
+    box-shadow: var(--shadow-subtle);
+    transition: box-shadow 0.5s ease;
+}
+
+.zaro-pillar:hover .zaro-pillar__body {
+    box-shadow: 0 26px 55px -20px color-mix(in srgb, var(--zaro-accent) 60%, transparent);
+}
+
+/* Accent hairline that draws itself across the top edge on hover. */
+.zaro-pillar__body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1.5rem;
+    right: 1.5rem;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, var(--zaro-accent), transparent);
+    opacity: 0;
+    transform: scaleX(0.35);
+    transition: opacity 0.4s ease, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zaro-pillar:hover .zaro-pillar__body::before {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+/* Cursor-tracked glow. JS only writes --zaro-x / --zaro-y; the gradient
+   itself stays in CSS so there is no per-frame style thrash. */
+.zaro-pillar__glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+        240px circle at var(--zaro-x, 50%) var(--zaro-y, 0%),
+        color-mix(in srgb, var(--zaro-accent) 18%, transparent),
+        transparent 68%
+    );
+    transition: opacity 0.4s ease;
+}
+
+.zaro-pillar:hover .zaro-pillar__glow {
+    opacity: 1;
+}
+
+.zaro-pillar__monogram {
+    position: absolute;
+    right: 0.6rem;
+    bottom: -1.9rem;
+    font-family: var(--font-mono);
+    font-size: 7.5rem;
+    font-weight: 800;
+    line-height: 1;
+    color: rgba(241, 245, 249, 0.9);
+    pointer-events: none;
+    user-select: none;
+    transform: translateZ(10px);
+    transition: color 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zaro-pillar:hover .zaro-pillar__monogram {
+    color: color-mix(in srgb, var(--zaro-accent) 13%, transparent);
+    transform: translateZ(10px) translateY(-8px);
+}
+
+.zaro-pillar__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 1.1rem;
+    transform: translateZ(28px);
+}
+
+/* --- Icon tile ---------------------------------------------------------- */
+.zaro-pillar__icon {
+    display: flex;
+    height: 3.25rem;
+    width: 3.25rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--zaro-accent), color-mix(in srgb, var(--zaro-accent) 40%, #0f172a));
+    box-shadow: 0 14px 28px -10px color-mix(in srgb, var(--zaro-accent) 75%, transparent);
+    transform: translateZ(45px) translate(var(--zaro-icon-x, 0px), var(--zaro-icon-y, 0px));
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zaro-pillar__pip {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    height: 0.7rem;
+    width: 0.7rem;
+    border-radius: 9999px;
+    background: var(--zaro-accent);
+    box-shadow: 0 0 0 2px #ffffff;
+}
+
+.zaro-pillar__pip::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
+    animation: zaroPipPing 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes zaroPipPing {
+    0%   { transform: scale(1);   opacity: 0.75; }
+    75%  { transform: scale(2.4); opacity: 0; }
+    100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* --- Headline metric ---------------------------------------------------- */
+.zaro-pillar__metric {
+    font-family: var(--font-heading);
+    font-size: 2.1rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--zaro-accent-ink);
+    font-variant-numeric: tabular-nums;
+}
+
+.zaro-pillar__rule {
+    height: 3px;
+    width: 2.25rem;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--zaro-accent) 35%, transparent);
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease;
+}
+
+.zaro-pillar:hover .zaro-pillar__rule {
+    width: 4rem;
+    background: var(--zaro-accent);
+}
+
+/* --- Feature checklist -------------------------------------------------- */
+.zaro-pillar__check {
+    display: flex;
+    height: 1.15rem;
+    width: 1.15rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    color: var(--zaro-accent-ink);
+    background: color-mix(in srgb, var(--zaro-accent) 12%, transparent);
+    transition:
+        transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) var(--zaro-check-delay, 0s),
+        background-color 0.35s ease,
+        color 0.35s ease;
+}
+
+.zaro-pillar:hover .zaro-pillar__check {
+    transform: scale(1.16);
+    color: #ffffff;
+    background: var(--zaro-accent);
+}
+
+/* --- Footer ------------------------------------------------------------- */
+.zaro-pillar__footer {
+    position: relative;
+    z-index: 1;
+    margin-top: 1.25rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--line-subtle);
+    transform: translateZ(20px);
+}
+
+.zaro-pillar__arrow {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zaro-pillar:hover .zaro-pillar__arrow {
+    transform: translateX(0.4rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .zaro-pillar__pip::after {
+        display: none;
     }
 }
 

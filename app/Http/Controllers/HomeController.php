@@ -5,20 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Faq;
 use App\Models\Project;
-use App\Models\Service;
 use App\Models\Testimonial;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $featuredServices = Service::with('category')
-            ->where('is_featured', true)
-            ->where('is_active', true)
-            ->orderBy('order')
-            ->take(6)
-            ->get();
-
         $featuredProjects = Project::with('category')
             ->where('is_featured', true)
             ->where('is_active', true)
@@ -41,7 +33,6 @@ class HomeController extends Controller
         $faqs = Faq::where('is_active', true)->orderBy('order')->take(6)->get();
 
         return view('home.index', compact(
-            'featuredServices',
             'featuredProjects',
             'testimonials',
             'latestBlogs',
