@@ -46,8 +46,15 @@
                             {{ $m->role_title }}
                         </td>
                         <td class="py-4 px-6">
-                            <span class="px-2 py-0.5 rounded text-[10px] font-bold {{ $m->is_founder ? 'bg-purple-500/10 text-purple-400' : 'bg-slate-500/10 text-slate-400' }}">
-                                {{ $m->is_founder ? 'Co-Founder' : 'Staff' }}
+                            @php
+                                $roleBadge = $m->is_founder
+                                    ? ['Co-Founder', 'bg-purple-500/10 text-purple-400']
+                                    : ($m->is_advisor
+                                        ? ['Advisor', 'bg-amber-500/10 text-amber-400']
+                                        : ['Staff', 'bg-slate-500/10 text-slate-400']);
+                            @endphp
+                            <span class="px-2 py-0.5 rounded text-[10px] font-bold {{ $roleBadge[1] }}">
+                                {{ $roleBadge[0] }}
                             </span>
                         </td>
                         <td class="py-4 px-6 font-bold text-slate-500">
@@ -71,6 +78,9 @@
                     @endforelse
                 </tbody>
             </table>
+        </div>
+        <div class="p-4 border-t border-slate-100 dark:border-slate-800">
+            {{ $members->links() }}
         </div>
     </div>
 </div>

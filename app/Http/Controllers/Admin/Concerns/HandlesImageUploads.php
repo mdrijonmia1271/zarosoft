@@ -25,23 +25,51 @@ trait HandlesImageUploads
         if ($request->hasFile($fileKey)) {
             $file = $request->file($fileKey);
 
-            $name = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
-            $name = Str::limit($name ?: 'image', 60, '');
-            $path = $file->storeAs(
-                $folder,
-                $name . '-' . Str::random(6) . '.' . $file->getClientOriginalExtension(),
-                'public'
-            );
-
             // Delete the previous upload so old files do not pile up.
             $this->deletePreviousUpload($current);
 
-            return 'storage/' . $path;
+            return $this->storeUpload($file, $folder);
         }
 
         $typed = trim((string) $request->input($field, ''));
 
         return $typed !== '' ? $typed : $current;
+    }
+
+    /**
+     * Resolves a multi-image field: the textarea holds one path/URL per line
+     * (the kept images, editable and re-orderable by hand) and the file input
+     * appends any freshly uploaded ones.
+     *
+     * @param  string  $field   Form field name (the file input uses "{$field}_files").
+     * @param  array<int, string>|null  $current  Existing list, kept when the form sends nothing.
+     * @return array<int, string>
+     */
+    protected function resolveGalleryField(Request $request, string $field, string $folder, ?array $current = null): array
+    {
+        // A form that never rendered the field must not wipe what is stored.
+        if (!$request->has($field) && !$request->hasFile($field . '_files')) {
+            return array_values($current ?? []);
+        }
+
+        $kept = collect(preg_split('/\r\n|\r|\n/', (string) $request->input($field, '')))
+            ->map(fn ($line) => trim($line))
+            ->filter()
+            ->values()
+            ->all();
+
+        foreach ($request->file($field . '_files', []) as $file) {
+            $kept[] = $this->storeUpload($file, $folder);
+        }
+
+        $kept = array_values(array_unique($kept));
+
+        // Drop uploads that the editor removed from the list.
+        foreach (array_diff($current ?? [], $kept) as $removed) {
+            $this->deletePreviousUpload($removed);
+        }
+
+        return $kept;
     }
 
     /**
@@ -55,6 +83,18 @@ trait HandlesImageUploads
         ];
     }
 
+    /**
+     * Validation rules for a multi-image field. Merge into a controller's rules.
+     */
+    protected function galleryFieldRules(string $field): array
+    {
+        return [
+            $field => 'nullable|string',
+            $field . '_files' => 'nullable|array|max:12',
+            $field . '_files.*' => 'image|mimes:jpg,jpeg,png,webp,gif|max:4096',
+        ];
+    }
+
     protected function deletePreviousUpload(?string $current): void
     {
         if (!$current || !Str::startsWith($current, 'storage/')) {
@@ -62,5 +102,22 @@ trait HandlesImageUploads
         }
 
         Storage::disk('public')->delete(Str::after($current, 'storage/'));
+    }
+
+    /**
+     * Stores one upload under the given folder and returns its public path.
+     */
+    protected function storeUpload($file, string $folder): string
+    {
+        $name = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
+        $name = Str::limit($name ?: 'image', 60, '');
+
+        $path = $file->storeAs(
+            $folder,
+            $name . '-' . Str::random(6) . '.' . $file->getClientOriginalExtension(),
+            'public'
+        );
+
+        return 'storage/' . $path;
     }
 }

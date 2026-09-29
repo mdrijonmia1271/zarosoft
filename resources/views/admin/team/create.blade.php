@@ -55,6 +55,12 @@
                     <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Skills (comma separated)</label>
                     <input type="text" name="skills" value="{{ old('skills') }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white" placeholder="Laravel, ERP, Cloud, AI">
                 </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Display Order</label>
+                    <input type="number" name="order" value="{{ old('order', 0) }}" min="0" step="1" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white">
+                    <p class="mt-1 text-[10px] text-slate-400">Lower number shows first on the About page.</p>
+                </div>
             </div>
 
             <div>
@@ -66,6 +72,11 @@
                 <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
                     <input type="checkbox" name="is_founder" value="1" checked class="rounded bg-slate-800 border-slate-700 text-indigo-600">
                     <span>Mark as Co-Founder</span>
+                </label>
+
+                <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
+                    <input type="checkbox" name="is_advisor" value="1" class="rounded bg-slate-800 border-slate-700 text-indigo-600">
+                    <span>Mark as Advisor</span>
                 </label>
 
                 <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">

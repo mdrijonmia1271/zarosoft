@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\HandlesImageUploads;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\ServiceCategory;
@@ -10,6 +11,8 @@ use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
+    use HandlesImageUploads;
+
     public function index()
     {
         $services = Service::with('category')->orderBy('service_category_id')->orderBy('order')->paginate(15);
@@ -24,7 +27,7 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validated = $request->validate(array_merge([
             'service_category_id' => 'required|exists:service_categories,id',
             'title' => 'required|string|max:200',
             'slug' => 'nullable|string|max:200|unique:services,slug',
@@ -38,7 +41,7 @@ class ServiceController extends Controller
             'is_featured' => 'boolean',
             'is_active' => 'boolean',
             'order' => 'integer',
-        ]);
+        ], $this->imageFieldRules('image'), $this->galleryFieldRules('gallery')));
 
         $slug = !empty($validated['slug']) ? Str::slug($validated['slug']) : Str::slug($validated['title']);
         $features = !empty($validated['features']) ? array_filter(array_map('trim', explode("\n", $validated['features']))) : [];
@@ -50,6 +53,8 @@ class ServiceController extends Controller
             'title' => $validated['title'],
             'slug' => $slug,
             'icon' => $validated['icon'] ?? 'code',
+            'image' => $this->resolveImageField($request, 'image', 'services'),
+            'gallery' => $this->resolveGalleryField($request, 'gallery', 'services'),
             'badge' => $validated['badge'] ?? null,
             'short_description' => $validated['short_description'],
             'description' => $validated['description'] ?? null,
@@ -72,7 +77,7 @@ class ServiceController extends Controller
 
     public function update(Request $request, Service $service)
     {
-        $validated = $request->validate([
+        $validated = $request->validate(array_merge([
             'service_category_id' => 'required|exists:service_categories,id',
             'title' => 'required|string|max:200',
             'slug' => 'nullable|string|max:200|unique:services,slug,' . $service->id,
@@ -86,7 +91,7 @@ class ServiceController extends Controller
             'is_featured' => 'boolean',
             'is_active' => 'boolean',
             'order' => 'integer',
-        ]);
+        ], $this->imageFieldRules('image'), $this->galleryFieldRules('gallery')));
 
         $slug = !empty($validated['slug']) ? Str::slug($validated['slug']) : Str::slug($validated['title']);
         $features = !empty($validated['features']) ? array_filter(array_map('trim', explode("\n", $validated['features']))) : [];
@@ -98,6 +103,8 @@ class ServiceController extends Controller
             'title' => $validated['title'],
             'slug' => $slug,
             'icon' => $validated['icon'] ?? 'code',
+            'image' => $this->resolveImageField($request, 'image', 'services', $service->image),
+            'gallery' => $this->resolveGalleryField($request, 'gallery', 'services', $service->gallery),
             'badge' => $validated['badge'] ?? null,
             'short_description' => $validated['short_description'],
             'description' => $validated['description'] ?? null,

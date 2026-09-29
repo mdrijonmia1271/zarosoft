@@ -13,7 +13,7 @@ class TeamController extends Controller
 
     public function index()
     {
-        $members = TeamMember::orderBy('order')->paginate(15);
+        $members = TeamMember::orderBy('order')->orderBy('id')->paginate(15);
         return view('admin.team.index', compact('members'));
     }
 
@@ -38,8 +38,9 @@ class TeamController extends Controller
             'twitter_url' => 'nullable|string',
             'skills' => 'nullable|string',
             'is_founder' => 'boolean',
+            'is_advisor' => 'boolean',
             'is_active' => 'boolean',
-            'order' => 'integer',
+            'order' => 'nullable|integer|min:0',
         ]);
 
         $skills = !empty($validated['skills']) ? array_filter(array_map('trim', explode(',', $validated['skills']))) : [];
@@ -57,6 +58,7 @@ class TeamController extends Controller
             'twitter_url' => $validated['twitter_url'] ?? null,
             'skills' => array_values($skills),
             'is_founder' => $request->boolean('is_founder'),
+            'is_advisor' => $request->boolean('is_advisor'),
             'is_active' => $request->boolean('is_active', true),
             'order' => $validated['order'] ?? 0,
         ]);
@@ -85,8 +87,9 @@ class TeamController extends Controller
             'twitter_url' => 'nullable|string',
             'skills' => 'nullable|string',
             'is_founder' => 'boolean',
+            'is_advisor' => 'boolean',
             'is_active' => 'boolean',
-            'order' => 'integer',
+            'order' => 'nullable|integer|min:0',
         ]);
 
         $skills = !empty($validated['skills']) ? array_filter(array_map('trim', explode(',', $validated['skills']))) : [];
@@ -104,8 +107,9 @@ class TeamController extends Controller
             'twitter_url' => $validated['twitter_url'] ?? null,
             'skills' => array_values($skills),
             'is_founder' => $request->boolean('is_founder'),
+            'is_advisor' => $request->boolean('is_advisor'),
             'is_active' => $request->boolean('is_active', true),
-            'order' => $validated['order'] ?? 0,
+            'order' => $validated['order'] ?? $team->order,
         ]);
 
         return redirect()->route('admin.team.index')->with('success', 'Team member updated successfully.');

@@ -25,6 +25,7 @@ class TeamMember extends Model
         'twitter_url',
         'skills',
         'is_founder',
+        'is_advisor',
         'order',
         'is_active',
     ];
@@ -32,6 +33,7 @@ class TeamMember extends Model
     protected $casts = [
         'skills' => 'array',
         'is_founder' => 'boolean',
+        'is_advisor' => 'boolean',
         'is_active' => 'boolean',
         'order' => 'integer',
     ];

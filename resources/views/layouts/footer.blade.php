@@ -108,6 +108,10 @@
                         <span>→</span>
                     </a>
                 </div>
+                {{-- Desktop only: lets visitors hand the site off to their phone. --}}
+                <div class="hidden md:block pt-3">
+                    <img src="{{ asset('images/zarosoft-qr.svg') }}" alt="QR code linking to zarosoft.com" width="112" height="112" loading="lazy" class="w-28 h-28 rounded-xl">
+                </div>
             </div>
 
         </div>

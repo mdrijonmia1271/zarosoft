@@ -214,6 +214,42 @@
     </div>
 </section>
 
+<!-- Service Gallery -->
+@if($service->showcase_images->isNotEmpty())
+<section class="py-20 bg-[#F8FAFC] border-t border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div class="space-y-2 reveal">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#007BFF] font-mono">GALLERY</span>
+            <h2 class="text-2xl sm:text-3xl font-black text-[#0F172A] font-heading">{{ $service->title }} in Practice</h2>
+        </div>
+
+        <div x-data="{ active: 0 }" class="space-y-4 reveal" data-delay="80">
+            <div class="relative aspect-[16/9] overflow-hidden rounded-2xl border border-slate-200/80 shadow-lg bg-white">
+                @foreach($service->showcase_images as $index => $shot)
+                <div x-show="active === {{ $index }}" x-transition.opacity.duration.400ms class="absolute inset-0">
+                    <x-picture :src="$shot" :alt="$service->title . ' — photo ' . ($index + 1)"
+                               width="1600" height="900" img-class="w-full h-full object-cover" />
+                </div>
+                @endforeach
+            </div>
+
+            @if($service->showcase_images->count() > 1)
+            <div class="flex flex-wrap gap-3">
+                @foreach($service->showcase_images as $index => $shot)
+                <button type="button" @click="active = {{ $index }}"
+                        :class="active === {{ $index }} ? 'ring-2 ring-[#007BFF] ring-offset-2' : 'opacity-70 hover:opacity-100'"
+                        class="w-24 h-16 rounded-xl overflow-hidden border border-slate-200 transition"
+                        aria-label="Show photo {{ $index + 1 }}">
+                    <x-picture :src="$shot" :alt="''" width="200" height="130" img-class="w-full h-full object-cover" />
+                </button>
+                @endforeach
+            </div>
+            @endif
+        </div>
+    </div>
+</section>
+@endif
+
 <!-- Fast Inquiry CTA -->
 <section class="py-20 bg-[#0B132B] text-white border-t border-slate-800 relative overflow-hidden text-center">
     <div class="absolute inset-0 bg-tech-grid opacity-20 pointer-events-none"></div>

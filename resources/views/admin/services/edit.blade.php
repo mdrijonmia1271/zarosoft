@@ -10,7 +10,7 @@
     </a>
 
     <div class="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
-        <form action="{{ route('admin.services.update', $service->id) }}" method="POST" class="space-y-6">
+        <form action="{{ route('admin.services.update', $service->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
             @csrf
             @method('PUT')
 
@@ -62,6 +62,31 @@
                 </div>
             </div>
 
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">Main Photo (shown in the homepage hero)</label>
+                    <input type="text" name="image" value="{{ old('image', $service->image) }}" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white" placeholder="images/services/my-service.jpg or https://...">
+                    <input type="file" name="image_file" accept="image/*" class="w-full mt-2 text-[11px] text-slate-600 dark:text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-indigo-50 dark:file:bg-indigo-950/50 file:text-indigo-500 hover:file:bg-indigo-100 cursor-pointer">
+                    @if($service->image_url)
+                    <img src="{{ $service->image_url }}" alt="" class="mt-3 h-20 w-32 object-cover rounded-lg border border-slate-700">
+                    @endif
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">More Photos (1 path per line)</label>
+                    <textarea name="gallery" rows="4" class="w-full px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white leading-relaxed" placeholder="images/services/shot-1.jpg&#10;images/services/shot-2.jpg">{{ old('gallery', implode("\n", $service->gallery ?? [])) }}</textarea>
+                    <input type="file" name="gallery_files[]" accept="image/*" multiple class="w-full mt-2 text-[11px] text-slate-600 dark:text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-indigo-50 dark:file:bg-indigo-950/50 file:text-indigo-500 hover:file:bg-indigo-100 cursor-pointer">
+                    <p class="mt-1 text-[10px] text-slate-500">Uploads are appended to the list. Delete a line to remove that photo. Every photo here also becomes its own hero slide.</p>
+                    @if($service->gallery_urls->isNotEmpty())
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        @foreach($service->gallery_urls as $shot)
+                        <img src="{{ $shot }}" alt="" class="h-14 w-20 object-cover rounded-lg border border-slate-700">
+                        @endforeach
+                    </div>
+                    @endif
+                </div>
+            </div>
             <div class="flex items-center gap-6 pt-2">
                 <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-300">
                     <input type="checkbox" name="is_featured" value="1" {{ $service->is_featured ? 'checked' : '' }} class="rounded bg-slate-800 border-slate-700 text-indigo-600">
