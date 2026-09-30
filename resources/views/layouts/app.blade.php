@@ -33,10 +33,10 @@
     <meta name="twitter:title" content="@yield('title', 'ZaroSoft — Smart Technology. Innovative Solutions.')">
     <meta name="twitter:description" content="@yield('meta_description', 'Building Smarter Digital Solutions with Laravel, AI, and Modern Cloud Architecture.')">
 
-    <!-- Google Fonts: Plus Jakarta Sans, Outfit & JetBrains Mono -->
+    <!-- Google Fonts: Manrope & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Always use light mode -->
     <script>
@@ -51,7 +51,7 @@
     {{-- Organization + WebSite on every page; pages add their own nodes. --}}
     <x-structured-data :graph="$structuredData ?? []" />
 </head>
-<body class="font-sans antialiased bg-[#F8FAFC] text-[#111827] selection:bg-[#007BFF] selection:text-white min-h-screen flex flex-col justify-between overflow-x-hidden">
+<body class="font-sans antialiased bg-[#F8FAFC] text-[#111827] selection:bg-[#055BE8] selection:text-white min-h-screen flex flex-col justify-between overflow-x-hidden">
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
     <!-- Top Navigation Bar -->

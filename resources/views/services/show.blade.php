@@ -29,14 +29,14 @@
 <!-- Header Hero -->
 <section class="py-20 relative overflow-hidden bg-[#F8FAFC] border-b border-slate-200/80">
     <div class="absolute inset-0 bg-tech-grid opacity-70 pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#007BFF]/10 rounded-full blur-[120px] pointer-events-none animate-pulse-glow"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#055BE8]/10 rounded-full blur-[120px] pointer-events-none animate-pulse-glow"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <!-- Breadcrumbs -->
         <nav class="flex items-center gap-2 text-xs text-slate-500 mb-6 font-medium reveal">
-            <a href="{{ route('home') }}" class="hover:text-[#007BFF] transition-colors">Home</a>
+            <a href="{{ route('home') }}" class="hover:text-[#055BE8] transition-colors">Home</a>
             <span class="text-slate-300">/</span>
-            <a href="{{ route('services.index') }}" class="hover:text-[#007BFF] transition-colors">Services</a>
+            <a href="{{ route('services.index') }}" class="hover:text-[#055BE8] transition-colors">Services</a>
             <span class="text-slate-300">/</span>
             <span class="text-[#0F172A] font-semibold">{{ $service->title }}</span>
         </nav>
@@ -44,11 +44,11 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div class="lg:col-span-8 space-y-6 reveal-left">
                 <div class="flex items-center gap-3">
-                    <span class="px-3.5 py-1 rounded-full bg-[#007BFF]/10 border border-[#007BFF]/25 text-xs font-bold uppercase tracking-wider text-[#007BFF] font-mono">
+                    <span class="px-3.5 py-1 rounded-full bg-[#055BE8]/10 border border-[#055BE8]/25 text-xs font-bold uppercase tracking-wider text-[#055BE8] font-mono">
                         {{ $service->category->name ?? 'Software Engineering' }}
                     </span>
                     @if($service->badge)
-                    <span class="px-3 py-0.5 rounded-full text-xs font-bold bg-[#00D2FF]/15 text-[#007BFF] border border-[#00D2FF]/30 font-mono">
+                    <span class="px-3 py-0.5 rounded-full text-xs font-bold bg-[#2FD5E9]/15 text-[#055BE8] border border-[#2FD5E9]/30 font-mono">
                         {{ $service->badge }}
                     </span>
                     @endif
@@ -63,7 +63,7 @@
                 </p>
 
                 <div class="flex flex-wrap items-center gap-4 pt-2">
-                    <a href="{{ route('contact.index', ['service' => $service->title]) }}" class="px-8 py-4 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#0062cc] hover:from-[#0062cc] hover:to-[#004bb5] text-white font-bold text-sm shadow-xl shadow-[#007BFF]/25 hover:shadow-[#007BFF]/40 hover:-translate-y-0.5 transition-all">
+                    <a href="{{ route('contact.index', ['service' => $service->title]) }}" class="px-8 py-4 rounded-xl bg-gradient-to-r from-[#055BE8] to-[#0449c2] hover:from-[#0449c2] hover:to-[#033a9c] text-white font-bold text-sm shadow-xl shadow-[#055BE8]/25 hover:shadow-[#055BE8]/40 hover:-translate-y-0.5 transition-all">
                         Request a Quote for this Service →
                     </a>
                     <a href="#capabilities" class="px-6 py-4 rounded-xl bg-white border border-slate-200 text-slate-700 font-bold text-sm hover:text-[#0F172A] hover:bg-slate-50 transition-colors shadow-sm">
@@ -94,7 +94,7 @@
                         </div>
                         <div class="flex justify-between py-1.5">
                             <span class="text-slate-500">Environment:</span>
-                            <span class="font-bold text-[#007BFF]">Docker / AWS / Cloud VPS</span>
+                            <span class="font-bold text-[#055BE8]">Docker / AWS / Cloud VPS</span>
                         </div>
                     </div>
 
@@ -123,7 +123,7 @@
         <!-- Deep Overview -->
         @if($service->description)
         <div class="max-w-4xl space-y-6 reveal">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#007BFF]/10 text-xs font-bold uppercase tracking-wider text-[#007BFF] font-mono">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#055BE8]/10 text-xs font-bold uppercase tracking-wider text-[#055BE8] font-mono">
                 ENGINEERING STRATEGY
             </div>
             <h2 class="text-2xl sm:text-3xl font-black text-[#0F172A] font-heading">
@@ -139,14 +139,14 @@
         @if($service->features && is_array($service->features))
         <div class="space-y-8">
             <div class="space-y-2 reveal">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#007BFF] font-mono">CORE SPECIFICATIONS</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-[#055BE8] font-mono">CORE SPECIFICATIONS</span>
                 <h2 class="text-2xl sm:text-3xl font-black text-[#0F172A] font-heading">Built Into Every Implementation</h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 @foreach($service->features as $index => $feature)
-                <div class="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 hover:border-[#007BFF]/50 shadow-sm flex items-start gap-4 spotlight-card reveal" data-delay="{{ ($index % 2) * 120 }}">
-                    <div class="w-9 h-9 rounded-xl bg-[#007BFF]/10 text-[#007BFF] flex items-center justify-center shrink-0 font-bold border border-[#007BFF]/20 shadow-sm mt-0.5">
+                <div class="p-6 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 hover:border-[#055BE8]/50 shadow-sm flex items-start gap-4 spotlight-card reveal" data-delay="{{ ($index % 2) * 120 }}">
+                    <div class="w-9 h-9 rounded-xl bg-[#055BE8]/10 text-[#055BE8] flex items-center justify-center shrink-0 font-bold border border-[#055BE8]/20 shadow-sm mt-0.5">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
                     </div>
                     <div>
@@ -168,7 +168,7 @@
                 <div class="space-y-4">
                     @foreach($service->process_steps as $step)
                     <div class="flex items-start gap-3.5">
-                        <span class="w-6 h-6 rounded-full bg-[#007BFF] text-white font-bold text-xs flex items-center justify-center shrink-0 font-mono shadow-md shadow-[#007BFF]/25 mt-0.5">
+                        <span class="w-6 h-6 rounded-full bg-[#055BE8] text-white font-bold text-xs flex items-center justify-center shrink-0 font-mono shadow-md shadow-[#055BE8]/25 mt-0.5">
                             {{ $loop->iteration }}
                         </span>
                         <div>
@@ -188,7 +188,7 @@
                 <div class="space-y-2.5">
                     @foreach($service->deliverables as $deliverable)
                     <div class="flex items-center gap-3 p-3 rounded-xl bg-white text-xs font-semibold text-[#0F172A] border border-slate-200/80 shadow-sm">
-                        <svg class="w-4 h-4 text-[#007BFF] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                        <svg class="w-4 h-4 text-[#055BE8] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
                         <span>{{ $deliverable }}</span>
                     </div>
                     @endforeach
@@ -196,11 +196,11 @@
 
                 @if($service->benefits && is_array($service->benefits))
                 <div class="pt-4 border-t border-slate-200/80">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#007BFF] mb-3 font-mono">Key Business Value:</h4>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#055BE8] mb-3 font-mono">Key Business Value:</h4>
                     <ul class="space-y-2 text-xs text-slate-600">
                         @foreach($service->benefits as $benefit)
                         <li class="flex items-center gap-2">
-                            <span class="text-[#007BFF] font-bold">→</span>
+                            <span class="text-[#055BE8] font-bold">→</span>
                             <span>{{ $benefit }}</span>
                         </li>
                         @endforeach
@@ -219,7 +219,7 @@
 <section class="py-20 bg-[#F8FAFC] border-t border-slate-200/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div class="space-y-2 reveal">
-            <span class="text-xs font-bold uppercase tracking-wider text-[#007BFF] font-mono">GALLERY</span>
+            <span class="text-xs font-bold uppercase tracking-wider text-[#055BE8] font-mono">GALLERY</span>
             <h2 class="text-2xl sm:text-3xl font-black text-[#0F172A] font-heading">{{ $service->title }} in Practice</h2>
         </div>
 
@@ -237,7 +237,7 @@
             <div class="flex flex-wrap gap-3">
                 @foreach($service->showcase_images as $index => $shot)
                 <button type="button" @click="active = {{ $index }}"
-                        :class="active === {{ $index }} ? 'ring-2 ring-[#007BFF] ring-offset-2' : 'opacity-70 hover:opacity-100'"
+                        :class="active === {{ $index }} ? 'ring-2 ring-[#055BE8] ring-offset-2' : 'opacity-70 hover:opacity-100'"
                         class="w-24 h-16 rounded-xl overflow-hidden border border-slate-200 transition"
                         aria-label="Show photo {{ $index + 1 }}">
                     <x-picture :src="$shot" :alt="''" width="200" height="130" img-class="w-full h-full object-cover" />
@@ -258,7 +258,7 @@
         <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">
             Contact our engineering leads directly. We will evaluate your technical specifications and deliver an actionable implementation estimate.
         </p>
-        <a href="{{ route('contact.index', ['service' => $service->title]) }}" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#00D2FF] hover:from-[#0062cc] hover:to-[#00b8e6] text-white font-bold text-sm shadow-xl shadow-[#007BFF]/30 hover:shadow-[#007BFF]/50 hover:-translate-y-0.5 transition-all">
+        <a href="{{ route('contact.index', ['service' => $service->title]) }}" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#055BE8] to-[#2FD5E9] hover:from-[#0449c2] hover:to-[#25bfd3] text-white font-bold text-sm shadow-xl shadow-[#055BE8]/30 hover:shadow-[#055BE8]/50 hover:-translate-y-0.5 transition-all">
             <span>Start {{ $service->title }} Discovery</span>
             <span>→</span>
         </a>

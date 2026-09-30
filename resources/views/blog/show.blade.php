@@ -37,20 +37,20 @@
 <!-- Header Hero -->
 <section class="py-20 relative overflow-hidden bg-[#F8FAFC] border-b border-slate-200/80">
     <div class="absolute inset-0 bg-tech-grid opacity-60"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#007BFF]/10 rounded-full blur-[120px] pointer-events-none animate-pulse-glow"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#055BE8]/10 rounded-full blur-[120px] pointer-events-none animate-pulse-glow"></div>
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 relative z-10 w-full reveal">
         <!-- Breadcrumbs -->
         <nav class="flex items-center gap-2 text-xs text-slate-500 font-medium">
-            <a href="{{ route('home') }}" class="hover:text-[#007BFF]">Home</a>
+            <a href="{{ route('home') }}" class="hover:text-[#055BE8]">Home</a>
             <span>/</span>
-            <a href="{{ route('blog.index') }}" class="hover:text-[#007BFF]">Blog</a>
+            <a href="{{ route('blog.index') }}" class="hover:text-[#055BE8]">Blog</a>
             <span>/</span>
             <span class="text-[#0F172A] truncate">{{ $blog->title }}</span>
         </nav>
 
         <div class="flex items-center gap-3">
-            <span class="px-3 py-0.5 rounded-full bg-[#007BFF]/10 border border-[#007BFF]/25 text-xs font-bold uppercase tracking-wider text-[#007BFF] backdrop-blur-md font-mono">
+            <span class="px-3 py-0.5 rounded-full bg-[#055BE8]/10 border border-[#055BE8]/25 text-xs font-bold uppercase tracking-wider text-[#055BE8] backdrop-blur-md font-mono">
                 {{ $blog->category->name }}
             </span>
             <span class="text-xs text-slate-500 font-mono flex items-center gap-1">
@@ -103,7 +103,7 @@
         <div class="pt-6 border-t border-slate-200/80 flex items-center gap-2 flex-wrap reveal">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mr-2 font-mono">Tags:</span>
             @foreach($blog->tags as $tag)
-            <a href="{{ route('blog.index', ['tag' => $tag->slug]) }}" class="px-3 py-1 rounded-lg bg-slate-100 text-xs font-semibold text-slate-700 hover:bg-[#007BFF] hover:text-white border border-slate-200 transition-all font-mono">
+            <a href="{{ route('blog.index', ['tag' => $tag->slug]) }}" class="px-3 py-1 rounded-lg bg-slate-100 text-xs font-semibold text-slate-700 hover:bg-[#055BE8] hover:text-white border border-slate-200 transition-all font-mono">
                 #{{ $tag->name }}
             </a>
             @endforeach
@@ -122,7 +122,7 @@
                 <p class="text-xs text-slate-600 leading-relaxed">
                     Engineering Lead at ZaroSoft, specializing in high-concurrency Laravel architectures, bespoke enterprise ERP platforms, and AI automation.
                 </p>
-                <a href="{{ route('contact.index') }}" class="inline-block text-xs font-bold text-[#007BFF] hover:underline pt-1">
+                <a href="{{ route('contact.index') }}" class="inline-block text-xs font-bold text-[#055BE8] hover:underline pt-1">
                     Connect with our engineering team →
                 </a>
             </div>
@@ -134,14 +134,14 @@
             <h3 class="text-2xl font-bold text-[#0F172A] font-heading reveal">Related Insights</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 @foreach($relatedBlogs as $index => $rel)
-                <div class="p-6 rounded-xl bg-[#F8FAFC] border border-slate-200/80 space-y-3 flex flex-col justify-between hover:border-[#007BFF]/50 transition-all spotlight-card reveal shadow-sm" data-delay="{{ ($index % 3) * 100 }}">
+                <div class="p-6 rounded-xl bg-[#F8FAFC] border border-slate-200/80 space-y-3 flex flex-col justify-between hover:border-[#055BE8]/50 transition-all spotlight-card reveal shadow-sm" data-delay="{{ ($index % 3) * 100 }}">
                     <div>
-                        <span class="text-[10px] font-bold uppercase text-[#007BFF] font-mono">{{ $rel->category->name }}</span>
-                        <h4 class="text-sm font-bold text-[#0F172A] hover:text-[#007BFF] transition-colors mt-1 font-heading">
+                        <span class="text-[10px] font-bold uppercase text-[#055BE8] font-mono">{{ $rel->category->name }}</span>
+                        <h4 class="text-sm font-bold text-[#0F172A] hover:text-[#055BE8] transition-colors mt-1 font-heading">
                             <a href="{{ route('blog.show', $rel->slug) }}">{{ $rel->title }}</a>
                         </h4>
                     </div>
-                    <a href="{{ route('blog.show', $rel->slug) }}" class="text-xs font-bold text-[#007BFF] hover:text-[#0052b3]">
+                    <a href="{{ route('blog.show', $rel->slug) }}" class="text-xs font-bold text-[#055BE8] hover:text-[#033a9c]">
                         Read →
                     </a>
                 </div>

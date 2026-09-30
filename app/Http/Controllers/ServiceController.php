@@ -2,28 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Faq;
 use App\Models\Project;
 use App\Models\Service;
-use App\Models\ServiceCategory;
-use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $categories = ServiceCategory::with(['activeServices'])->where('is_active', true)->orderBy('order')->get();
-        $allServices = Service::with('category')->where('is_active', true)->orderBy('order')->get();
-        
-        $currentCategory = $request->query('category');
-        if ($currentCategory) {
-            $filteredServices = Service::whereHas('category', function ($q) use ($currentCategory) {
-                $q->where('slug', $currentCategory);
-            })->where('is_active', true)->orderBy('order')->get();
-        } else {
-            $filteredServices = $allServices;
-        }
+        $services = Service::with('category')->where('is_active', true)->orderBy('order')->get();
 
-        return view('services.index', compact('categories', 'allServices', 'filteredServices', 'currentCategory'));
+        $faqs = Faq::where('is_active', true)->orderBy('order')->take(5)->get();
+
+        return view('services.index', compact('services', 'faqs'));
     }
 
     public function show(string $slug)

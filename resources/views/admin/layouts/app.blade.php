@@ -10,7 +10,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Always use light mode -->
     <script>
@@ -39,12 +39,12 @@
 
             <!-- Navigation Items -->
             <nav class="space-y-1.5 text-xs font-semibold">
-                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-[#055BE8] text-white shadow-md shadow-[#055BE8]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <span class="text-base">📊</span>
                     <span>Dashboard</span>
                 </a>
 
-                <a href="{{ route('admin.leads.index') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.leads.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                <a href="{{ route('admin.leads.index') }}" class="flex items-center justify-between px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.leads.*') ? 'bg-[#055BE8] text-white shadow-md shadow-[#055BE8]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <div class="flex items-center gap-3">
                         <span class="text-base">💼</span>
                         <span>Leads (Mini CRM)</span>
@@ -60,47 +60,47 @@
                     Content Management
                 </div>
 
-                <a href="{{ route('admin.services.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.services.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                <a href="{{ route('admin.services.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.services.*') ? 'bg-[#055BE8] text-white shadow-md shadow-[#055BE8]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <span class="text-base">🛠️</span>
                     <span>Services ({{ $activeServiceCount }})</span>
                 </a>
 
-                <a href="{{ route('admin.products.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.products.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                <a href="{{ route('admin.products.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.products.*') ? 'bg-[#055BE8] text-white shadow-md shadow-[#055BE8]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <span class="text-base">📦</span>
                     <span>Product Suite</span>
                 </a>
 
-                <a href="{{ route('admin.industries.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.industries.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                <a href="{{ route('admin.industries.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.industries.*') ? 'bg-[#055BE8] text-white shadow-md shadow-[#055BE8]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <span class="text-base">🏭</span>
                     <span>Industry Solutions</span>
                 </a>
 
-                <a href="{{ route('admin.clients.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.clients.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                <a href="{{ route('admin.clients.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.clients.*') ? 'bg-[#055BE8] text-white shadow-md shadow-[#055BE8]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <span class="text-base">🤝</span>
                     <span>Client Logos</span>
                 </a>
 
-                <a href="{{ route('admin.projects.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.projects.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                <a href="{{ route('admin.projects.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.projects.*') ? 'bg-[#055BE8] text-white shadow-md shadow-[#055BE8]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <span class="text-base">🚀</span>
                     <span>Portfolio & Case Studies</span>
                 </a>
 
-                <a href="{{ route('admin.blogs.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.blogs.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                <a href="{{ route('admin.blogs.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.blogs.*') ? 'bg-[#055BE8] text-white shadow-md shadow-[#055BE8]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <span class="text-base">📝</span>
                     <span>Blog Articles</span>
                 </a>
 
-                <a href="{{ route('admin.team.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.team.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                <a href="{{ route('admin.team.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.team.*') ? 'bg-[#055BE8] text-white shadow-md shadow-[#055BE8]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <span class="text-base">👥</span>
                     <span>Team Members</span>
                 </a>
 
-                <a href="{{ route('admin.testimonials.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.testimonials.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                <a href="{{ route('admin.testimonials.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.testimonials.*') ? 'bg-[#055BE8] text-white shadow-md shadow-[#055BE8]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <span class="text-base">⭐</span>
                     <span>Testimonials</span>
                 </a>
 
-                <a href="{{ route('admin.faqs.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.faqs.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                <a href="{{ route('admin.faqs.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.faqs.*') ? 'bg-[#055BE8] text-white shadow-md shadow-[#055BE8]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <span class="text-base">❓</span>
                     <span>FAQs</span>
                 </a>
@@ -109,7 +109,7 @@
                     System & Settings
                 </div>
 
-                <a href="{{ route('admin.settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.settings.*') ? 'bg-[#007BFF] text-white shadow-md shadow-[#007BFF]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
+                <a href="{{ route('admin.settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors {{ request()->routeIs('admin.settings.*') ? 'bg-[#055BE8] text-white shadow-md shadow-[#055BE8]/25' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-white' }}">
                     <span class="text-base">⚙️</span>
                     <span>Site Settings & SEO</span>
                 </a>
@@ -125,7 +125,7 @@
         <div class="p-4 border-t border-slate-200 dark:border-slate-800">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-[#007BFF]/20 text-[#00D2FF] font-bold flex items-center justify-center text-xs">
+                    <div class="w-9 h-9 rounded-full bg-[#055BE8]/20 text-[#2FD5E9] font-bold flex items-center justify-center text-xs">
                         {{ substr(auth()->user()->name ?? 'Admin', 0, 2) }}
                     </div>
                     <div class="truncate">
@@ -158,7 +158,7 @@
             </div>
 
             <div class="flex items-center gap-3">
-                <a href="{{ route('home') }}" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#007BFF]/10 text-[#007BFF] dark:text-[#00D2FF] text-xs font-bold hover:bg-[#007BFF]/20">
+                <a href="{{ route('home') }}" target="_blank" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#055BE8]/10 text-[#055BE8] dark:text-[#2FD5E9] text-xs font-bold hover:bg-[#055BE8]/20">
                     <span>Live Website</span>
                     <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                 </a>

@@ -1,12 +1,12 @@
 @extends('admin.layouts.app')
 
 @section('title', 'Manage Services')
-@section('header', 'Services Management (17 Services)')
+@section('header', 'Services Management (' . $services->total() . ' Services)')
 
 @section('content')
 <div class="space-y-6">
     <div class="flex items-center justify-between">
-        <p class="text-xs text-slate-500">Manage all 17 specialized development and creative services.</p>
+        <p class="text-xs text-slate-500">Manage all {{ $services->total() }} development, creative and marketing services.</p>
         <a href="{{ route('admin.services.create') }}" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-500/20 transition-all flex items-center gap-1.5">
             <span>+ Add New Service</span>
         </a>

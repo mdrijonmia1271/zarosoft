@@ -3,26 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Models\ProjectCategory;
-use Illuminate\Http\Request;
 
 class PortfolioController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $categories = ProjectCategory::where('is_active', true)->orderBy('order')->get();
-        $selectedCategory = $request->query('category');
+        $allProjects = Project::with('category')->where('is_active', true)->orderBy('order')->get();
 
-        $query = Project::with('category')->where('is_active', true)->orderBy('order');
-        if ($selectedCategory) {
-            $query->whereHas('category', function ($q) use ($selectedCategory) {
-                $q->where('slug', $selectedCategory);
-            });
-        }
+        // The lead featured project gets the large banner; the rest fill the grid.
+        $featured = $allProjects->firstWhere('is_featured', true) ?? $allProjects->first();
+        $projects = $allProjects->reject(fn (Project $project) => $project->is($featured))->values();
 
-        $projects = $query->paginate(9);
+        // Only offer filter pills for categories that have a card to show.
+        $categories = $projects->pluck('category')->filter()->unique('id')->sortBy('order')->values();
 
-        return view('portfolio.index', compact('categories', 'projects', 'selectedCategory'));
+        return view('portfolio.index', compact('featured', 'projects', 'categories'));
     }
 
     public function show(string $slug)

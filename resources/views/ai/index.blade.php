@@ -8,17 +8,17 @@
 <section class="relative overflow-hidden py-16 sm:py-20 bg-[#0B132B] border-b border-slate-800 text-center">
     <!-- Ambient Tech Background -->
     <div class="absolute inset-0 bg-tech-grid opacity-30 pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#007BFF]/20 rounded-full blur-[130px] pointer-events-none animate-pulse-glow"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#055BE8]/20 rounded-full blur-[130px] pointer-events-none animate-pulse-glow"></div>
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6 reveal">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#007BFF]/40 text-xs font-bold uppercase tracking-[0.18em] text-[#00D2FF] backdrop-blur-md shadow-lg shadow-[#007BFF]/20 font-mono">
-            <span class="w-2 h-2 rounded-full bg-[#00D2FF] animate-pulse"></span>
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-[#055BE8]/40 text-xs font-bold uppercase tracking-[0.18em] text-[#2FD5E9] backdrop-blur-md shadow-lg shadow-[#055BE8]/20 font-mono">
+            <span class="w-2 h-2 rounded-full bg-[#2FD5E9] animate-pulse"></span>
             ENTERPRISE AI ARCHITECTURE
         </div>
         
         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight font-heading">
             Applied Intelligence That <br/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#007BFF] via-[#00A3FF] to-[#00D2FF]">Drives Real ROI.</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#055BE8] via-[#1A8CEC] to-[#2FD5E9]">Drives Real ROI.</span>
         </h1>
 
         <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
@@ -26,10 +26,10 @@
         </p>
 
         <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <a href="{{ route('contact.index', ['service' => 'AI Solutions']) }}" class="px-8 py-4 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#00D2FF] hover:from-[#0062cc] hover:to-[#00b8e6] text-white font-bold text-sm shadow-xl shadow-[#007BFF]/30 hover:shadow-[#007BFF]/50 hover:-translate-y-0.5 transition-all">
+            <a href="{{ route('contact.index', ['service' => 'AI Solutions']) }}" class="px-8 py-4 rounded-xl bg-gradient-to-r from-[#055BE8] to-[#2FD5E9] hover:from-[#0449c2] hover:to-[#25bfd3] text-white font-bold text-sm shadow-xl shadow-[#055BE8]/30 hover:shadow-[#055BE8]/50 hover:-translate-y-0.5 transition-all">
                 Integrate AI Into Your Software →
             </a>
-            <a href="#services" class="px-8 py-4 rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/20 hover:border-[#007BFF] font-bold text-sm backdrop-blur-md transition-all shadow-xl">
+            <a href="#services" class="px-8 py-4 rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/20 hover:border-[#055BE8] font-bold text-sm backdrop-blur-md transition-all shadow-xl">
                 Explore 6 AI Capabilities ↓
             </a>
         </div>
@@ -41,9 +41,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
         
         <div class="text-center max-w-3xl mx-auto space-y-4 reveal">
-            <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#00D2FF] font-mono">ENTERPRISE CAPABILITIES</span>
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#2FD5E9] font-mono">ENTERPRISE CAPABILITIES</span>
             <h2 class="text-3xl sm:text-4xl font-black text-white font-heading">
-                Practical AI Engineered For <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#007BFF] via-[#00A3FF] to-[#00D2FF]">Measurable ROI</span>
+                Practical AI Engineered For <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#055BE8] via-[#1A8CEC] to-[#2FD5E9]">Measurable ROI</span>
             </h2>
             <p class="text-slate-400 text-sm sm:text-base">
                 We focus on high-impact operational automations that save hundreds of human work-hours every month.
@@ -99,10 +99,10 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($aiServices as $index => $ai)
-            <div class="p-8 rounded-2xl bg-[#0D1836] border border-slate-800 hover:border-[#007BFF]/50 shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group spotlight-card reveal" data-delay="{{ ($index % 3) * 100 }}">
+            <div class="p-8 rounded-2xl bg-[#0D1836] border border-slate-800 hover:border-[#055BE8]/50 shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between group spotlight-card reveal" data-delay="{{ ($index % 3) * 100 }}">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <div class="w-12 h-12 rounded-xl bg-[#007BFF]/15 text-[#00D2FF] flex items-center justify-center border border-[#007BFF]/30 group-hover:scale-105 transition-transform">
+                        <div class="w-12 h-12 rounded-xl bg-[#055BE8]/15 text-[#2FD5E9] flex items-center justify-center border border-[#055BE8]/30 group-hover:scale-105 transition-transform">
                             @if($ai['icon_type'] == 'ocr')
                                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                             @elseif($ai['icon_type'] == 'bot')
@@ -117,12 +117,12 @@
                                 <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
                             @endif
                         </div>
-                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#007BFF]/20 text-[#00D2FF] border border-[#007BFF]/30 font-mono">
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#055BE8]/20 text-[#2FD5E9] border border-[#055BE8]/30 font-mono">
                             {{ $ai['badge'] }}
                         </span>
                     </div>
 
-                    <h3 class="text-lg font-bold text-white group-hover:text-[#00D2FF] transition-colors font-heading">
+                    <h3 class="text-lg font-bold text-white group-hover:text-[#2FD5E9] transition-colors font-heading">
                         {{ $ai['title'] }}
                     </h3>
 
@@ -133,7 +133,7 @@
                     <div class="pt-4 border-t border-slate-800 space-y-1.5">
                         @foreach($ai['highlights'] as $highlight)
                         <div class="flex items-center gap-2 text-xs text-slate-300">
-                            <span class="text-[#00D2FF] font-bold">✓</span>
+                            <span class="text-[#2FD5E9] font-bold">✓</span>
                             <span>{{ $highlight }}</span>
                         </div>
                         @endforeach
@@ -141,7 +141,7 @@
                 </div>
 
                 <div class="pt-5 mt-5 border-t border-slate-800">
-                    <a href="{{ route('contact.index', ['service' => 'AI: ' . $ai['title']]) }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#00D2FF] hover:text-white group-hover:translate-x-1 transition-all">
+                    <a href="{{ route('contact.index', ['service' => 'AI: ' . $ai['title']]) }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#2FD5E9] hover:text-white group-hover:translate-x-1 transition-all">
                         <span>Discuss Architecture</span>
                         <span>→</span>
                     </a>
@@ -159,22 +159,22 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div class="lg:col-span-6 space-y-6 reveal-left">
-                <span class="text-xs font-bold uppercase tracking-widest text-[#00D2FF] font-mono">SECURITY & PRIVACY FIRST</span>
+                <span class="text-xs font-bold uppercase tracking-widest text-[#2FD5E9] font-mono">SECURITY & PRIVACY FIRST</span>
                 <h2 class="text-3xl sm:text-4xl font-black leading-tight font-heading">
                     Enterprise Data Privacy <br/>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#007BFF] to-[#00D2FF]">Without Compromise.</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#055BE8] to-[#2FD5E9]">Without Compromise.</span>
                 </h2>
                 <div class="space-y-3 pt-2">
                     <div class="flex items-center gap-3">
-                        <span class="w-6 h-6 rounded-full bg-[#007BFF]/20 text-[#00D2FF] flex items-center justify-center font-bold text-xs border border-[#007BFF]/30">✓</span>
+                        <span class="w-6 h-6 rounded-full bg-[#055BE8]/20 text-[#2FD5E9] flex items-center justify-center font-bold text-xs border border-[#055BE8]/30">✓</span>
                         <span class="text-slate-300 text-xs sm:text-sm">Private data isolation inside your MySQL / PostgreSQL databases</span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <span class="w-6 h-6 rounded-full bg-[#007BFF]/20 text-[#00D2FF] flex items-center justify-center font-bold text-xs border border-[#007BFF]/30">✓</span>
+                        <span class="w-6 h-6 rounded-full bg-[#055BE8]/20 text-[#2FD5E9] flex items-center justify-center font-bold text-xs border border-[#055BE8]/30">✓</span>
                         <span class="text-slate-300 text-xs sm:text-sm">SOC2 / GDPR compliant API routing & payload encryption</span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <span class="w-6 h-6 rounded-full bg-[#007BFF]/20 text-[#00D2FF] flex items-center justify-center font-bold text-xs border border-[#007BFF]/30">✓</span>
+                        <span class="w-6 h-6 rounded-full bg-[#055BE8]/20 text-[#2FD5E9] flex items-center justify-center font-bold text-xs border border-[#055BE8]/30">✓</span>
                         <span class="text-slate-300 text-xs sm:text-sm">Option for 100% self-hosted on-premise open-source LLMs</span>
                     </div>
                 </div>
@@ -187,7 +187,7 @@
                     <span class="text-emerald-400">● Encrypted TLS</span>
                 </div>
                 <div class="space-y-2 text-[11px]">
-                    <p class="text-[#00D2FF]">[INVOICE_OCR] Received payload: invoice_apex_mill_492.pdf</p>
+                    <p class="text-[#2FD5E9]">[INVOICE_OCR] Received payload: invoice_apex_mill_492.pdf</p>
                     <p class="text-slate-400">→ Running computer vision layout detection...</p>
                     <p class="text-cyan-300">→ Matched Vendor: "Apex Steel Mills Ltd" (Entity: #4012)</p>
                     <p class="text-cyan-300">→ Extracted 14 line items, Subtotal: $42,500.00, Tax: $2,125.00</p>
@@ -203,7 +203,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 relative z-10 reveal">
         <h2 class="text-3xl sm:text-4xl font-black font-heading">Ready to Explore How AI Can Accelerate Your Operations?</h2>
         <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">Book an AI architecture discovery call with our lead technical architect.</p>
-        <a href="{{ route('contact.index', ['service' => 'AI Solutions']) }}" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#00D2FF] hover:from-[#0062cc] hover:to-[#00b8e6] text-white font-bold text-sm shadow-xl shadow-[#007BFF]/30 hover:shadow-[#007BFF]/50 hover:-translate-y-0.5 transition-all">
+        <a href="{{ route('contact.index', ['service' => 'AI Solutions']) }}" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#055BE8] to-[#2FD5E9] hover:from-[#0449c2] hover:to-[#25bfd3] text-white font-bold text-sm shadow-xl shadow-[#055BE8]/30 hover:shadow-[#055BE8]/50 hover:-translate-y-0.5 transition-all">
             <span>Schedule AI Consultation</span>
             <span>→</span>
         </a>

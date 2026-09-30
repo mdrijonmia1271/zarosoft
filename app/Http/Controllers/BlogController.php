@@ -3,19 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use App\Models\BlogCategory;
-use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = BlogCategory::withCount('blogs')->get();
-        $tags = Tag::all();
-        $featuredPost = Blog::with('category')->where('is_featured', true)->where('is_published', true)->first();
+        $filtered = $request->hasAny(['category', 'tag', 'search']);
 
-        $query = Blog::with(['category', 'tags'])->where('is_published', true)->orderBy('published_at', 'desc');
+        // The newest featured post leads the page as the banner and stays out
+        // of the grid; a filtered view is just the grid.
+        $lead = $filtered ? null : Blog::with('category')
+            ->where('is_published', true)
+            ->orderByDesc('is_featured')
+            ->orderByDesc('published_at')
+            ->first();
+
+        $featuredPost = $request->integer('page', 1) > 1 ? null : $lead;
+
+        $query = Blog::with(['category', 'tags'])
+            ->where('is_published', true)
+            ->when($lead, fn ($q) => $q->whereKeyNot($lead->id))
+            ->orderBy('published_at', 'desc');
 
         if ($request->filled('category')) {
             $query->whereHas('category', function ($q) use ($request) {
@@ -38,9 +47,9 @@ class BlogController extends Controller
             });
         }
 
-        $blogs = $query->paginate(6)->withQueryString();
+        $blogs = $query->paginate(8)->withQueryString();
 
-        return view('blog.index', compact('blogs', 'categories', 'tags', 'featuredPost'));
+        return view('blog.index', compact('blogs', 'featuredPost', 'filtered'));
     }
 
     public function show(string $slug)

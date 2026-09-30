@@ -32,8 +32,8 @@
     @if($eyebrow)
     <div @class([
         'reveal inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] font-heading backdrop-blur-md',
-        'bg-[#007BFF]/10 border border-[#007BFF]/30 text-[#007BFF]' => !$isDark,
-        'bg-white/5 border border-white/15 text-[#38BDF8]' => $isDark,
+        'bg-[#055BE8]/10 border border-[#055BE8]/30 text-[#055BE8]' => !$isDark,
+        'bg-white/5 border border-white/15 text-[#1A8CEC]' => $isDark,
     ])>
         {{-- A quietly pulsing dot rather than a static bullet, so the eyebrow
              reads as a live signal on both light and dark grounds. --}}
@@ -58,7 +58,7 @@
         {{-- Large headings read better broken over two lines; the small ones
              used in column headers do not have the width for it. --}}
         @if($break)<br class="hidden sm:block" />@endif
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#007BFF] via-[#00B4D8] to-[#00D2FF]">{{ $accent }}</span>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#055BE8] via-[#00B4D8] to-[#2FD5E9]">{{ $accent }}</span>
         @endif
     </h2>
     @endif

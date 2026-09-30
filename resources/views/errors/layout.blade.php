@@ -6,13 +6,13 @@
 @section('content')
 <section class="relative overflow-hidden py-24 sm:py-32 bg-[#0F172A] text-white">
     <div class="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
-    <div class="absolute -top-24 -left-24 w-[28rem] h-[28rem] rounded-full bg-[#007BFF]/10 blur-[120px] pointer-events-none"></div>
-    <div class="absolute -bottom-32 -right-24 w-[26rem] h-[26rem] rounded-full bg-[#00D2FF]/10 blur-[120px] pointer-events-none"></div>
+    <div class="absolute -top-24 -left-24 w-[28rem] h-[28rem] rounded-full bg-[#055BE8]/10 blur-[120px] pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-24 w-[26rem] h-[26rem] rounded-full bg-[#2FD5E9]/10 blur-[120px] pointer-events-none"></div>
 
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center space-y-7">
-        <p class="text-[11px] font-bold uppercase tracking-[0.28em] text-[#00D2FF] font-heading">Error {{ $code }}</p>
+        <p class="text-[11px] font-bold uppercase tracking-[0.28em] text-[#2FD5E9] font-heading">Error {{ $code }}</p>
 
-        <h1 class="text-6xl sm:text-8xl font-black font-heading leading-none text-transparent bg-clip-text bg-gradient-to-r from-[#007BFF] to-[#00D2FF]">
+        <h1 class="text-6xl sm:text-8xl font-black font-heading leading-none text-transparent bg-clip-text bg-gradient-to-r from-[#055BE8] to-[#2FD5E9]">
             {{ $code }}
         </h1>
 
@@ -21,7 +21,7 @@
         <p class="text-sm sm:text-base text-slate-400 max-w-xl mx-auto leading-relaxed">{{ $message }}</p>
 
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <a href="{{ route('home') }}" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#0052cc] hover:from-[#0062cc] hover:to-[#003d99] text-white font-bold text-sm shadow-xl shadow-[#007BFF]/30 transition-all">
+            <a href="{{ route('home') }}" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#055BE8] to-[#0052cc] hover:from-[#0449c2] hover:to-[#003d99] text-white font-bold text-sm shadow-xl shadow-[#055BE8]/30 transition-all">
                 Back to homepage
             </a>
             <a href="{{ route('contact.index') }}" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-sm border border-white/20 backdrop-blur-md transition-all">

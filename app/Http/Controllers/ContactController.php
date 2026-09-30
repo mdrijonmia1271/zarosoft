@@ -24,6 +24,7 @@ class ContactController extends Controller
             'email' => 'required|email|max:150',
             'phone' => 'nullable|string|max:30',
             'company' => 'nullable|string|max:150',
+            'role' => 'nullable|string|max:100',
             'service_interest' => 'required|string|max:100',
             'budget_range' => 'nullable|string|max:50',
             'message' => 'required|string|min:10|max:5000',
@@ -46,7 +47,10 @@ class ContactController extends Controller
             'company' => $validated['company'] ?? null,
             'service_interest' => $validated['service_interest'],
             'budget_range' => $validated['budget_range'] ?? null,
-            'message' => $validated['message'],
+            // Leads have no role column, so the sender's role heads the message.
+            'message' => filled($validated['role'] ?? null)
+                ? "Role: {$validated['role']}\n\n{$validated['message']}"
+                : $validated['message'],
             'attachment_path' => $attachmentPath,
             'attachment_original_name' => $attachmentOriginalName,
             'ip_address' => $request->ip(),

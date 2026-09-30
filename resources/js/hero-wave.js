@@ -57,7 +57,7 @@ export function initHeroWaveBackdrop() {
                 vy: (Math.random() - 0.5) * 0.45,
                 radius: Math.random() * 2.0 + 1.8,
                 pulseOffset: Math.random() * Math.PI * 2,
-                color: Math.random() > 0.35 ? '#00D2FF' : '#38BDF8',
+                color: Math.random() > 0.35 ? '#2FD5E9' : '#1A8CEC',
             });
         }
     }
@@ -73,7 +73,7 @@ export function initHeroWaveBackdrop() {
                 speedX: (Math.random() - 0.5) * 0.25,
                 opacity: Math.random() * 0.7 + 0.2,
                 pulseOffset: Math.random() * Math.PI * 2,
-                color: Math.random() > 0.4 ? '#00D2FF' : '#38BDF8',
+                color: Math.random() > 0.4 ? '#2FD5E9' : '#1A8CEC',
             });
         }
     }
@@ -92,7 +92,7 @@ export function initHeroWaveBackdrop() {
                 targetIdx,
                 progress: 0,
                 speed: Math.random() * 0.02 + 0.015,
-                color: '#00D2FF'
+                color: '#2FD5E9'
             });
         }
     }
@@ -216,7 +216,7 @@ export function initHeroWaveBackdrop() {
                 }
             }
             const rowAlpha = Math.max(0.03, (1 - r / rows) * 0.20);
-            ctx.strokeStyle = `rgba(0, 210, 255, ${rowAlpha})`;
+            ctx.strokeStyle = `rgba(47, 213, 233, ${rowAlpha})`;
             ctx.lineWidth = Math.max(0.65, (1 - r / rows) * 1.15);
             ctx.stroke();
         }
@@ -237,7 +237,7 @@ export function initHeroWaveBackdrop() {
                     ctx.lineTo(pt.screenX, pt.screenY);
                 }
             }
-            ctx.strokeStyle = `rgba(0, 123, 255, 0.12)`;
+            ctx.strokeStyle = `rgba(5, 91, 232, 0.12)`;
             ctx.lineWidth = 0.65;
             ctx.stroke();
         }
@@ -254,7 +254,7 @@ export function initHeroWaveBackdrop() {
                 const alpha = pt.alpha;
                 const isHighlighted = pt.y > 15;
                 const fillStyle = isHighlighted
-                    ? `rgba(0, 210, 255, ${alpha})`
+                    ? `rgba(47, 213, 233, ${alpha})`
                     : `rgba(56, 189, 248, ${alpha * 0.85})`;
 
                 ctx.beginPath();
@@ -265,7 +265,7 @@ export function initHeroWaveBackdrop() {
                 if (isHighlighted && pt.scale > 0.45 && alpha > 0.35) {
                     ctx.beginPath();
                     ctx.arc(pt.screenX, pt.screenY, radius * 2.4, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(0, 210, 255, ${alpha * 0.25})`;
+                    ctx.fillStyle = `rgba(47, 213, 233, ${alpha * 0.25})`;
                     ctx.fill();
                 }
             }
@@ -314,10 +314,10 @@ export function initHeroWaveBackdrop() {
                             ctx.lineTo(p3.x, p3.y);
                             ctx.closePath();
 
-                            ctx.fillStyle = `rgba(0, 210, 255, ${triAlpha * 0.18})`;
+                            ctx.fillStyle = `rgba(47, 213, 233, ${triAlpha * 0.18})`;
                             ctx.fill();
 
-                            ctx.strokeStyle = `rgba(0, 210, 255, ${triAlpha * 0.65})`;
+                            ctx.strokeStyle = `rgba(47, 213, 233, ${triAlpha * 0.65})`;
                             ctx.lineWidth = 0.85;
                             ctx.stroke();
                         }
@@ -348,7 +348,7 @@ export function initHeroWaveBackdrop() {
 
             ctx.beginPath();
             ctx.arc(node.x, node.y, nodeRadius * 2.2, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(0, 210, 255, 0.18)';
+            ctx.fillStyle = 'rgba(47, 213, 233, 0.18)';
             ctx.fill();
         }
 
@@ -384,7 +384,7 @@ export function initHeroWaveBackdrop() {
 
             ctx.beginPath();
             ctx.arc(curX, curY, 5, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(0, 210, 255, 0.6)';
+            ctx.fillStyle = 'rgba(47, 213, 233, 0.6)';
             ctx.fill();
         }
 
@@ -406,8 +406,8 @@ export function initHeroWaveBackdrop() {
 
             ctx.beginPath();
             ctx.arc(sp.x, sp.y, sp.size, 0, Math.PI * 2);
-            ctx.fillStyle = sp.color === '#00D2FF'
-                ? `rgba(0, 210, 255, ${currentAlpha})`
+            ctx.fillStyle = sp.color === '#2FD5E9'
+                ? `rgba(47, 213, 233, ${currentAlpha})`
                 : `rgba(56, 189, 248, ${currentAlpha})`;
             ctx.fill();
         }

@@ -16,7 +16,7 @@
                     {{ $newLeadsCount }} unreviewed leads
                 </p>
             </div>
-            <div class="w-12 h-12 rounded-2xl bg-[#007BFF]/10 text-[#007BFF] flex items-center justify-center text-xl font-bold">
+            <div class="w-12 h-12 rounded-2xl bg-[#055BE8]/10 text-[#055BE8] flex items-center justify-center text-xl font-bold">
                 💼
             </div>
         </div>
@@ -27,7 +27,7 @@
                 <h3 class="text-3xl font-black text-slate-900 dark:text-white mt-1">{{ $totalServices }}</h3>
                 <p class="text-[11px] text-slate-400 font-semibold mt-1">10 Dev + 7 Design</p>
             </div>
-            <div class="w-12 h-12 rounded-2xl bg-[#00D2FF]/10 text-[#00D2FF] flex items-center justify-center text-xl font-bold">
+            <div class="w-12 h-12 rounded-2xl bg-[#2FD5E9]/10 text-[#2FD5E9] flex items-center justify-center text-xl font-bold">
                 🛠️
             </div>
         </div>
@@ -36,9 +36,9 @@
             <div>
                 <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Case Studies</p>
                 <h3 class="text-3xl font-black text-slate-900 dark:text-white mt-1">{{ $totalProjects }}</h3>
-                <p class="text-[11px] text-[#00D2FF] font-semibold mt-1">Live in Portfolio</p>
+                <p class="text-[11px] text-[#2FD5E9] font-semibold mt-1">Live in Portfolio</p>
             </div>
-            <div class="w-12 h-12 rounded-2xl bg-[#007BFF]/10 text-[#007BFF] flex items-center justify-center text-xl font-bold">
+            <div class="w-12 h-12 rounded-2xl bg-[#055BE8]/10 text-[#055BE8] flex items-center justify-center text-xl font-bold">
                 🚀
             </div>
         </div>
@@ -62,7 +62,7 @@
                 <h2 class="text-lg font-bold text-slate-900 dark:text-white">Lead Management Pipeline (Mini CRM)</h2>
                 <p class="text-xs text-slate-500 dark:text-slate-400">Current distribution of project inquiries across pipeline stages.</p>
             </div>
-            <a href="{{ route('admin.leads.index') }}" class="text-xs font-bold text-[#007BFF] hover:underline">
+            <a href="{{ route('admin.leads.index') }}" class="text-xs font-bold text-[#055BE8] hover:underline">
                 Manage All Leads →
             </a>
         </div>
@@ -73,8 +73,8 @@
                 <p class="text-2xl font-black text-slate-900 dark:text-white mt-1">{{ $leadsByStatus['new'] }}</p>
             </a>
 
-            <a href="{{ route('admin.leads.index', ['status' => 'contacted']) }}" class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 hover:border-[#007BFF] transition-colors">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#007BFF]">Contacted</span>
+            <a href="{{ route('admin.leads.index', ['status' => 'contacted']) }}" class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 hover:border-[#055BE8] transition-colors">
+                <span class="text-xs font-bold uppercase tracking-wider text-[#055BE8]">Contacted</span>
                 <p class="text-2xl font-black text-slate-900 dark:text-white mt-1">{{ $leadsByStatus['contacted'] }}</p>
             </a>
 
@@ -83,8 +83,8 @@
                 <p class="text-2xl font-black text-slate-900 dark:text-white mt-1">{{ $leadsByStatus['discussion'] }}</p>
             </a>
 
-            <a href="{{ route('admin.leads.index', ['status' => 'proposal']) }}" class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 hover:border-[#00D2FF] transition-colors">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#00D2FF]">Proposal</span>
+            <a href="{{ route('admin.leads.index', ['status' => 'proposal']) }}" class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 hover:border-[#2FD5E9] transition-colors">
+                <span class="text-xs font-bold uppercase tracking-wider text-[#2FD5E9]">Proposal</span>
                 <p class="text-2xl font-black text-slate-900 dark:text-white mt-1">{{ $leadsByStatus['proposal'] }}</p>
             </a>
 
@@ -106,7 +106,7 @@
         <div class="lg:col-span-8 p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0d111a] border border-slate-200 dark:border-white/10 shadow-sm space-y-6">
             <div class="flex items-center justify-between">
                 <h2 class="text-lg font-bold text-slate-900 dark:text-white">Recent Inquiries</h2>
-                <a href="{{ route('admin.leads.index') }}" class="text-xs font-bold text-[#007BFF] hover:underline">View All Leads →</a>
+                <a href="{{ route('admin.leads.index') }}" class="text-xs font-bold text-[#055BE8] hover:underline">View All Leads →</a>
             </div>
 
             <div class="overflow-x-auto">
@@ -136,16 +136,16 @@
                             <td class="py-3.5 pr-4">
                                 <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider
                                     @if($lead->status === 'new') bg-emerald-500/10 text-emerald-400 border border-emerald-500/20
-                                    @elseif($lead->status === 'contacted') bg-[#007BFF]/10 text-[#007BFF] border border-[#007BFF]/20
+                                    @elseif($lead->status === 'contacted') bg-[#055BE8]/10 text-[#055BE8] border border-[#055BE8]/20
                                     @elseif($lead->status === 'discussion') bg-amber-500/10 text-amber-400 border border-amber-500/20
-                                    @elseif($lead->status === 'proposal') bg-[#00D2FF]/10 text-[#00D2FF] border border-[#00D2FF]/20
+                                    @elseif($lead->status === 'proposal') bg-[#2FD5E9]/10 text-[#2FD5E9] border border-[#2FD5E9]/20
                                     @elseif($lead->status === 'won') bg-green-500/10 text-green-400 border border-green-500/20
                                     @else bg-slate-500/10 text-slate-400 border border-slate-500/20 @endif">
                                     {{ $lead->status }}
                                 </span>
                             </td>
                             <td class="py-3.5 text-right">
-                                <a href="{{ route('admin.leads.show', $lead->id) }}" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-[#007BFF] hover:bg-[#007BFF] hover:text-white font-bold transition-colors">
+                                <a href="{{ route('admin.leads.show', $lead->id) }}" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-[#055BE8] hover:bg-[#055BE8] hover:text-white font-bold transition-colors">
                                     Details →
                                 </a>
                             </td>
@@ -165,19 +165,19 @@
             <div class="p-6 rounded-3xl bg-white dark:bg-[#0d111a] border border-slate-200 dark:border-white/10 shadow-sm space-y-4">
                 <h3 class="text-base font-bold text-slate-900 dark:text-white">Quick CMS Actions</h3>
                 <div class="space-y-2">
-                    <a href="{{ route('admin.blogs.create') }}" class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 hover:bg-[#007BFF]/10 hover:text-[#007BFF] text-xs font-bold transition-colors">
+                    <a href="{{ route('admin.blogs.create') }}" class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 hover:bg-[#055BE8]/10 hover:text-[#055BE8] text-xs font-bold transition-colors">
                         <span>✍️ Write New Blog Post</span>
                         <span>+</span>
                     </a>
-                    <a href="{{ route('admin.projects.create') }}" class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 hover:bg-[#007BFF]/10 hover:text-[#007BFF] text-xs font-bold transition-colors">
+                    <a href="{{ route('admin.projects.create') }}" class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 hover:bg-[#055BE8]/10 hover:text-[#055BE8] text-xs font-bold transition-colors">
                         <span>🚀 Add Portfolio Project</span>
                         <span>+</span>
                     </a>
-                    <a href="{{ route('admin.testimonials.create') }}" class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 hover:bg-[#007BFF]/10 hover:text-[#007BFF] text-xs font-bold transition-colors">
+                    <a href="{{ route('admin.testimonials.create') }}" class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 hover:bg-[#055BE8]/10 hover:text-[#055BE8] text-xs font-bold transition-colors">
                         <span>⭐ Add Client Review</span>
                         <span>+</span>
                     </a>
-                    <a href="{{ route('admin.services.create') }}" class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 hover:bg-[#007BFF]/10 hover:text-[#007BFF] text-xs font-bold transition-colors">
+                    <a href="{{ route('admin.services.create') }}" class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 hover:bg-[#055BE8]/10 hover:text-[#055BE8] text-xs font-bold transition-colors">
                         <span>🛠️ Add New Service</span>
                         <span>+</span>
                     </a>

@@ -1,672 +1,684 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>About — {{ setting('site_name', 'ZaroSoft') }}</title>
+<meta name="description" content="We help teams simplify complex workflows, reduce manual work, and build structured systems that scale — without adding unnecessary tools or noise.">
+<link rel="canonical" href="{{ url()->current() }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{{ setting('site_name', 'ZaroSoft') }}">
+<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:title" content="About — {{ setting('site_name', 'ZaroSoft') }}">
+<meta property="og:description" content="We help teams simplify complex workflows, reduce manual work, and build structured systems that scale — without adding unnecessary tools or noise.">
+<meta property="og:image" content="{{ asset('images/zarosoft-og.jpg') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{{-- Manrope for the page; JetBrains Mono for the team section's code-style labels --}}
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+{{-- The team section is the site's Tailwind markup, so the page loads the app build too --}}
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+<x-structured-data :graph="$structuredData ?? []" />
+<style>
+/* ===========================================================
+   DESIGN TOKENS
+   =========================================================== */
+:root{
+  --page:#fff;
+  --surface:#e8f1fd;
+  --dark:#061233;
+  --white:#fff;
+  --text-body:#566178;
+  --text-heading:#061233;
+  --on-dark:#f3f7ff;
+  --on-dark-muted:#bcc7da;
+  --primary:#055be8;
+  --primary-hover:#0449c2;
+  --footer-heading:#2c3650;
+  --footer-text:#46506a;
+  --border-default:#e1ebf8;
+  --border-strong:#d3e1f3;
 
-@section('title', 'About ZaroSoft — Enterprise Software Engineering & Leadership')
-@section('meta_description', 'Learn about ZaroSoft, our engineering mission to automate enterprise workflows, our leadership team, and the core ZARO philosophy.')
+  --h1:56px;
+  --h2:40px;
+  --h3:32px;
+  --h4:24px;
+  --h5:20px;
+  --body:20px;
+  --big-body:24px;
+  --small-body:16px;
+  --button-text:20px;
 
-@section('content')
-    <!-- Header Hero -->
-    <section class="relative overflow-hidden py-16 sm:py-20 bg-[#F8FAFC] border-b border-slate-200/80 text-center">
-        <!-- Ambient Tech Glows & Grid Pattern -->
-        <div class="absolute inset-0 bg-tech-grid pointer-events-none opacity-70"></div>
-        <div
-            class="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-[#007BFF]/10 rounded-full blur-[130px] pointer-events-none -z-10 animate-pulse-glow">
+  --space-xs:8px;
+  --space-12:12px;
+  --space-sm:16px;
+  --space-20:20px;
+  --space-md:24px;
+  --space-lg:32px;
+  --space-40:40px;
+  --space-xl:48px;
+  --space-2xl:64px;
+  --space-3xl:80px;
+  --section-padding:96px;
+  --section-padding-h:60px;
+  --hero-padding-top:196px;
+  --max-width:1400px;
+
+  --r-2xl:24px;
+  --r-3xl:32px;
+  --r-4xl:40px;
+  --r-50:50px;
+  --r-full:999px;
+}
+
+/* ===========================================================
+   BASE
+   Element rules live in the base layer so the Tailwind utilities
+   in the team section still win over them.
+   =========================================================== */
+@layer base{
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0;
+    background-color:var(--page);
+    color:var(--text-body);
+    font-family:'Manrope',sans-serif;
+    font-size:var(--body);
+    font-weight:400;
+    line-height:1.2em;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;border:0}
+  a{color:inherit;text-decoration:none}
+
+  h1,h2,h3,h4{margin:0 0 var(--space-xs);color:var(--text-heading);font-weight:400}
+  h1{font-size:var(--h1);letter-spacing:-1.92px;line-height:1.1em}
+  h2{font-size:var(--h2);letter-spacing:-1.4px;line-height:1.1em}
+  h3{font-size:var(--h3);letter-spacing:-.96px;line-height:1.2em;margin-bottom:4px}
+  p{margin:0 0 10px;font-size:var(--big-body);line-height:1.2em}
+
+  /* inside the team section, fall back to Tailwind's own reset */
+  .team-block :where(h1,h2,h3,h4,p){margin:0;font-size:inherit;font-weight:inherit;line-height:inherit;letter-spacing:normal;color:inherit}
+}
+/* app.css styles body outside any layer, so these three must be unlayered to win */
+body{background-color:var(--page);color:var(--text-body);font-family:'Manrope',sans-serif}
+.no-margin{margin-top:0;margin-bottom:0}
+
+/* the team section keeps the site's own type, as on the old About page */
+.team-block{
+  font-family:'Manrope',ui-sans-serif,system-ui,sans-serif;
+  font-size:16px;font-weight:400;line-height:1.5;color:#111827;
+}
+
+.section{padding:var(--section-padding) var(--section-padding-h);overflow:hidden}
+.container{width:100%;max-width:var(--max-width);margin-left:auto;margin-right:auto}
+
+.section-label{
+  display:inline-flex;
+  margin-bottom:var(--space-12);
+  padding:6px 12px;
+  border:1.5px solid var(--text-body);
+  border-radius:var(--r-50);
+  color:var(--text-body);
+  font-size:var(--small-body);font-weight:400;line-height:120%;
+}
+.cs-tag{
+  display:inline-flex;
+  margin-bottom:0;
+  padding:var(--space-xs) var(--space-sm);
+  border-radius:100px;
+  background-color:var(--primary);
+  color:var(--on-dark);
+  font-size:var(--small-body);font-weight:500;line-height:120%;
+}
+.text-small{font-size:var(--body);margin-bottom:0}
+
+/* ===========================================================
+   BUTTONS
+   =========================================================== */
+.button-primary{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:var(--space-20) var(--space-md);
+  border-radius:var(--r-50);
+  background-color:var(--primary);
+  color:var(--on-dark);
+  font-size:var(--button-text);font-weight:500;
+  transition:background-color .2s ease-in-out,transform .2s ease-in-out;
+}
+.button-primary:hover{background-color:var(--primary-hover);transform:scale(1.02)}
+
+/* ===========================================================
+   NAVBAR — light variant, sits over the hero
+   =========================================================== */
+.navbar{
+  position:absolute;inset:0 0 auto;z-index:9;
+  width:100%;margin-top:46px;
+  padding:0 var(--section-padding-h);
+}
+.navbar-row{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;max-width:var(--max-width);margin-inline:auto;
+}
+.logo{display:flex;align-items:center}
+.logo img{width:auto;height:55px}
+.footer-logo{width:auto;height:55px}
+.footer-left .footer-logo{width:auto;height:70px}
+.nav-links{
+  display:inline-flex;align-items:center;gap:var(--space-sm);
+  padding:var(--space-xs);
+  border-radius:30px;
+  background-color:var(--surface);
+}
+.nav-link{
+  padding:var(--space-12) var(--space-20);
+  border-radius:30px;
+  color:var(--text-heading);
+  font-size:var(--small-body);font-weight:500;line-height:120%;
+  white-space:nowrap;
+  transition:background-color .2s ease-in-out;
+}
+.nav-link:hover{background-color:rgba(255,255,255,.55)}
+.nav-link.is-current{background-color:#fff}
+.nav-contact-button{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:var(--space-12) 21px;
+  border-radius:var(--r-50);
+  background-color:var(--text-heading);
+  color:var(--white);
+  font-size:var(--small-body);font-weight:500;line-height:1.2;
+  white-space:nowrap;
+  transition:background-color .2s ease-in-out;
+}
+.nav-contact-button:hover{background-color:#0b2257}
+.menu-button{display:none;padding:12px;background:none;border:0;cursor:pointer}
+.menu-button img{width:24px;height:24px}
+.nav-mobile{
+  position:absolute;top:80px;left:var(--section-padding-h);right:var(--section-padding-h);
+  flex-direction:column;gap:4px;
+  padding:var(--space-md);
+  border-radius:var(--r-2xl);
+  background:#fff;
+  box-shadow:0 30px 70px -30px rgba(6,18,51,.35);
+  display:none;
+}
+.nav-mobile.is-open{display:flex}
+.nav-mobile a{padding:10px 12px;border-radius:12px;font-size:var(--small-body);color:var(--text-heading)}
+.nav-mobile a:hover{background:var(--surface)}
+
+/* ===========================================================
+   1. HERO
+   =========================================================== */
+.section-hero{padding-top:var(--hero-padding-top)}
+.about-hero-head{
+  margin:0 auto var(--space-2xl);
+  text-align:center;
+}
+.about-hero-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  grid-template-rows:auto;
+  place-items:center stretch;
+  gap:var(--space-20);
+}
+.about-quote-card{
+  display:flex;flex-direction:column;justify-content:space-between;
+  min-height:500px;
+  padding:var(--space-40) var(--space-md);
+  border-radius:var(--r-4xl);
+  background-color:var(--dark);
+  text-align:left;
+}
+.about-quote-text{
+  margin-bottom:0;
+  color:var(--white);
+  font-size:var(--h3);font-weight:400;line-height:120%;letter-spacing:-.96px;
+}
+.about-quote-author{display:flex;align-items:center;gap:var(--space-md)}
+.about-quote-avatar{flex-shrink:0;width:64px;height:64px;border-radius:50%;object-fit:cover}
+.about-author-name{margin-bottom:0;color:var(--on-dark);font-size:var(--big-body);font-weight:400;line-height:120%}
+.about-author-role{margin-bottom:0;font-size:var(--small-body)}
+.about-hero-image{width:100%;height:530px;border-radius:var(--r-4xl);object-fit:cover}
+.about-stat-card{
+  display:flex;flex-direction:column;justify-content:space-between;
+  min-height:500px;
+  padding:var(--space-40) var(--space-md);
+  border-radius:var(--r-4xl);
+  background-color:var(--surface);
+  text-align:left;
+}
+.about-stat-big-number{
+  margin:0;
+  color:var(--primary);
+  font-size:120px;font-weight:400;line-height:110%;letter-spacing:-3.6px;
+}
+.about-stat-card-text{margin-bottom:0;color:var(--text-heading);font-size:var(--big-body);font-weight:400}
+
+/* ===========================================================
+   2. OUR PHILOSOPHY
+   =========================================================== */
+.about-philosophy-text{margin-bottom:var(--space-xs)}
+.about-stats-flex{
+  display:flex;
+  gap:var(--space-20);
+  margin-top:var(--space-40);
+}
+.about-stat-inline{
+  display:flex;align-items:center;flex:1;
+  gap:var(--space-md);
+  padding:var(--space-40) var(--space-md);
+  border-radius:var(--r-4xl);
+  background-color:var(--surface);
+}
+.cs-cms-stat-number{
+  margin:0;
+  color:var(--text-heading);
+  font-size:var(--h1);font-weight:400;line-height:110%;letter-spacing:-1.44px;
+}
+
+/* ===========================================================
+   4. PRINCIPLES
+   =========================================================== */
+.about-principles-layout{
+  display:flex;align-items:stretch;
+  gap:var(--space-20);
+  padding:var(--space-sm);
+  border-radius:var(--r-4xl);
+  background-color:var(--surface);
+}
+.about-principles-left{
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;
+  max-width:450px;
+  padding:56px var(--space-40);
+  border-radius:var(--r-3xl);
+  background-image:radial-gradient(90% 120% at 92% 8%,rgba(47,213,233,.55) 0%,rgba(47,213,233,0) 55%),radial-gradient(80% 120% at 8% 100%,rgba(5,91,232,.65) 0%,rgba(5,91,232,0) 60%),linear-gradient(115deg,#040c26 0%,#08184a 45%,#0a3a9a 100%);
+  background-position:50%;
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+.about-principles-heading{margin-bottom:0;color:var(--on-dark)}
+.about-principles-right{
+  display:flex;flex-direction:column;flex:1;justify-content:center;
+  gap:var(--space-40);
+  padding:var(--space-40) var(--space-md);
+}
+.about-principle-item{display:flex;flex-direction:column;gap:4px}
+
+/* ===========================================================
+   5. TESTIMONIALS — two marquee rows
+   =========================================================== */
+.about-testimonials-header{margin-bottom:var(--space-40)}
+.marquee-container{
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  gap:var(--space-20);
+  width:calc(100% + 80px);
+  margin:var(--space-2xl) -40px 0;
+  overflow:hidden;
+}
+.marquee-track,.marquee-track-reverse{
+  display:flex;flex-flow:row;align-items:stretch;justify-content:flex-start;
+  width:max-content;
+}
+.marquee-track{animation:marqueeLeft 60s linear infinite}
+.marquee-track-reverse{animation:marqueeRight 60s linear infinite}
+.marquee-track:hover,.marquee-track-reverse:hover{animation-play-state:paused}
+/* Each row holds its cards twice, so translating half the width loops seamlessly. */
+@keyframes marqueeLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes marqueeRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+
+.about-testimonial-card{
+  display:flex;flex-direction:column;flex-shrink:0;
+  align-items:flex-start;justify-content:space-between;
+  gap:var(--space-3xl);
+  margin-right:var(--space-20);
+  padding:var(--space-40) var(--space-md);
+  border-radius:var(--r-4xl);
+  background-color:var(--surface);
+}
+.about-testimonial-card.card-w-410{max-width:450px}
+.about-testimonial-card.card-w-460{max-width:460px}
+.about-testimonial-card.card-w-510{max-width:510px}
+.about-testimonial-card.card-w-540{max-width:540px}
+.testimonial-quote{margin-bottom:0;color:var(--text-heading)}
+.about-testimonial-author{display:flex;align-items:center;gap:var(--space-sm)}
+.testimonial-avatar{flex-shrink:0;width:48px;height:48px;border-radius:var(--r-full);object-fit:cover}
+.testimonial-name{margin-bottom:0;color:var(--text-heading)}
+.testimonial-role{margin-bottom:0;color:var(--text-body);font-size:var(--body)}
+
+/* ===========================================================
+   6. CTA
+   =========================================================== */
+.cta-section{padding:var(--space-3xl) var(--section-padding-h);text-align:center}
+.cta-content{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:460px;
+  padding:var(--space-40) var(--space-md);
+  border-radius:var(--r-2xl);
+  text-align:center;
+  background-image:radial-gradient(90% 120% at 92% 8%,rgba(47,213,233,.55) 0%,rgba(47,213,233,0) 55%),radial-gradient(80% 120% at 8% 100%,rgba(5,91,232,.65) 0%,rgba(5,91,232,0) 60%),linear-gradient(115deg,#040c26 0%,#08184a 45%,#0a3a9a 100%);
+  background-position:50%;
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+.cta-heading{color:var(--on-dark);line-height:110%}
+.cta-subtitle{max-width:870px;margin-bottom:var(--space-md);color:var(--on-dark-muted)}
+
+/* ===========================================================
+   7. FOOTER
+   =========================================================== */
+.footer-section{padding:var(--space-xl) var(--section-padding-h);background-color:var(--surface)}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-40);max-width:var(--max-width);margin:0 auto}
+.footer-left{display:flex;flex-direction:column;gap:var(--space-sm);max-width:300px}
+.footer-contact-list,.footer-link-list{display:flex;flex-direction:column;gap:var(--space-12)}
+.footer-link-list{gap:6px}
+.footer-contact-item{display:flex;align-items:center;gap:var(--space-xs)}
+.footer-contact-text{margin:0;color:var(--footer-heading);font-size:var(--small-body);font-weight:400;line-height:120%}
+.footer-social{display:flex;align-items:center;gap:var(--space-20);margin-top:var(--space-sm)}
+.footer-social-link{width:24px;height:24px;transition:opacity .2s}
+.footer-social-link:hover{opacity:.65}
+/* link columns join the footer row directly, so logo + 3 columns spread evenly edge to edge */
+.footer-links-grid{display:contents}
+.footer-link-column{display:flex;flex-direction:column;gap:var(--space-sm)}
+.footer-column-title{margin:0;color:var(--footer-heading);font-size:var(--h5);font-weight:400}
+.footer-link{display:block;color:var(--footer-text);font-size:var(--small-body);transition:color .2s}
+.footer-link:hover{color:var(--text-heading)}
+.footer-bottom{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--space-sm);
+  max-width:var(--max-width);margin:var(--space-xl) auto 0;
+  padding-top:var(--space-lg);
+  border-top:1px solid var(--border-strong);
+}
+.footer-powered{margin:0;color:var(--footer-text);font-size:14px;font-weight:400;line-height:120%}
+
+/* ===========================================================
+   ENTRANCE ANIMATIONS
+   =========================================================== */
+.anim-fade-up,.anim-fade-up-2,.anim-fade-up-3,.anim-img-fade-in{
+  opacity:0;transform:translateY(40px);
+  transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1);
+}
+.anim-fade-up-2{transition-delay:.12s}
+.anim-fade-up-3{transition-delay:.24s}
+.is-in{opacity:1;transform:none}
+
+.anim-children-fade-in > *{
+  opacity:0;transform:translateY(40px);
+  transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1);
+}
+.anim-children-fade-in.is-in > *{opacity:1;transform:none}
+.anim-children-fade-in.is-in > *:nth-child(2){transition-delay:.1s}
+.anim-children-fade-in.is-in > *:nth-child(3){transition-delay:.2s}
+.anim-children-fade-in.is-in > *:nth-child(4){transition-delay:.3s}
+
+.anim-hero-fade-up-in,.anim-hero-fade-up-in-2,.anim-hero-fade-up-in-3{
+  opacity:0;transform:translateY(40px);
+  animation:heroUp 1s cubic-bezier(.22,.61,.36,1) forwards;
+}
+.anim-hero-fade-up-in-2{animation-delay:.15s}
+.anim-hero-fade-up-in-3{animation-delay:.3s}
+@keyframes heroUp{to{opacity:1;transform:translateY(0)}}
+
+/* ===========================================================
+   TABLET — 991px
+   =========================================================== */
+@media screen and (max-width:991px){
+  :root{
+    --h1:44px;--h2:34px;--h3:26px;--big-body:20px;--body:18px;--button-text:18px;
+    --section-padding:72px;--section-padding-h:32px;--hero-padding-top:150px;
+  }
+  .nav-links,.nav-contact-button{display:none}
+  .menu-button{display:block}
+
+  .about-hero-grid{grid-template-columns:1fr 1fr}
+  .about-hero-image{display:none}
+  .about-quote-card,.about-stat-card{min-height:320px}
+  .about-stat-big-number{font-size:84px;letter-spacing:-2.4px}
+
+  .about-stats-flex{flex-flow:wrap}
+  .about-stat-inline{
+    flex-flow:column;align-items:flex-start;justify-content:flex-start;
+    flex:1 1 240px;
+  }
+
+  .about-principles-layout{flex-flow:wrap}
+  .about-principles-left{
+    flex:0 auto;width:100%;max-width:none;
+    gap:var(--space-2xl);
+  }
+  .about-principles-right{padding-inline:var(--space-sm)}
+
+  .marquee-container{width:calc(100% + 64px);margin-inline:-32px}
+  .footer-top{flex-flow:wrap;gap:var(--space-2xl)}
+  .footer-links-grid{flex-wrap:wrap;gap:var(--space-2xl)}
+}
+
+/* ===========================================================
+   MOBILE — 767 / 479
+   =========================================================== */
+@media screen and (max-width:767px){
+  :root{--h1:38px;--h2:30px;--h3:24px;--section-padding:56px;--section-padding-h:20px;--hero-padding-top:130px}
+  h1{letter-spacing:-1px;line-height:1.08em}
+  .navbar{margin-top:24px;padding:0 20px}
+  .nav-mobile{left:20px;right:20px}
+  .logo img{height:40px}
+  .footer-logo{height:26px}
+  .about-hero-grid{grid-template-columns:1fr}
+  .cta-content{min-height:380px}
+  .about-testimonial-card{max-width:320px!important}
+}
+@media screen and (max-width:479px){
+  :root{--h1:32px;--h2:26px;--h3:22px;--body:16px;--big-body:18px;--button-text:16px}
+  .button-primary{width:100%}
+  .about-stat-big-number{font-size:64px;letter-spacing:-1.6px}
+  .footer-links-grid{gap:var(--space-lg)}
+  .footer-link-column{min-width:44%}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .anim-fade-up,.anim-fade-up-2,.anim-fade-up-3,.anim-img-fade-in,
+  .anim-children-fade-in > *{opacity:1!important;transform:none!important}
+  .marquee-track,.marquee-track-reverse{animation:none!important}
+}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:8px}
+
+/* Manrope: headings 700 site-wide. !important because several template
+   selectors (e.g. ".hero h1") set lighter weights with higher specificity. */
+h1,h2,h3,h4,h5,h6{font-weight:700!important}
+</style>
+</head>
+<body>
+
+@php
+  $cardWidths = ['card-w-540', 'card-w-460', 'card-w-510', 'card-w-410'];
+  // The second marquee row runs the same clients in reverse so the rows differ.
+  $marqueeRows = [
+    'marquee-track' => $testimonials,
+    'marquee-track-reverse' => $testimonials->reverse()->values(),
+  ];
+@endphp
+
+<!-- ======================= NAVBAR ======================= -->
+@include('partials.site-navbar-light')
+
+<!-- ======================= HERO ======================= -->
+<section class="section section-hero">
+  <div class="container">
+    <div class="about-hero-head">
+      <h1 class="anim-hero-fade-up-in">Automation, Designed Around Real Operations</h1>
+      <p class="anim-hero-fade-up-in-2">We help teams simplify complex workflows, reduce manual work, and build structured systems that scale — without adding unnecessary tools or noise.</p>
+    </div>
+
+    <div class="about-hero-grid">
+      <div class="about-quote-card">
+        <p class="about-quote-text">“Not every workflow should be automated. The real impact comes from knowing which ones should.”</p>
+        @if($founder)
+        <div class="about-quote-author">
+          @if($founder->avatar_url)
+          <img src="{{ $founder->avatar_url }}" loading="lazy" alt="{{ $founder->name }}" class="about-quote-avatar">
+          @endif
+          <div>
+            <p class="about-author-name">{{ $founder->name }}</p>
+            <p class="about-author-role">{{ $founder->designation }}</p>
+          </div>
         </div>
-        <div class="absolute bottom-10 left-10 w-[450px] h-[450px] bg-[#00D2FF]/15 rounded-full blur-[110px] pointer-events-none -z-10 animate-pulse-glow"
-            style="animation-delay: 2s;"></div>
+        @endif
+      </div>
 
-        <!-- ==================== 10 DECORATIVE SOFTWARE TECH SHAPES (HERO AREA) ==================== -->
+      <img src="https://cdn.prod.website-files.com/69976e6486f35ebce739573f/69acb1978016b691acad0d72_hero-about.webp"
+           loading="eager" alt="About hero" class="about-hero-image">
 
+      <div class="about-stat-card">
+        <h2 class="about-stat-big-number">100+</h2>
+        <p class="about-stat-card-text">Workflows analyzed across client engagements</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ======================= OUR PHILOSOPHY ======================= -->
+<section class="section">
+  <div class="container">
+    <p class="section-label">Our Philosophy</p>
+    <h2 class="anim-fade-up-2">Automation Should Be Intentional</h2>
+    <p class="about-philosophy-text anim-fade-up-3">Most teams don’t lack tools — they lack structure. Instead of automating everything, we focus on identifying where automation creates measurable leverage. </p>
 
+    <div class="about-stats-flex anim-children-fade-in">
+      <div class="about-stat-inline">
+        <div class="cs-cms-stat-number">95%</div>
+        <p class="text-small">Client <br>satisfaction</p>
+      </div>
+      <div class="about-stat-inline">
+        <div class="cs-cms-stat-number">&gt;40%</div>
+        <p class="text-small">Average reduction in repetitive manual work</p>
+      </div>
+      <div class="about-stat-inline">
+        <div class="cs-cms-stat-number">4x</div>
+        <p class="text-small">Increase in cross-team process visibility</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ======================= TEAM (unchanged from the previous About page) ======================= -->
+<div class="team-block">
+  @include('about.partials.team')
+</div>
 
+<!-- ======================= PRINCIPLES ======================= -->
+<section class="section">
+  <div class="container">
+    <div class="about-principles-layout">
+      <div class="about-principles-left">
+        <p class="cs-tag">Principles</p>
+        <h2 class="about-principles-heading anim-fade-up-2">What Actually Makes the Difference</h2>
+      </div>
 
-
-
-
-
-
-
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6 reveal">
-            <div
-                class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#007BFF]/10 border border-[#007BFF]/25 text-xs font-bold uppercase tracking-[0.18em] text-[#007BFF] font-heading">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                ABOUT ZAROSOFT
-            </div>
-            <h1
-                class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#0F172A] leading-tight font-heading">
-                Engineering Technology That <br />
-                <span
-                    class="text-transparent bg-clip-text bg-gradient-to-r from-[#007BFF] via-[#00A3FF] to-[#00D2FF]">Eliminates
-                    Complexity.</span>
-            </h1>
-            <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto">
-                ZaroSoft was founded by software engineers and technical architects on a single principle: ambitious
-                companies shouldn't be constrained by slow, fragmented legacy tools.
-            </p>
-            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
-                <a href="#team"
-                    class="px-8 py-4 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#0062cc] hover:from-[#0062cc] hover:to-[#004bb5] text-white font-bold text-sm shadow-xl shadow-[#007BFF]/25 hover:shadow-[#007BFF]/40 hover:-translate-y-0.5 transition-all">
-                    Meet Leadership Team ↓
-                </a>
-                <a href="{{ route('contact.index') }}"
-                    class="px-8 py-4 rounded-xl bg-white hover:bg-slate-50 text-[#0F172A] font-bold text-sm border border-slate-200 hover:border-[#007BFF]/50 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
-                    Start a Conversation →
-                </a>
-            </div>
+      <div class="about-principles-right anim-children-fade-in">
+        <div class="about-principle-item">
+          <h3 class="no-margin">We reduce complexity, not increase it</h3>
+          <p class="text-small">If a solution adds operational burden, it’s not a solution.</p>
         </div>
-    </section>
-
-    <!-- Mission & Vision Cards -->
-    <section class="py-24 bg-white border-b border-slate-200/80 relative overflow-hidden">
-
-
-
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Mission -->
-                <div
-                    class="p-8 sm:p-10 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 hover:border-[#007BFF]/50 shadow-sm hover:shadow-xl hover:shadow-[#007BFF]/10 transition-all duration-300 space-y-4 group spotlight-card reveal-left">
-                    <div
-                        class="w-12 h-12 rounded-xl bg-[#007BFF]/10 text-[#007BFF] flex items-center justify-center border border-[#007BFF]/20 group-hover:scale-105 transition-transform">
-                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                    </div>
-                    <h2 class="text-2xl font-bold text-[#0F172A] font-heading group-hover:text-[#007BFF] transition-colors">
-                        Our Mission</h2>
-                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
-                        To build intelligent, reliable, and high-concurrency technology solutions that automate operations,
-                        eliminate manual bottlenecks, and unlock scalable growth for ambitious businesses globally.
-                    </p>
-                </div>
-
-                <!-- Vision -->
-                <div
-                    class="p-8 sm:p-10 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 hover:border-[#007BFF]/50 shadow-sm hover:shadow-xl hover:shadow-[#007BFF]/10 transition-all duration-300 space-y-4 group spotlight-card reveal-right">
-                    <div
-                        class="w-12 h-12 rounded-xl bg-[#00D2FF]/15 text-[#007BFF] flex items-center justify-center border border-[#00D2FF]/30 group-hover:scale-105 transition-transform">
-                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                        </svg>
-                    </div>
-                    <h2 class="text-2xl font-bold text-[#0F172A] font-heading group-hover:text-[#007BFF] transition-colors">
-                        Our Vision</h2>
-                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
-                        To be the premier trusted global software engineering and business automation partner recognized for
-                        pristine code quality, rock-solid 99.9% reliability, and measurable client ROI.
-                    </p>
-                </div>
-            </div>
+        <div class="about-principle-item">
+          <h3 class="no-margin">We think beyond launch</h3>
+          <p class="text-small">Every system is built for long-term maintainability.</p>
         </div>
-    </section>
-
-    <!-- The ZARO Philosophy -->
-    <section class="py-24 bg-[#F8FAFC] border-b border-slate-200/80 relative overflow-hidden">
-
-
-
-
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16 reveal">
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#007BFF]/10 border border-[#007BFF]/25 text-xs font-bold uppercase tracking-[0.18em] text-[#007BFF] font-heading">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#007BFF] animate-pulse"></span>
-                    CORE BRAND PILLARS
-                </div>
-                <h2 class="text-3xl sm:text-4xl font-black text-[#0F172A] font-heading">
-                    The <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#007BFF] to-[#00D2FF]">ZARO</span>
-                    Engineering Principles
-                </h2>
-                <p class="text-slate-600 text-sm sm:text-base">
-                    Each letter in our brand represents an uncompromising standard in how we architect, test, and deliver
-                    code.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="p-7 rounded-2xl bg-white border border-slate-200/80 hover:border-[#007BFF]/50 shadow-sm hover:shadow-xl hover:shadow-[#007BFF]/10 transition-all duration-300 hover:-translate-y-1 space-y-3 spotlight-card reveal"
-                    data-delay="0">
-                    <span class="text-3xl font-black text-[#007BFF] font-mono">01 / Z</span>
-                    <h3 class="text-lg font-bold text-[#0F172A]">Zenith Quality</h3>
-                    <p class="text-xs font-bold text-[#007BFF] font-mono">Pristine Architecture</p>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        We adhere to the highest international standards of code craftsmanship, continuous automated
-                        testing, and zero technical debt.
-                    </p>
-                </div>
-
-                <div class="p-7 rounded-2xl bg-white border border-slate-200/80 hover:border-[#007BFF]/50 shadow-sm hover:shadow-xl hover:shadow-[#007BFF]/10 transition-all duration-300 hover:-translate-y-1 space-y-3 spotlight-card reveal"
-                    data-delay="100">
-                    <span class="text-3xl font-black text-[#00D2FF] font-mono">02 / A</span>
-                    <h3 class="text-lg font-bold text-[#0F172A]">Automation</h3>
-                    <p class="text-xs font-bold text-[#007BFF] font-mono">Streamlined Operations</p>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        We eliminate error-prone manual spreadsheets and disconnected silos by engineering unified,
-                        end-to-end automated pipelines.
-                    </p>
-                </div>
-
-                <div class="p-7 rounded-2xl bg-white border border-slate-200/80 hover:border-[#007BFF]/50 shadow-sm hover:shadow-xl hover:shadow-[#007BFF]/10 transition-all duration-300 hover:-translate-y-1 space-y-3 spotlight-card reveal"
-                    data-delay="200">
-                    <span class="text-3xl font-black text-[#007BFF] font-mono">03 / R</span>
-                    <h3 class="text-lg font-bold text-[#0F172A]">Reliability</h3>
-                    <p class="text-xs font-bold text-[#007BFF] font-mono">99.9% Uptime Guarantee</p>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        No downtime surprises. We engineer resilient systems backed by containerized cloud environments and
-                        automated backup snapshots.
-                    </p>
-                </div>
-
-                <div class="p-7 rounded-2xl bg-white border border-slate-200/80 hover:border-[#007BFF]/50 shadow-sm hover:shadow-xl hover:shadow-[#007BFF]/10 transition-all duration-300 hover:-translate-y-1 space-y-3 spotlight-card reveal"
-                    data-delay="300">
-                    <span class="text-3xl font-black text-[#00D2FF] font-mono">04 / O</span>
-                    <h3 class="text-lg font-bold text-[#0F172A]">Optimization</h3>
-                    <p class="text-xs font-bold text-[#007BFF] font-mono">Speed & Scalable ROI</p>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        We optimize for sub-second database query execution, efficient server scaling, and measurable
-                        financial return on investment.
-                    </p>
-                </div>
-            </div>
+        <div class="about-principle-item">
+          <h3 class="no-margin">We don’t automate everything</h3>
+          <p class="text-small">We identify where automation creates measurable impact — and where it doesn’t.</p>
         </div>
-    </section>
-
-    <!-- 4 Team (founders first, then core team) -->
-    <section class="py-24 bg-[#0F172A] relative overflow-hidden" id="team">
-        <!-- ==================== AMBIENT BACKDROP ==================== -->
-        <div class="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
-        <div
-            class="absolute -top-24 -left-24 w-[28rem] h-[28rem] rounded-full bg-[#007BFF]/10 blur-[120px] pointer-events-none">
+        <div class="about-principle-item">
+          <h3 class="no-margin">We design systems, not workflows in isolation</h3>
+          <p class="text-small">Every automation considers dependencies across teams and tools.</p>
         </div>
-        <div
-            class="absolute -bottom-32 -right-24 w-[26rem] h-[26rem] rounded-full bg-[#00D2FF]/10 blur-[120px] pointer-events-none">
-        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+@if($testimonials->isNotEmpty())
+<!-- ======================= WHAT CLIENTS SAY (marquee) ======================= -->
+<section class="section">
+  <div class="container">
+    <div class="about-testimonials-header">
+      <p class="section-label">What Clients Say</p>
+      <h2 class="anim-fade-up-2">Measurable Impact, Shared by Our Clients</h2>
+    </div>
+  </div>
 
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20 sm:space-y-24">
-            @php
-                $executives = $team->where('is_founder', true);
-                $advisors = $team->where('is_founder', false)->where('is_advisor', true);
-                $engineers = $team->where('is_founder', false)->where('is_advisor', false);
-            @endphp
-
-            <!-- ========================================================================= -->
-            <!-- 4.1 EXECUTIVE LEADERSHIP -->
-            <!-- ========================================================================= -->
-            <div class="space-y-10 sm:space-y-12">
-                <!-- Executive Header -->
-                <div
-                    class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 border-b border-white/10 pb-6 sm:pb-8">
-                    <div class="space-y-3 max-w-2xl reveal">
-                        <div
-                            class="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.28em] text-[#00D2FF] font-heading">
-                            <span class="w-2 h-2 rounded-full bg-[#00D2FF] animate-pulse"></span>
-                            LEADERSHIP
-                        </div>
-                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white font-heading leading-tight">
-                            Executive <span
-                                class="text-transparent bg-clip-text bg-gradient-to-r from-[#007BFF] via-[#38BDF8] to-[#00D2FF]">Leadership</span>
-                        </h2>
-                    </div>
-                    <p class="text-slate-300 text-sm sm:text-base max-w-md lg:text-right reveal" data-delay="100">
-                        The minds shaping our vision, strategy, and future.
-                    </p>
-                </div>
-
-                <!-- Executive Grid (Founder, CEO, CMO, CTO) -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-6 lg:gap-7 items-stretch">
-                    @foreach($executives as $index => $founder)
-                        <!-- @php
-                                    $rolePill = 'Executive';
-                                    if (str_contains(strtoupper($founder->role_title), 'CEO')) {
-                                        $rolePill = 'CEO';
-                                    } elseif (str_contains(strtoupper($founder->role_title), 'CTO')) {
-                                        $rolePill = 'CTO';
-                                    } elseif (str_contains(strtoupper($founder->role_title), 'CMO')) {
-                                        $rolePill = 'CMO';
-                                    } elseif (str_contains(strtoupper($founder->role_title), 'MD')){
-                                        $rolePill = 'MD';
-                                    } elseif ($founder->is_founder) {
-                                        $rolePill = 'Co-Founder';
-                                    }
-                                @endphp -->
-
-                        <article class="group reveal" data-delay="{{ $index * 110 }}">
-                            <div
-                                class="relative h-[380px] sm:h-[400px] lg:h-[415px] rounded-2xl overflow-hidden bg-[#0B132B] border border-white/10 transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:border-[#007BFF]/50 group-hover:shadow-[0_28px_60px_-24px_rgba(0,123,255,0.6)] flex flex-col justify-end">
-
-                                <!-- Portrait (monochrome by default, full colour on hover) -->
-                                @if($founder->avatar_url)
-                                    <x-picture :src="$founder->avatar" alt="Portrait of {{ $founder->name }}" width="760"
-                                        height="950"
-                                        class="absolute inset-0 w-full h-full object-cover object-top grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.06]" />
-                                @else
-                                    <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#132139] to-[#0B132B]"
-                                        aria-hidden="true">
-                                        <span
-                                            class="text-5xl font-black text-white/15 font-heading tracking-tight">{{ $founder->initials }}</span>
-                                    </div>
-                                @endif
-
-                                <!-- Legibility scrim + brand wash on hover -->
-                                <div class="absolute inset-0 bg-gradient-to-t from-[#050A16] via-[#050A16]/65 to-[#050A16]/15">
-                                </div>
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-t from-[#007BFF]/35 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                </div>
-
-                                <!-- Role pill -->
-                                <!-- <span
-                                            class="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider font-mono bg-white/15 text-white backdrop-blur-md border border-white/20 transition-all duration-300 group-hover:bg-[#007BFF] group-hover:border-[#007BFF] group-hover:shadow-[0_0_15px_rgba(0,123,255,0.6)]">
-                                            {{ $rolePill }}
-                                        </span> -->
-
-                                <!-- Identity block -->
-                                <div class="relative z-10 p-5 sm:p-6">
-                                    <h3 class="text-lg sm:text-xl font-bold text-white font-heading leading-tight">
-                                        {{ $founder->name }}
-                                    </h3>
-                                    <p class="mt-1 text-xs font-semibold text-[#00D2FF] font-mono leading-snug line-clamp-2">
-                                        {{ $founder->designation }}
-                                    </p>
-
-                                    <!-- Expanding detail drawer: always open on touch devices, hover/focus driven for mouse pointers -->
-                                    <div
-                                        class="grid grid-rows-[1fr] pointer-fine:grid-rows-[0fr] pointer-fine:group-hover:grid-rows-[1fr] pointer-fine:group-focus-within:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
-                                        <div class="overflow-hidden">
-                                            <p class="mt-3 text-xs leading-relaxed text-slate-300 line-clamp-5">
-                                                {{ $founder->bio }}
-                                            </p>
-
-                                            <!-- @if($founder->skills && is_array($founder->skills))
-                                                        <div class="flex flex-wrap gap-1.5 mt-3">
-                                                            @foreach(array_slice($founder->skills, 0, 3) as $skill)
-                                                                <span
-                                                                    class="text-[9px] px-2 py-0.5 rounded bg-white/10 text-slate-200 font-mono font-medium border border-white/10">
-                                                                    {{ $skill }}
-                                                                </span>
-                                                            @endforeach
-                                                        </div>
-                                                    @endif -->
-
-                                            <div class="flex items-center gap-2 mt-4">
-                                                @if($founder->linkedin_url)
-                                                    <a href="{{ $founder->linkedin_url }}" target="_blank" rel="noopener noreferrer"
-                                                        class="p-2 rounded-lg bg-white/10 border border-white/15 text-white/80 hover:bg-[#007BFF] hover:border-[#007BFF] hover:text-white transition-colors"
-                                                        aria-label="LinkedIn profile of {{ $founder->name }}">
-                                                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                                                            <path
-                                                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                                        </svg>
-                                                    </a>
-                                                @endif
-                                                @if($founder->github_url)
-                                                    <a href="{{ $founder->github_url }}" target="_blank" rel="noopener noreferrer"
-                                                        class="p-2 rounded-lg bg-white/10 border border-white/15 text-white/80 hover:bg-[#007BFF] hover:border-[#007BFF] hover:text-white transition-colors"
-                                                        aria-label="GitHub profile of {{ $founder->name }}">
-                                                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                                                            <path fill-rule="evenodd"
-                                                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                                                clip-rule="evenodd" />
-                                                        </svg>
-                                                    </a>
-                                                @endif
-                                                @if($founder->email)
-                                                    <a href="mailto:{{ $founder->email }}"
-                                                        class="p-2 rounded-lg bg-white/10 border border-white/15 text-white/80 hover:bg-[#007BFF] hover:border-[#007BFF] hover:text-white transition-colors"
-                                                        aria-label="Email {{ $founder->name }}">
-                                                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
-                                                            stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                                        </svg>
-                                                    </a>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    @endforeach
-                </div>
-            </div>
-
-            @if($advisors->isNotEmpty())
-                <!-- ========================================================================= -->
-                <!-- 4.2 ADVISORY BOARD -->
-                <!-- ========================================================================= -->
-                <div class="space-y-10 sm:space-y-12 pt-6">
-                    <!-- Advisor Header -->
-                    <div
-                        class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 border-b border-white/10 pb-6 sm:pb-8">
-                        <div class="space-y-3 max-w-2xl reveal">
-                            <div
-                                class="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.28em] text-amber-400 font-heading">
-                                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-                                ADVISORY BOARD
-                            </div>
-                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white font-heading leading-tight">
-                                Our <span
-                                    class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-[#00D2FF]">Advisors</span>
-                            </h2>
-                        </div>
-                        <p class="text-slate-300 text-sm sm:text-base max-w-md lg:text-right reveal" data-delay="100">
-                            Trusted voices guiding our strategy with deep industry experience.
-                        </p>
-                    </div>
-
-                    <!-- Advisor Grid -->
-                    <div
-                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-6 lg:gap-7 items-stretch">
-                        @foreach($advisors as $index => $advisor)
-                            <article class="group reveal" data-delay="{{ $index * 110 }}">
-                                <div
-                                    class="relative h-[380px] sm:h-[400px] lg:h-[415px] rounded-2xl overflow-hidden bg-[#0B132B] border border-white/10 transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:border-amber-400/50 group-hover:shadow-[0_28px_60px_-24px_rgba(251,191,36,0.5)] flex flex-col justify-end">
-
-                                    <!-- Portrait (monochrome by default, full colour on hover) -->
-                                    @if($advisor->avatar_url)
-                                        <x-picture :src="$advisor->avatar" alt="Portrait of {{ $advisor->name }}" width="760"
-                                            height="950"
-                                            class="absolute inset-0 w-full h-full object-cover object-top grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.06]" />
-                                    @else
-                                        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#132139] to-[#0B132B]"
-                                            aria-hidden="true">
-                                            <span
-                                                class="text-5xl font-black text-white/15 font-heading tracking-tight">{{ $advisor->initials }}</span>
-                                        </div>
-                                    @endif
-
-                                    <!-- Legibility scrim + brand wash on hover -->
-                                    <div class="absolute inset-0 bg-gradient-to-t from-[#050A16] via-[#050A16]/65 to-[#050A16]/15">
-                                    </div>
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-amber-500/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                    </div>
-
-                                    <!-- Identity block -->
-                                    <div class="relative z-10 p-5 sm:p-6">
-                                        <h3 class="text-lg sm:text-xl font-bold text-white font-heading leading-tight">
-                                            {{ $advisor->name }}
-                                        </h3>
-                                        <p class="mt-1 text-xs font-semibold text-amber-400 font-mono leading-snug line-clamp-2">
-                                            {{ $advisor->designation }}
-                                        </p>
-
-                                        <!-- Expanding detail drawer -->
-                                        <div
-                                            class="grid grid-rows-[1fr] pointer-fine:grid-rows-[0fr] pointer-fine:group-hover:grid-rows-[1fr] pointer-fine:group-focus-within:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
-                                            <div class="overflow-hidden">
-                                                <p class="mt-3 text-xs leading-relaxed text-slate-300 line-clamp-3">
-                                                    {{ $advisor->bio }}
-                                                </p>
-
-                                                @if($advisor->skills && is_array($advisor->skills))
-                                                    <div class="flex flex-wrap gap-1.5 mt-3">
-                                                        @foreach(array_slice($advisor->skills, 0, 3) as $skill)
-                                                            <span
-                                                                class="text-[9px] px-2 py-0.5 rounded bg-white/10 text-slate-200 font-mono font-medium border border-white/10">
-                                                                {{ $skill }}
-                                                            </span>
-                                                        @endforeach
-                                                    </div>
-                                                @endif
-
-                                                <div class="flex items-center gap-2 mt-4">
-                                                    @if($advisor->linkedin_url)
-                                                        <a href="{{ $advisor->linkedin_url }}" target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            class="p-2 rounded-lg bg-white/10 border border-white/15 text-white/80 hover:bg-amber-500 hover:border-amber-400 hover:text-white transition-colors"
-                                                            aria-label="LinkedIn profile of {{ $advisor->name }}">
-                                                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                                                                <path
-                                                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                                            </svg>
-                                                        </a>
-                                                    @endif
-                                                    @if($advisor->github_url)
-                                                        <a href="{{ $advisor->github_url }}" target="_blank" rel="noopener noreferrer"
-                                                            class="p-2 rounded-lg bg-white/10 border border-white/15 text-white/80 hover:bg-amber-500 hover:border-amber-400 hover:text-white transition-colors"
-                                                            aria-label="GitHub profile of {{ $advisor->name }}">
-                                                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                                                                <path fill-rule="evenodd"
-                                                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                                                    clip-rule="evenodd" />
-                                                            </svg>
-                                                        </a>
-                                                    @endif
-                                                    @if($advisor->email)
-                                                        <a href="mailto:{{ $advisor->email }}"
-                                                            class="p-2 rounded-lg bg-white/10 border border-white/15 text-white/80 hover:bg-amber-500 hover:border-amber-400 hover:text-white transition-colors"
-                                                            aria-label="Email {{ $advisor->name }}">
-                                                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                                            </svg>
-                                                        </a>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        @endforeach
-                    </div>
-                </div>
+  <div class="marquee-container">
+    @foreach($marqueeRows as $rowClass => $rowItems)
+    <div class="{{ $rowClass }}">
+      {{-- the row repeats so the loop is seamless --}}
+      @foreach([false, true] as $isCopy)
+        @foreach($rowItems as $i => $testimonial)
+        <div class="about-testimonial-card {{ $cardWidths[$i % count($cardWidths)] }}" @if($isCopy) aria-hidden="true" @endif>
+          <p class="testimonial-quote">“{{ Str::limit($testimonial->quote, 170) }}”</p>
+          <div class="about-testimonial-author">
+            @if($testimonial->avatar_url)
+            <img src="{{ $testimonial->avatar_url }}" loading="lazy" alt="{{ $isCopy ? '' : $testimonial->client_name }}" class="testimonial-avatar">
             @endif
-
-            @if($engineers->isNotEmpty())
-                <!-- ========================================================================= -->
-                <!-- 4.3 ENGINEERING EXCELLENCE -->
-                <!-- ========================================================================= -->
-                <div class="space-y-10 sm:space-y-12 pt-6">
-                    <!-- Engineering Header -->
-                    <div
-                        class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 border-b border-white/10 pb-6 sm:pb-8">
-                        <div class="space-y-3 max-w-2xl reveal">
-                            <div
-                                class="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.28em] text-emerald-400 font-heading">
-                                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                                ENGINEERING TEAM
-                            </div>
-                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white font-heading leading-tight">
-                                Engineering <span
-                                    class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-[#38BDF8] to-[#007BFF]">Excellence</span>
-                            </h2>
-                        </div>
-                        <p class="text-slate-300 text-sm sm:text-base max-w-md lg:text-right reveal" data-delay="100">
-                            The engineers turning ideas into powerful digital solutions.
-                        </p>
-                    </div>
-
-                    <!-- Engineering Grid -->
-                    <div
-                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-6 lg:gap-7 items-stretch">
-                        @foreach($engineers as $index => $engineer)
-                            <article class="group reveal" data-delay="{{ $index * 110 }}">
-                                <div
-                                    class="relative h-[380px] sm:h-[400px] lg:h-[415px] rounded-2xl overflow-hidden bg-[#0B132B] border border-white/10 transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:border-emerald-400/50 group-hover:shadow-[0_28px_60px_-24px_rgba(52,211,153,0.5)] flex flex-col justify-end">
-
-                                    <!-- Portrait (monochrome by default, full colour on hover) -->
-                                    @if($engineer->avatar_url)
-                                        <x-picture :src="$engineer->avatar" alt="Portrait of {{ $engineer->name }}" width="760"
-                                            height="950"
-                                            class="absolute inset-0 w-full h-full object-cover object-top grayscale transition-all duration-700 ease-out group-hover:grayscale-0 group-hover:scale-[1.06]" />
-                                    @else
-                                        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#132139] to-[#0B132B]"
-                                            aria-hidden="true">
-                                            <span
-                                                class="text-5xl font-black text-white/15 font-heading tracking-tight">{{ $engineer->initials }}</span>
-                                        </div>
-                                    @endif
-
-                                    <!-- Legibility scrim + brand wash on hover -->
-                                    <div class="absolute inset-0 bg-gradient-to-t from-[#050A16] via-[#050A16]/65 to-[#050A16]/15">
-                                    </div>
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-emerald-500/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                    </div>
-
-                                    <!-- Index marker -->
-                                    <!-- <span
-                                                    class="absolute top-4 left-4 text-[10px] font-mono font-bold tracking-[0.2em] text-white/45 group-hover:text-emerald-400 transition-colors">
-                                                    {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
-                                                </span> -->
-
-                                    <!-- Role pill -->
-                                    <!-- <span
-                                                    class="absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider font-mono bg-white/15 text-white backdrop-blur-md border border-white/20 transition-all duration-300 group-hover:bg-emerald-500 group-hover:border-emerald-400 group-hover:shadow-[0_0_15px_rgba(52,211,153,0.6)]">
-                                                    {{ $engineer->role_title ?: 'Engineer' }}
-                                                </span> -->
-
-                                    <!-- Identity block -->
-                                    <div class="relative z-10 p-5 sm:p-6">
-                                        <h3 class="text-lg sm:text-xl font-bold text-white font-heading leading-tight">
-                                            {{ $engineer->name }}
-                                        </h3>
-                                        <p class="mt-1 text-xs font-semibold text-emerald-400 font-mono leading-snug line-clamp-2">
-                                            {{ $engineer->designation }}
-                                        </p>
-
-                                        <!-- Expanding detail drawer -->
-                                        <div
-                                            class="grid grid-rows-[1fr] pointer-fine:grid-rows-[0fr] pointer-fine:group-hover:grid-rows-[1fr] pointer-fine:group-focus-within:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
-                                            <div class="overflow-hidden">
-                                                <p class="mt-3 text-xs leading-relaxed text-slate-300 line-clamp-3">
-                                                    {{ $engineer->bio }}
-                                                </p>
-
-                                                @if($engineer->skills && is_array($engineer->skills))
-                                                    <div class="flex flex-wrap gap-1.5 mt-3">
-                                                        @foreach(array_slice($engineer->skills, 0, 3) as $skill)
-                                                            <span
-                                                                class="text-[9px] px-2 py-0.5 rounded bg-white/10 text-slate-200 font-mono font-medium border border-white/10">
-                                                                {{ $skill }}
-                                                            </span>
-                                                        @endforeach
-                                                    </div>
-                                                @endif
-
-                                                <div class="flex items-center gap-2 mt-4">
-                                                    @if($engineer->linkedin_url)
-                                                        <a href="{{ $engineer->linkedin_url }}" target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            class="p-2 rounded-lg bg-white/10 border border-white/15 text-white/80 hover:bg-[#007BFF] hover:border-[#007BFF] hover:text-white transition-colors"
-                                                            aria-label="LinkedIn profile of {{ $engineer->name }}">
-                                                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                                                                <path
-                                                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                                            </svg>
-                                                        </a>
-                                                    @endif
-                                                    @if($engineer->github_url)
-                                                        <a href="{{ $engineer->github_url }}" target="_blank" rel="noopener noreferrer"
-                                                            class="p-2 rounded-lg bg-white/10 border border-white/15 text-white/80 hover:bg-[#007BFF] hover:border-[#007BFF] hover:text-white transition-colors"
-                                                            aria-label="GitHub profile of {{ $engineer->name }}">
-                                                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-                                                                <path fill-rule="evenodd"
-                                                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                                                                    clip-rule="evenodd" />
-                                                            </svg>
-                                                        </a>
-                                                    @endif
-                                                    @if($engineer->email)
-                                                        <a href="mailto:{{ $engineer->email }}"
-                                                            class="p-2 rounded-lg bg-white/10 border border-white/15 text-white/80 hover:bg-[#007BFF] hover:border-[#007BFF] hover:text-white transition-colors"
-                                                            aria-label="Email {{ $engineer->name }}">
-                                                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                                            </svg>
-                                                        </a>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
-        </div>
-    </section>
-
-
-    <!-- 5 Client Voices -->
-    @if($testimonials->isNotEmpty())
-        <section class="py-20 bg-[#F8FAFC] border-b border-slate-200/80 relative overflow-hidden">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="text-center max-w-2xl mx-auto space-y-3 mb-12 reveal">
-                    <div
-                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#007BFF]/10 border border-[#007BFF]/25 text-xs font-bold uppercase tracking-[0.18em] text-[#007BFF] font-heading">
-                        <span class="w-1.5 h-1.5 rounded-full bg-[#007BFF] animate-pulse"></span>
-                        IN THEIR WORDS
-                    </div>
-                    <h2 class="text-2xl sm:text-3xl font-black text-[#0F172A] font-heading">
-                        What the people we build for say
-                    </h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    @foreach($testimonials as $index => $testimonial)
-                        <figure
-                            class="p-7 rounded-2xl bg-white border border-slate-200/80 shadow-sm hover:shadow-lg hover:border-[#007BFF]/40 transition-all duration-300 flex flex-col justify-between gap-5 spotlight-card reveal"
-                            data-delay="{{ $index * 100 }}">
-                            <blockquote class="text-xs text-slate-700 leading-relaxed italic">
-                                &ldquo;{{ Str::limit($testimonial->quote, 240) }}&rdquo;
-                            </blockquote>
-                            <figcaption class="flex items-center gap-3 pt-4 border-t border-slate-100">
-                                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#007BFF] to-[#00D2FF] p-0.5 shrink-0">
-                                    @if($testimonial->avatar_url)
-                                        <img src="{{ $testimonial->avatar_url }}" alt="{{ $testimonial->client_name }}" loading="lazy"
-                                            class="w-full h-full rounded-full object-cover">
-                                    @else
-                                        <div
-                                            class="w-full h-full rounded-full bg-white flex items-center justify-center text-xs font-bold text-[#007BFF]">
-                                            {{ $testimonial->initials }}
-                                        </div>
-                                    @endif
-                                </div>
-                                <div>
-                                    <p class="text-xs font-bold text-[#0F172A]">{{ $testimonial->client_name }}</p>
-                                    <p class="text-[11px] text-slate-500">
-                                        {{ collect([$testimonial->client_position, $testimonial->company])->filter()->implode(', ') }}
-                                    </p>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    @endforeach
-                </div>
+            <div>
+              <p class="testimonial-name">{{ $testimonial->client_name }}</p>
+              <p class="testimonial-role">{{ collect([$testimonial->client_position, $testimonial->company])->filter()->implode(', ') }}</p>
             </div>
-        </section>
-    @endif
-
-    <!-- CTA -->
-    <section class="py-20 bg-[#0B132B] text-white text-center border-t border-slate-800 relative overflow-hidden">
-        <!-- ==================== DECORATIVE DARK TECH SHAPES ==================== -->
-
-
-
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 relative z-10 reveal">
-            <h2 class="text-3xl sm:text-4xl font-black font-heading">Ready to Collaborate with Our Engineering Team?</h2>
-            <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">Tell us about your project challenges. We will
-                schedule a direct consultation call with our founders.</p>
-            <a href="{{ route('contact.index') }}"
-                class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#00D2FF] hover:from-[#0062cc] hover:to-[#00b8e6] text-white font-bold text-sm shadow-xl shadow-[#007BFF]/30 hover:shadow-[#007BFF]/50 hover:-translate-y-0.5 transition-all">
-                <span>Start a Conversation</span>
-                <span>→</span>
-            </a>
+          </div>
         </div>
-    </section>
-@endsection
+        @endforeach
+      @endforeach
+    </div>
+    @endforeach
+  </div>
+</section>
+@endif
+
+<!-- ======================= CTA ======================= -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <div class="cta-content">
+      <h2 class="cta-heading anim-fade-up">Ready to Simplify How Your Team Works?</h2>
+      <p class="cta-subtitle anim-fade-up-2">If operational complexity is slowing progress, let’s start with clarity. We design structured automation systems aligned with real business priorities.</p>
+      <div class="anim-fade-up-3">
+        <a href="{{ route('contact.index') }}" class="button-primary">Schedule a Consultation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FOOTER ======================= -->
+@include('partials.site-footer')
+
+<script>
+(() => {
+  'use strict';
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- scroll reveals ---------- */
+  const animated = document.querySelectorAll('.anim-fade-up, .anim-fade-up-2, .anim-fade-up-3, .anim-img-fade-in, .anim-children-fade-in');
+  if (reduced || !('IntersectionObserver' in window)) {
+    animated.forEach(el => el.classList.add('is-in'));
+  } else {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    animated.forEach(el => io.observe(el));
+  }
+
+  /* ---------- Testimonial marquees: match the duration to the
+     row's real width, so both rows travel at the same speed
+     regardless of how many cards they hold. ---------- */
+  if (!reduced) {
+    document.querySelectorAll('.marquee-track, .marquee-track-reverse').forEach(row => {
+      const seconds = Math.max(30, row.scrollWidth / 2 / 55);
+      row.style.animationDuration = seconds.toFixed(1) + 's';
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -17,7 +17,7 @@
             <div class="site-nav__menu" @mouseenter="servicesDropdown = true" @mouseleave="servicesDropdown = false">
                 <button type="button" class="site-nav__link site-nav__trigger" @click="servicesDropdown = !servicesDropdown" :aria-expanded="servicesDropdown.toString()" aria-controls="services-menu">
                     <span>Services</span>
-                    <svg aria-hidden="true" class="site-nav__chevron" :class="{ 'rotate-180 text-[#007BFF]': servicesDropdown }" viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="m5 7.5 5 5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg aria-hidden="true" class="site-nav__chevron" :class="{ 'rotate-180 text-[#055BE8]': servicesDropdown }" viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="m5 7.5 5 5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
                 <div id="services-menu" x-cloak x-show="servicesDropdown" 
                      x-transition:enter="transition ease-out duration-200"
@@ -32,7 +32,7 @@
                         <p class="site-mega-menu__label">{{ $categoryName }}</p>
                         @foreach($services as $service)
                         <a href="{{ route('services.show', $service->slug) }}">
-                            <div class="w-8 h-8 rounded-lg bg-[#007BFF]/10 text-[#007BFF] flex items-center justify-center shrink-0 mt-0.5 border border-[#007BFF]/20">
+                            <div class="w-8 h-8 rounded-lg bg-[#055BE8]/10 text-[#055BE8] flex items-center justify-center shrink-0 mt-0.5 border border-[#055BE8]/20">
                                 <x-icon :name="$service->icon" class="w-4 h-4" />
                             </div>
                             <div>
@@ -44,7 +44,7 @@
 
                         @if($loop->last)
                         <div class="pt-2 px-3">
-                            <a href="{{ route('services.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#007BFF] hover:text-[#0052b3] !p-0">
+                            <a href="{{ route('services.index') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#055BE8] hover:text-[#033a9c] !p-0">
                                 <span>View all {{ $activeServiceCount }} capabilities</span>
                                 <span aria-hidden="true">→</span>
                             </a>
@@ -59,7 +59,7 @@
             <div class="site-nav__menu" @mouseenter="solutionsDropdown = true" @mouseleave="solutionsDropdown = false">
                 <button type="button" class="site-nav__link site-nav__trigger" @click="solutionsDropdown = !solutionsDropdown" :aria-expanded="solutionsDropdown.toString()" aria-controls="solutions-menu">
                     <span>Solutions</span>
-                    <svg aria-hidden="true" class="site-nav__chevron" :class="{ 'rotate-180 text-[#007BFF]': solutionsDropdown }" viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="m5 7.5 5 5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg aria-hidden="true" class="site-nav__chevron" :class="{ 'rotate-180 text-[#055BE8]': solutionsDropdown }" viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="m5 7.5 5 5 5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
                 <div id="solutions-menu" x-cloak x-show="solutionsDropdown" 
                      x-transition:enter="transition ease-out duration-200"
@@ -73,7 +73,7 @@
                     <a href="{{ route('products.index') }}">Product Suite</a>
                     <a href="{{ route('ai.index') }}" class="flex items-center justify-between">
                         <span>AI & Innovation</span>
-                        <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#007BFF]/10 text-[#007BFF]">New</span>
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#055BE8]/10 text-[#055BE8]">New</span>
                     </a>
                 </div>
             </div>

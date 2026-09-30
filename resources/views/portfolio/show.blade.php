@@ -34,14 +34,14 @@
 <!-- Header Hero -->
 <section class="py-20 relative overflow-hidden bg-[#F8FAFC] border-b border-slate-200/80">
     <div class="absolute inset-0 bg-tech-grid opacity-70 pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#007BFF]/10 rounded-full blur-[120px] pointer-events-none animate-pulse-glow"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#055BE8]/10 rounded-full blur-[120px] pointer-events-none animate-pulse-glow"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <!-- Breadcrumb -->
         <nav class="flex items-center gap-2 text-xs text-slate-500 mb-6 font-medium reveal">
-            <a href="{{ route('home') }}" class="hover:text-[#007BFF] transition-colors">Home</a>
+            <a href="{{ route('home') }}" class="hover:text-[#055BE8] transition-colors">Home</a>
             <span class="text-slate-300">/</span>
-            <a href="{{ route('portfolio.index') }}" class="hover:text-[#007BFF] transition-colors">Portfolio</a>
+            <a href="{{ route('portfolio.index') }}" class="hover:text-[#055BE8] transition-colors">Portfolio</a>
             <span class="text-slate-300">/</span>
             <span class="text-[#0F172A] font-semibold">{{ $project->title }}</span>
         </nav>
@@ -49,7 +49,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div class="lg:col-span-8 space-y-6 reveal-left">
                 <div class="flex flex-wrap items-center gap-3">
-                    <span class="px-3.5 py-1 rounded-full bg-[#007BFF]/10 border border-[#007BFF]/25 text-xs font-bold uppercase tracking-wider text-[#007BFF] font-mono">
+                    <span class="px-3.5 py-1 rounded-full bg-[#055BE8]/10 border border-[#055BE8]/25 text-xs font-bold uppercase tracking-wider text-[#055BE8] font-mono">
                         {{ $project->category->name ?? 'Enterprise Solution' }}
                     </span>
                     @if($project->industry)
@@ -68,13 +68,13 @@
                 </p>
 
                 <div class="flex flex-wrap items-center gap-4 pt-2">
-                    <a href="{{ route('contact.index', ['service' => 'Case Study Inquiry: ' . $project->title]) }}" class="px-8 py-4 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#0062cc] hover:from-[#0062cc] hover:to-[#004bb5] text-white font-bold text-sm shadow-xl shadow-[#007BFF]/25 hover:shadow-[#007BFF]/40 hover:-translate-y-0.5 transition-all">
+                    <a href="{{ route('contact.index', ['service' => 'Case Study Inquiry: ' . $project->title]) }}" class="px-8 py-4 rounded-xl bg-gradient-to-r from-[#055BE8] to-[#0449c2] hover:from-[#0449c2] hover:to-[#033a9c] text-white font-bold text-sm shadow-xl shadow-[#055BE8]/25 hover:shadow-[#055BE8]/40 hover:-translate-y-0.5 transition-all">
                         Build a Similar System →
                     </a>
                     @if($project->live_url)
                     <a href="{{ $project->live_url }}" target="_blank" rel="noopener noreferrer" class="px-6 py-4 rounded-xl bg-white border border-slate-200 text-[#0F172A] font-bold text-sm hover:bg-slate-50 flex items-center gap-2 shadow-sm">
                         <span>Visit Live Platform</span>
-                        <svg class="w-4 h-4 text-[#007BFF]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        <svg class="w-4 h-4 text-[#055BE8]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                     </a>
                     @endif
                 </div>
@@ -83,7 +83,7 @@
             <!-- Project Meta Card -->
             <div class="lg:col-span-4 reveal-right">
                 <div class="p-8 rounded-2xl bg-white border border-slate-200/80 shadow-xl space-y-4 spotlight-card">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-[#007BFF] border-b border-slate-100 pb-3 font-mono">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-[#055BE8] border-b border-slate-100 pb-3 font-mono">
                         PROJECT SPECIFICATION
                     </h3>
 
@@ -94,7 +94,7 @@
                         </div>
                         <div class="flex justify-between py-1.5 border-b border-slate-100">
                             <span class="text-slate-500">Duration:</span>
-                            <span class="font-bold text-[#007BFF] font-mono">{{ $project->duration ?? '3 Months' }}</span>
+                            <span class="font-bold text-[#055BE8] font-mono">{{ $project->duration ?? '3 Months' }}</span>
                         </div>
                         <div class="flex justify-between py-1.5">
                             <span class="text-slate-500">Architecture:</span>
@@ -145,8 +145,8 @@
             </div>
 
             <!-- Solution -->
-            <div class="p-8 sm:p-10 rounded-2xl bg-[#007BFF]/5 border border-[#007BFF]/20 space-y-4 spotlight-card reveal-right">
-                <div class="w-12 h-12 rounded-xl bg-[#007BFF]/15 text-[#007BFF] flex items-center justify-center font-bold border border-[#007BFF]/30 shadow-sm">
+            <div class="p-8 sm:p-10 rounded-2xl bg-[#055BE8]/5 border border-[#055BE8]/20 space-y-4 spotlight-card reveal-right">
+                <div class="w-12 h-12 rounded-xl bg-[#055BE8]/15 text-[#055BE8] flex items-center justify-center font-bold border border-[#055BE8]/30 shadow-sm">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
                 </div>
                 <h2 class="text-2xl font-bold text-[#0F172A] font-heading">The ZaroSoft Engineering Solution</h2>
@@ -160,14 +160,14 @@
         @if($project->results && is_array($project->results))
         <div class="p-10 rounded-2xl bg-[#0B132B] text-white space-y-8 shadow-xl spotlight-card reveal">
             <div class="space-y-2">
-                <span class="text-xs font-bold uppercase tracking-widest text-[#00D2FF] font-mono">IMPACT & BUSINESS ROI</span>
+                <span class="text-xs font-bold uppercase tracking-widest text-[#2FD5E9] font-mono">IMPACT & BUSINESS ROI</span>
                 <h2 class="text-2xl sm:text-3xl font-black font-heading">Measurable Outcomes Delivered</h2>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach($project->results as $res)
                 <div class="p-6 rounded-xl bg-white/5 border border-white/10 space-y-2">
-                    <svg class="w-6 h-6 text-[#00D2FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                    <svg class="w-6 h-6 text-[#2FD5E9]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
                     <p class="text-xs sm:text-sm font-semibold text-slate-200 leading-relaxed">{{ $res }}</p>
                 </div>
                 @endforeach
@@ -179,13 +179,13 @@
         @if($project->key_features && is_array($project->key_features))
         <div class="space-y-8">
             <div class="space-y-2 reveal">
-                <span class="text-xs font-bold uppercase tracking-wider text-[#007BFF] font-mono">ENGINEERING HIGHLIGHTS</span>
+                <span class="text-xs font-bold uppercase tracking-wider text-[#055BE8] font-mono">ENGINEERING HIGHLIGHTS</span>
                 <h2 class="text-2xl sm:text-3xl font-black text-[#0F172A] font-heading">Key Architectural Features</h2>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @foreach($project->key_features as $index => $feat)
                 <div class="p-5 rounded-xl bg-[#F8FAFC] border border-slate-200/80 shadow-sm flex items-start gap-4 spotlight-card reveal" data-delay="{{ ($index % 2) * 100 }}">
-                    <span class="w-6 h-6 rounded-full bg-[#007BFF]/10 text-[#007BFF] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 border border-[#007BFF]/20">✓</span>
+                    <span class="w-6 h-6 rounded-full bg-[#055BE8]/10 text-[#055BE8] flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 border border-[#055BE8]/20">✓</span>
                     <span class="text-sm font-semibold text-slate-800">{{ $feat }}</span>
                 </div>
                 @endforeach
@@ -218,7 +218,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 relative z-10 reveal">
         <h2 class="text-3xl sm:text-4xl font-black font-heading">Facing Similar Bottlenecks in Your Operations?</h2>
         <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto">Let our senior architects design a custom solution tailored to your operational specifications.</p>
-        <a href="{{ route('contact.index', ['service' => 'Case Study Consultation: ' . $project->title]) }}" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#007BFF] to-[#00D2FF] hover:from-[#0062cc] hover:to-[#00b8e6] text-white font-bold text-sm shadow-xl shadow-[#007BFF]/30 hover:shadow-[#007BFF]/50 hover:-translate-y-0.5 transition-all">
+        <a href="{{ route('contact.index', ['service' => 'Case Study Consultation: ' . $project->title]) }}" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#055BE8] to-[#2FD5E9] hover:from-[#0449c2] hover:to-[#25bfd3] text-white font-bold text-sm shadow-xl shadow-[#055BE8]/30 hover:shadow-[#055BE8]/50 hover:-translate-y-0.5 transition-all">
             <span>Schedule Project Discovery Call</span>
             <span>→</span>
         </a>

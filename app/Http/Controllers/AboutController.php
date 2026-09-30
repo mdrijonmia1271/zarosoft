@@ -16,11 +16,14 @@ class AboutController extends Controller
             ->orderBy('order')
             ->get();
 
+        // The lead founder signs the hero quote card.
+        $founder = $team->first(fn (TeamMember $member) => $member->is_founder && ! $member->is_advisor)
+            ?? $team->first();
+
         $testimonials = Testimonial::where('is_active', true)
             ->orderBy('order')
-            ->take(3)
             ->get();
 
-        return view('about.index', compact('team', 'testimonials'));
+        return view('about.index', compact('team', 'founder', 'testimonials'));
     }
 }
